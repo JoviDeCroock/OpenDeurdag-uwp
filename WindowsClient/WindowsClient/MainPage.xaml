@@ -7,38 +7,33 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource HoGent_Grid}">
-        <!-- definitions -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <SplitView CompactPaneLength="35" x:Name="splitView" DisplayMode="CompactOverlay" IsPaneOpen="False" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView.Pane>
+            <StackPanel Background="Gray" Margin="0 0 20 0">
+                <Button  Content="&#xE700;" FontFamily="Segoe MDL2 Assets" AutomationProperties.Name="Favorite" Click="on_Click" />
+                <StackPanel Orientation="Horizontal" Tapped="goToNewsFeed">
+                    <Button Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock VerticalAlignment="Center" Text="Newsfeed"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Tapped="goToTrainings">
+                    <Button Background="Transparent" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock VerticalAlignment="Center" Text="Opleidingen"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" Content="&#xE707;" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock VerticalAlignment="Center" Text="Routeplanner"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Tapped="goToMyPreferences">
+                    <Button Background="Transparent" Content="&#xE735;" FontFamily="Segoe MDL2 Assets"/>
+                    <TextBlock VerticalAlignment="Center" Text="Interesses"/>
+                </StackPanel>
 
-        <!-- header -->
-        <Border Grid.Row="0" Background="#006fb8;">
-            <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
-                       Text="HoGent" />
-        </Border>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <!---->
+            <Frame x:Name="mainfr"/>
 
-        <!-- items -->
-        <Button Grid.Row="1" 
-                Style="{StaticResource HoGent_ButtonStyle}" 
-                Content="Newsfeed" Click="goToNewsFeed"/>
-        <Button Grid.Row="2" 
-                Style="{StaticResource HoGent_ButtonStyle}" 
-                Content="Opleidingen" Click="goToTrainings"/>
-        <Button Grid.Row="3" 
-                Style="{StaticResource HoGent_ButtonStyle}" 
-                Content="Routeplanner"/>
-        <Button Grid.Row="4" 
-                Style="{StaticResource HoGent_ButtonStyle}" 
-                Content="Mijn interesses" Click="goToMyPreferences"/>
-
-    </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
