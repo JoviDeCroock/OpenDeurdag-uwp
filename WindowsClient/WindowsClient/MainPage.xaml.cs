@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.System.Profile;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -28,7 +31,7 @@ namespace WindowsClient
         public MainPage()
         {
             this.InitializeComponent();
-         
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -85,6 +88,29 @@ namespace WindowsClient
                     mainfr.Navigate(typeof(MyPreferences));
                     break;
             }
+        }
+
+        private void updateTile()
+        {
+            /* TileWide310x150SmallImageAndText04 */
+            string strxml = "<tile>"
+                             + "<visual>"
+                             + "<binding template='TileSmall'>"
+                             + "<image id='1' src='Assets/pikachuTile.png'/>"
+                             /*
+                             + "<text id='1'>TEXT ID 1</text>"
+                             + "<text id='2'>TEXT ID 2</text>"
+                             */
+                             + "</binding>"
+                             + "</visual>"
+                             + "</tile>";
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(strxml);
+
+            var updator = TileUpdateManager.CreateTileUpdaterForApplication();
+            var notification = new TileNotification(xml);
+            updator.Update(notification);
         }
     }
 }
