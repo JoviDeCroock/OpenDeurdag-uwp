@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RondleidingAPI.Models
 {
-    public class Admin
+    public class Admin : User
     {
         public int AdminId { get; set; }
         public string wachtwoord { get; set; }

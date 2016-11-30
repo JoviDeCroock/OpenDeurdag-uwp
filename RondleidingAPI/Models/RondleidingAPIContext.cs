@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -26,5 +27,18 @@ namespace RondleidingAPI.Models
         public System.Data.Entity.DbSet<RondleidingAPI.Models.Training> Trainings { get; set; }
 
         public System.Data.Entity.DbSet<RondleidingAPI.Models.Campus> Campus { get; set; }
-    }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Training>()
+               .HasMany<Campus>(s => s.Campussen)
+               .WithMany(c => c.Trainingen)
+               .Map(cs =>
+               {
+                   cs.MapLeftKey("TrainingRefId");
+                   cs.MapRightKey("CampusRefId");
+                   cs.ToTable("TrainingCampus");
+               });       
+        }
+   }
 }
