@@ -13,7 +13,7 @@ namespace RondleidingAPI.Models
         public string HouseNumber { get; set; }
         public string Street { get; set; }
         public string Telephone { get; set; }
-        public IList<Training> Trainingen { get; set; }
+        public virtual IList<Training> Trainingen { get; set; }
         public Campus() { Trainingen = new List<Training>(); }
         public Campus(string name, string city, string street, string houseNumber, string telephone)
         {

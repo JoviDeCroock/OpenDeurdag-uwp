@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RondleidingAPI.Models;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace RondleidingAPI.Controllers
 {
@@ -33,6 +35,30 @@ namespace RondleidingAPI.Controllers
             }
 
             return Ok(admin);
+        }
+
+        private string encode(string pw)
+        {
+            UTF8Encoding encoder = new UTF8Encoding();
+            SHA256Managed sha256hasher = new SHA256Managed();
+            byte[] hashedDataBytes = sha256hasher.ComputeHash(encoder.GetBytes(pw));
+            return Convert.ToBase64String(hashedDataBytes);
+        }
+
+        public IHttpActionResult PostLogin(String username, String password)
+        {
+            Admin a = db.Admins.FirstOrDefault(ad => ad.Email == username);
+            if(a == null)
+            {
+                return NotFound();
+            }
+
+            string x = encode(password);
+            if(a.Password == x)
+            {
+                return Ok(a);
+            }
+            return Ok("Foutief wachtwoord.");
         }
 
         // PUT: api/Admins/5
@@ -78,6 +104,7 @@ namespace RondleidingAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            admin.Password = encode(admin.Password);
 
             db.Admins.Add(admin);
             db.SaveChanges();
