@@ -25,28 +25,51 @@ namespace WindowsClient.Views
         public NewsfeedFilter()
         {
             this.InitializeComponent();
+            //fill lists of feeds here
+            //veranderNaam1.ItemsSource = ;
+            //veranderNaam2.ItemsSource = ;
+            //veranderNaam3.ItemsSource = ;
+            //veranderNaam4.ItemsSource = ;
+            //veranderNaam5.ItemsSource = ;
+            //veranderNaam6.ItemsSource = ;
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
         }
-    }
 
-    /*
-    private void OnHardwareButtonsBackPressed(object sender, BackPressedEventArgs e)
-    {
-        // This is the missing line!
-        e.Handled = true;
-
-        // Close the App if you are on the startpage
-        if (mMainFrame.CurrentSourcePageType == typeof(Startpage))
-            App.Current.Exit();
-
-        // Navigate back
-        if (mMainFrame.CanGoBack)
+        private void updateFeeds1(object sender, RoutedEventArgs e)
         {
-            mMainFrame.GoBack();
+            //set list of feeds visible or invisible splitView.IsPaneOpen = !splitView.IsPaneOpen;
+            //link voor booleantovisibilityconverter : http://stackoverflow.com/questions/39832208/how-to-use-booleantovisibilityconverter-in-uwp
+            if (veranderNaam1.Visibility == Visibility.Collapsed)
+            { }
         }
-    }*/
+
+        private void updateFeeds2(object sender, RoutedEventArgs e)
+        {
+            //set list of feeds visible or invisible
+        }
+
+        private void updateFeeds3(object sender, RoutedEventArgs e)
+        {
+            //set list of feeds visible or invisible
+        }
+
+        private void updateFeeds4(object sender, RoutedEventArgs e)
+        {
+            //set list of feeds visible or invisible
+        }
+
+        private void updateFeeds5(object sender, RoutedEventArgs e)
+        {
+            //set list of feeds visible or invisible
+        }
+
+        private void updateFeeds6(object sender, RoutedEventArgs e)
+        {
+            //set list of feeds visible or invisible
+        }
+    }
 }
