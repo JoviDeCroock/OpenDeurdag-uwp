@@ -84,5 +84,57 @@
                       Checked="updateFeeds6"
                       Unchecked="updateFeeds6"/>
         </Grid>
+
+        <RelativePanel Grid.Row="3">
+            <ListView x:Name="veranderNaam1"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="veranderNaam2"
+                      RelativePanel.Below="veranderNaam1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="veranderNaam3"
+                      RelativePanel.Below="veranderNaam2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="veranderNaam4"
+                      RelativePanel.Below="veranderNaam3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView> 
+            <ListView x:Name="veranderNaam5"
+                      RelativePanel.Below="veranderNaam4">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="veranderNaam6"
+                      RelativePanel.Below="veranderNaam5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- set data -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </RelativePanel>
     </Grid>
 </Page>
