@@ -115,15 +115,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611301102286_Initial.cs" />
-    <Compile Include="Migrations\201611301102286_Initial.Designer.cs">
-      <DependentUpon>201611301102286_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201612071002125_initial.cs" />
+    <Compile Include="Migrations\201612071002125_initial.Designer.cs">
+      <DependentUpon>201612071002125_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domain\Admin.cs" />
     <Compile Include="Models\Domain\Campus.cs" />
     <Compile Include="Models\Domain\Student.cs" />
+    <Compile Include="Models\Domain\StudentTraining.cs" />
     <Compile Include="Models\Domain\Training.cs" />
+    <Compile Include="Models\Domain\StudentCampus.cs" />
+    <Compile Include="Models\Domain\TrainingCampus.cs" />
     <Compile Include="Models\Domain\User.cs" />
     <Compile Include="Models\RondleidingAPIContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,8 +141,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611301102286_Initial.resx">
-      <DependentUpon>201611301102286_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612071002125_initial.resx">
+      <DependentUpon>201612071002125_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
