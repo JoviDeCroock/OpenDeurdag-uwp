@@ -110,6 +110,9 @@
     <Compile Include="Views\NewsfeedFilter.xaml.cs">
       <DependentUpon>NewsfeedFilter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Training.xaml.cs">
+      <DependentUpon>Training.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrainingChoice.xaml.cs">
       <DependentUpon>TrainingChoice.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewsfeedFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Training.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

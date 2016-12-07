@@ -22,71 +22,31 @@
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Opleidingen" />
         </Border>
-        <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}"/>
+        <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
 
         <!-- items -->
-        <RelativePanel Grid.Row="1" 
-                       HorizontalAlignment="Center">
-            
-            <!-- opleidingen gent -->
-            <Button Name="ButtonGent" 
-                    Content="Gent" 
-                    Margin="0 20 0 20" 
-                    Style="{StaticResource HoGent_ButtonStyle}" 
-                    Click="openListTrainingGent_Click"/>
-            <ListView RelativePanel.Below="ButtonGent" 
-                      x:Name="listViewTrainingsGent" 
-                      Visibility="Collapsed"
-                      Height="Auto"  
-                      Width="250"
-                      VerticalAlignment="Top"
-                      IsItemClickEnabled="True"
-                      ItemClick="listViewGentItem_Click"
-                      ItemsSource="{Binding trainingsGent}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel HorizontalAlignment="Center" Width="250">
-                            <TextBlock HorizontalAlignment="Center"
+        <ListView
+                Grid.Row="1"
+                x:Name="listViewTrainingsGent" 
+                Visibility="Visible"
+                Height="Auto"  
+                Width="250"
+                VerticalAlignment="Top"
+                IsItemClickEnabled="True"
+                ItemClick="listViewHoGentItem_Click"
+                ItemsSource="{Binding trainingsGent}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel HorizontalAlignment="Center" Width="250">
+                        <TextBlock HorizontalAlignment="Center"
                                        TextWrapping="Wrap"
                                        Text="{Binding Name}"
+                                    Foreground="White"
                                        Style="{StaticResource Hogent_TextBlockNormal}"/>
-                            <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="White" X1="0" Y1="5" X2="200" Y2="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <!-- opleidingen aalst -->
-            <Button Name="ButtonAalst" 
-                    Content="Aalst" 
-                    Margin="0 20 0 20" 
-                    RelativePanel.Below="listViewTrainingsGent" 
-                    Style="{StaticResource HoGent_ButtonStyle}" Click="openListTrainingAalst_Click"/>
-
-            <ListView RelativePanel.Below="ButtonAalst" 
-                      x:Name="listViewTrainingsAalst" 
-                      Visibility="Collapsed" 
-                      Height="Auto" 
-                      Width="250"
-                      VerticalAlignment="Top"
-                      IsItemClickEnabled="True"
-                      ItemClick="listViewAalstItem_Click"
-                      ItemsSource="{Binding trainingsGent}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel HorizontalAlignment="Center" Width="250">
-                            <TextBlock HorizontalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       Text="{Binding Name}" 
-                                       Style="{StaticResource Hogent_TextBlockNormal}"/>
-                            <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="White" X1="0" Y1="5" X2="200" Y2="5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-
-        </RelativePanel>
-
+                        <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="White" X1="0" Y1="5" X2="200" Y2="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

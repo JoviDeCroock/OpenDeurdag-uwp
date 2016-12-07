@@ -27,7 +27,8 @@
                 <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Newsfeed" />
             </Border>
-            <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" />
+
+            <Button Grid.Row="0" Style="{StaticResource HoGent_ButtonHome}" />
 
             <!-- items -->
             <TextBlock Text="Kies welke feeds u wil zien:"
