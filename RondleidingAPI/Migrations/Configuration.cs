@@ -14,7 +14,7 @@ namespace RondleidingAPI.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         private string encode(string pw)
@@ -34,7 +34,7 @@ namespace RondleidingAPI.Migrations
             };
             var trainingenObj = new[]
             {
-                new Training() { TrainingId = 1, Name="Toegepaste Informatica", Description="Ieksdé Toekomstrichting boiz", Feed = "hogenttoegepasteinformatica"}
+                new Training() { TrainingId = 1, Name="Toegepaste Informatica", Description="Toekomstrichting boiz", Feed = "hogenttoegepasteinformatica"}
             };
 
             var trainingen = new[]
@@ -47,7 +47,7 @@ namespace RondleidingAPI.Migrations
             {
                 context.TCampus.AddOrUpdate(t);
             }
-
+        
             foreach(Campus c in campussenObj)
             {
                 if(c.Trainingen == null)
@@ -63,23 +63,19 @@ namespace RondleidingAPI.Migrations
                     t.Campussen = new List<TrainingCampus>();
                 }
                 t.addToCampus(trainingen[0]);
-
+                context.Training.AddOrUpdate(t);
             }
 
             foreach (Campus c in campussenObj)
             {
                 context.Campus.AddOrUpdate(c);
-                context.SaveChanges();
             }
-
-            context.SaveChanges();
             foreach (Training t in trainingenObj)
             {
-                context.Trainings.AddOrUpdate(t);
-                context.SaveChanges();
+                context.Training.AddOrUpdate(t);
             }
 
-            context.Admins.AddOrUpdate(x => x.AdminId,
+            context.Admin.AddOrUpdate(x => x.AdminId,
                 new Admin() { AdminId = 1, Email = "admin@gmail.com", Name = "Admin", Password = encode("Password") }
             );
 

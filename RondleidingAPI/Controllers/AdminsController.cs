@@ -21,14 +21,14 @@ namespace RondleidingAPI.Controllers
         // GET: api/Admins
         public IQueryable<Admin> GetAdmins()
         {
-            return db.Admins;
+            return db.Admin;
         }
 
         // GET: api/Admins/5
         [ResponseType(typeof(Admin))]
         public IHttpActionResult GetAdmin(int id)
         {
-            Admin admin = db.Admins.Find(id);
+            Admin admin = db.Admin.Find(id);
             if (admin == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace RondleidingAPI.Controllers
 
         public IHttpActionResult PostLogin(String username, String password)
         {
-            Admin a = db.Admins.FirstOrDefault(ad => ad.Email == username);
+            Admin a = db.Admin.FirstOrDefault(ad => ad.Email == username);
             if(a == null)
             {
                 return NotFound();
@@ -106,7 +106,7 @@ namespace RondleidingAPI.Controllers
             }
             admin.Password = encode(admin.Password);
 
-            db.Admins.Add(admin);
+            db.Admin.Add(admin);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = admin.AdminId }, admin);
@@ -116,13 +116,13 @@ namespace RondleidingAPI.Controllers
         [ResponseType(typeof(Admin))]
         public IHttpActionResult DeleteAdmin(int id)
         {
-            Admin admin = db.Admins.Find(id);
+            Admin admin = db.Admin.Find(id);
             if (admin == null)
             {
                 return NotFound();
             }
 
-            db.Admins.Remove(admin);
+            db.Admin.Remove(admin);
             db.SaveChanges();
 
             return Ok(admin);
@@ -139,7 +139,7 @@ namespace RondleidingAPI.Controllers
 
         private bool AdminExists(int id)
         {
-            return db.Admins.Count(e => e.AdminId == id) > 0;
+            return db.Admin.Count(e => e.AdminId == id) > 0;
         }
     }
 }

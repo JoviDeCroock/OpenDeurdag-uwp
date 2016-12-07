@@ -21,18 +21,17 @@ namespace RondleidingAPI.Models
         {
         }
 
-        public System.Data.Entity.DbSet<Student> Students { get; set; }
-
-        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
-
-        public System.Data.Entity.DbSet<Training> Trainings { get; set; }
-
+        public System.Data.Entity.DbSet<Student> Student { get; set; }
+        public System.Data.Entity.DbSet<Admin> Admin { get; set; }
+        public System.Data.Entity.DbSet<Training> Training { get; set; }
         public System.Data.Entity.DbSet<Campus> Campus { get; set; }
         public System.Data.Entity.DbSet<TrainingCampus> TCampus { get; set; }
         public System.Data.Entity.DbSet<StudentCampus> SCampus { get; set; }
         public System.Data.Entity.DbSet<StudentTraining> STraining { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            /*OPTIE2 XD      AH WACHT DA WERKT OOK NIET*/
             /*modelBuilder.Entity<Training>()
                .HasMany<Campus>(s => s.Campussen)
                .WithMany(c => c.Trainingen)

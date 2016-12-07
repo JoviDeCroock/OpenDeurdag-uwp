@@ -13,7 +13,7 @@ namespace RondleidingAPI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612071002125_initial"; }
+            get { return "201612071047477_initial"; }
         }
         
         string IMigrationMetadata.Source

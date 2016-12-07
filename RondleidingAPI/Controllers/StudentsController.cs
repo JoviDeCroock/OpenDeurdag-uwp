@@ -19,14 +19,14 @@ namespace RondleidingAPI.Controllers
         // GET: api/Students
         public IQueryable<Student> GetStudents()
         {
-            return db.Students;
+            return db.Student;
         }
 
         // GET: api/Students/5
         [ResponseType(typeof(Student))]
         public IHttpActionResult GetStudent(int id)
         {
-            Student student = db.Students.Find(id);
+            Student student = db.Student.Find(id);
             if (student == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace RondleidingAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Students.Add(student);
+            db.Student.Add(student);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = student.StudentId }, student);
@@ -89,13 +89,13 @@ namespace RondleidingAPI.Controllers
         [ResponseType(typeof(Student))]
         public IHttpActionResult DeleteStudent(int id)
         {
-            Student student = db.Students.Find(id);
+            Student student = db.Student.Find(id);
             if (student == null)
             {
                 return NotFound();
             }
 
-            db.Students.Remove(student);
+            db.Student.Remove(student);
             db.SaveChanges();
 
             return Ok(student);
@@ -112,7 +112,7 @@ namespace RondleidingAPI.Controllers
 
         private bool StudentExists(int id)
         {
-            return db.Students.Count(e => e.StudentId == id) > 0;
+            return db.Student.Count(e => e.StudentId == id) > 0;
         }
     }
 }

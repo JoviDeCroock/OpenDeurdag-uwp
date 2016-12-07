@@ -19,14 +19,14 @@ namespace RondleidingAPI.Controllers
         // GET: api/Trainings
         public IQueryable<Training> GetTrainings()
         {
-            return db.Trainings;
+            return db.Training;
         }
 
         // GET: api/Trainings/5
         [ResponseType(typeof(Training))]
         public IHttpActionResult GetTraining(int id)
         {
-            Training training = db.Trainings.Find(id);
+            Training training = db.Training.Find(id);
             if (training == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace RondleidingAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Trainings.Add(training);
+            db.Training.Add(training);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = training.TrainingId }, training);
@@ -89,13 +89,13 @@ namespace RondleidingAPI.Controllers
         [ResponseType(typeof(Training))]
         public IHttpActionResult DeleteTraining(int id)
         {
-            Training training = db.Trainings.Find(id);
+            Training training = db.Training.Find(id);
             if (training == null)
             {
                 return NotFound();
             }
 
-            db.Trainings.Remove(training);
+            db.Training.Remove(training);
             db.SaveChanges();
 
             return Ok(training);
@@ -112,7 +112,7 @@ namespace RondleidingAPI.Controllers
 
         private bool TrainingExists(int id)
         {
-            return db.Trainings.Count(e => e.TrainingId == id) > 0;
+            return db.Training.Count(e => e.TrainingId == id) > 0;
         }
     }
 }
