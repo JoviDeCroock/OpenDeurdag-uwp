@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="WindowsClient.Views.Training"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestProject.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource HoGent_Grid}">
+        <!-- definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- header -->
+        <Border Grid.Row="0" Background="#006fb8;">
+            <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
+                       Text="Opleidingen" />
+        </Border>
+        <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
+        
+        <!-- items -->
+        
+    </Grid>
+</Page>

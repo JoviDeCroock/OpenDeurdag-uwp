@@ -8,13 +8,21 @@ namespace WindowsClient.Models
 {
     class Training
     {
+        public Training() { }
         string name;
+        IList<string> campus;
         /*TODO: add more attributes (e.g. descriptions, ...) */
 
         public string Name
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public IList<string> Campus
+        {
+            get { return campus; }
+            set { campus = value; }
         }
     }
 }

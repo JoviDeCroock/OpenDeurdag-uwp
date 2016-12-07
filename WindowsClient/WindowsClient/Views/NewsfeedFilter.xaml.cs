@@ -34,42 +34,70 @@ namespace WindowsClient.Views
             //veranderNaam6.ItemsSource = ;
         }
 
-        private void onHomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
+        //private void onHomeButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Frame.Navigate(typeof(MainPage));
+        //}
 
         private void updateFeeds1(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible splitView.IsPaneOpen = !splitView.IsPaneOpen;
-            //link voor booleantovisibilityconverter : http://stackoverflow.com/questions/39832208/how-to-use-booleantovisibilityconverter-in-uwp
+            //link voor booleantovisibilityconverter (miss beter?) : http://stackoverflow.com/questions/39832208/how-to-use-booleantovisibilityconverter-in-uwp
             if (veranderNaam1.Visibility == Visibility.Collapsed)
-            { }
+                veranderNaam1.Visibility = Visibility.Visible;
+            else
+                veranderNaam1.Visibility = Visibility.Collapsed;
+            
         }
 
         private void updateFeeds2(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible
+            if (veranderNaam2.Visibility == Visibility.Collapsed)
+                veranderNaam2.Visibility = Visibility.Visible;
+            else            
+                veranderNaam2.Visibility = Visibility.Collapsed;
         }
 
         private void updateFeeds3(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible
+            if (veranderNaam3.Visibility == Visibility.Collapsed)
+                veranderNaam3.Visibility = Visibility.Visible;
+            else            
+                veranderNaam3.Visibility = Visibility.Collapsed;
         }
 
         private void updateFeeds4(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible
+            if (veranderNaam4.Visibility == Visibility.Collapsed)
+                veranderNaam4.Visibility = Visibility.Visible;
+            else            
+                veranderNaam4.Visibility = Visibility.Collapsed;
         }
 
         private void updateFeeds5(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible
+            if (veranderNaam5.Visibility == Visibility.Collapsed)
+                veranderNaam5.Visibility = Visibility.Visible;
+            else            
+                veranderNaam5.Visibility = Visibility.Collapsed;
         }
 
         private void updateFeeds6(object sender, RoutedEventArgs e)
         {
             //set list of feeds visible or invisible
+            if (veranderNaam6.Visibility == Visibility.Collapsed)
+                veranderNaam6.Visibility = Visibility.Visible;
+            else            
+                veranderNaam6.Visibility = Visibility.Collapsed;
+        }
+
+        private void onHomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }
