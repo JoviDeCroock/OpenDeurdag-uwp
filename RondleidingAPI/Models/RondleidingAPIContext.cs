@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
+using RondleidingAPI.Models.Domain;
 
 namespace RondleidingAPI.Models
 {
@@ -20,17 +21,19 @@ namespace RondleidingAPI.Models
         {
         }
 
-        public System.Data.Entity.DbSet<RondleidingAPI.Models.Student> Students { get; set; }
+        public System.Data.Entity.DbSet<Student> Students { get; set; }
 
-        public System.Data.Entity.DbSet<RondleidingAPI.Models.Admin> Admins { get; set; }
+        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
 
-        public System.Data.Entity.DbSet<RondleidingAPI.Models.Training> Trainings { get; set; }
+        public System.Data.Entity.DbSet<Training> Trainings { get; set; }
 
-        public System.Data.Entity.DbSet<RondleidingAPI.Models.Campus> Campus { get; set; }
-
+        public System.Data.Entity.DbSet<Campus> Campus { get; set; }
+        public System.Data.Entity.DbSet<TrainingCampus> TCampus { get; set; }
+        public System.Data.Entity.DbSet<StudentCampus> SCampus { get; set; }
+        public System.Data.Entity.DbSet<StudentTraining> STraining { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Training>()
+            /*modelBuilder.Entity<Training>()
                .HasMany<Campus>(s => s.Campussen)
                .WithMany(c => c.Trainingen)
                .Map(cs =>
@@ -38,7 +41,25 @@ namespace RondleidingAPI.Models
                    cs.MapLeftKey("TrainingRefId");
                    cs.MapRightKey("CampusRefId");
                    cs.ToTable("TrainingCampus");
-               });       
+               });
+            modelBuilder.Entity<Student>()
+                .HasMany<Campus>(s => s.PrefCampus)
+                .WithMany(c => c.Studenten)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("StudentRefId");
+                    cs.MapRightKey("CampusRefId");
+                    cs.ToTable("StudentCampus");
+                });
+            modelBuilder.Entity<Student>()
+                .HasMany<Training>(s => s.PrefTraining)
+                .WithMany(c => c.Studenten)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("StudentRefId");
+                    cs.MapRightKey("TrainingRefId");
+                    cs.ToTable("StudentTraining");
+                });*/
         }
    }
 }

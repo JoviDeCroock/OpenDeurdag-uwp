@@ -9,7 +9,9 @@
 
     <SplitView CompactPaneLength="35" x:Name="splitView" DisplayMode="CompactOverlay" IsPaneOpen="False" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView.Pane>
-            <StackPanel Background="Gray">
+
+            <StackPanel Background="#006fb8" Margin="0 0 20 0">
+
                 <Button  Content="&#xE700;" FontFamily="Segoe MDL2 Assets" AutomationProperties.Name="Favorite" Click="on_Click" />
                 <StackPanel Orientation="Horizontal" Tapped="goToNewsFeed">
                     <Button Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets"/>

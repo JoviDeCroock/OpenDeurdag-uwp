@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RondleidingAPI.Models.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,13 +12,27 @@ namespace RondleidingAPI.Models
         public int TrainingId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual IList<Campus> Campussen { get; set; }
-        public Training() { Campussen = new List<Campus>(); }
-        public Training(string name, string description)
+        public virtual IList<TrainingCampus> Campussen { get; set; }
+        public string Feed { get; set; }
+        public virtual IList<StudentTraining> Studenten { get; set; }
+        public Training() { Campussen = new List<TrainingCampus>(); Studenten = new List<StudentTraining>(); }
+
+        public Training(string name, string description, string feed)
         {
             Name = name;
             Description = description;
-            Campussen = new List<Campus>();
+            Feed = feed;
+            Campussen = new List<TrainingCampus>();
+            Studenten = new List<StudentTraining>();
+        }
+
+        public void addToCampus(TrainingCampus t)
+        {
+            Campussen.Add(t);
+        }
+        public void addToStudents(StudentTraining t)
+        {
+            Studenten.Add(t);
         }
     }
 }

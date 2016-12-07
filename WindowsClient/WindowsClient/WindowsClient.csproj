@@ -103,6 +103,7 @@
     <Compile Include="Models\Preference.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CheckComboBox.cs" />
     <Compile Include="Views\MyPreferences.xaml.cs">
       <DependentUpon>MyPreferences.xaml</DependentUpon>
     </Compile>
@@ -205,6 +206,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

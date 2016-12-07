@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RondleidingAPI.Models.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,9 +13,9 @@ namespace RondleidingAPI.Models
         public string HouseNumber { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
-        public virtual IList<Campus> PrefCampus { get; set; }
-        public virtual IList<Training> PrefTraining { get; set; }
-        public Student() { }
+        public virtual IList<StudentCampus> PrefCampus { get; set; }
+        public virtual IList<StudentTraining> PrefTraining { get; set; }
+        public Student() { PrefCampus = new List<StudentCampus>(); PrefTraining = new List<StudentTraining>(); }
         public Student(string street, string houseNumber, string province, string city, string name, string email)
         {
             Street = street;
@@ -23,28 +24,28 @@ namespace RondleidingAPI.Models
             City = city;
             Name = name;
             Email = email;
-            PrefCampus = new List<Campus>();
-            PrefTraining = new List<Training>();
+            PrefCampus = new List<StudentCampus>();
+            PrefTraining = new List<StudentTraining>();
         }
 
-        public void addCampus(Campus c)
+        public void addCampus(StudentCampus c)
         {
             PrefCampus.Add(c);
         }
-        public void removeCampus(string name)
+        public void removeCampus(int id)
         {
-            Campus c = PrefCampus.Where(campus => campus.Name == name).FirstOrDefault();
+            StudentCampus c = PrefCampus.Where(campus => campus.CampusId == id).FirstOrDefault();
             if (c != null)
                 PrefCampus.Remove(c);
         }
 
-        public void addTraining(Training t)
+        public void addTraining(StudentTraining t)
         {
             PrefTraining.Add(t);
         }
-        public void removeTraining(string name)
+        public void removeTraining(int id)
         {
-            Training t = PrefTraining.Where(training => training.Name == name).FirstOrDefault();
+            StudentTraining t = PrefTraining.Where(training => training.TrainingId == id).FirstOrDefault();
             if (t != null)
                 PrefTraining.Remove(t);
         }
