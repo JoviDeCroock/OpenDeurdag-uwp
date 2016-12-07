@@ -30,7 +30,7 @@
                    VerticalAlignment="Center"
                    Margin="20 0 0 0"
                    FontSize="24"
-                   Foreground="White"/>
+                   Foreground="#333;"/>
 
         <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed" />
 
