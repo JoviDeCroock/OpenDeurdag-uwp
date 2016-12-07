@@ -35,13 +35,9 @@ namespace WindowsClient.Views
                 new WindowsClient.Models.Training() { Name="Office management"},
                 new WindowsClient.Models.Training() { Name="Retailmanagement"},
                 new WindowsClient.Models.Training() { Name="Toegepaste informatica"}
-
                 };
 
-            trainingsGent.Add(new WindowsClient.Models.Training() { Name = "Toegepaste informatica" });
-
             listViewTrainingsGent.ItemsSource = trainingsGent;
-            //this.DataContext = trainingsHoGent;
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
