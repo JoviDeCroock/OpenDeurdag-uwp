@@ -31,8 +31,8 @@
                    Margin="20 0 0 0"
                    FontSize="24"
                    Foreground="White"/>
+        <Button Grid.Row="0" Style="{StaticResource HoGent_ButtonHome}" Click="onHomeButton_Click" Visibility="Collapsed"/>
 
-        <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed" />
 
         <Grid Grid.Row="2">
             <!-- definitions -->

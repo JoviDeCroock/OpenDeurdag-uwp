@@ -22,7 +22,7 @@
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Interesses" />
         </Border>
-        <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" />
+        <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
 
         <!-- items -->
         <ScrollContentPresenter  Grid.Row="1" 
