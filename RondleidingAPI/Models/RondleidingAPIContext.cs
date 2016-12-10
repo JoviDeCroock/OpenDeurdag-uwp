@@ -60,5 +60,7 @@ namespace RondleidingAPI.Models
                     cs.ToTable("StudentTraining");
                 });*/
         }
-   }
+
+        public System.Data.Entity.DbSet<RondleidingAPI.Models.Domain.Post> Posts { get; set; }
+    }
 }

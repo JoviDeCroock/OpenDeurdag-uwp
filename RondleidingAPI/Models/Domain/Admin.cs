@@ -11,5 +11,6 @@ namespace RondleidingAPI.Models
         public int AdminId { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
+        public Admin() { }
     }
 }

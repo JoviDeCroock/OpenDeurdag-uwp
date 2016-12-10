@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RondleidingAPI.Models;
+using RondleidingAPI.Models.Domain;
 
 namespace RondleidingAPI.Controllers
 {
@@ -47,6 +48,29 @@ namespace RondleidingAPI.Controllers
             if (id != student.StudentId)
             {
                 return BadRequest();
+            }
+
+            /*TRYOUT*/
+            Student s = db.Student.Where(t => t.StudentId == student.StudentId).FirstOrDefault();
+            if(student.PrefTraining != s.PrefTraining)
+            {
+                foreach(StudentTraining p in student.PrefTraining)
+                {
+                    if(!s.PrefTraining.Contains(p))
+                    {
+                        s.addTraining(p);
+                    }
+                }
+            }
+            if (student.PrefCampus != s.PrefCampus)
+            {
+                foreach (StudentCampus p in student.PrefCampus)
+                {
+                    if (!s.PrefCampus.Contains(p))
+                    {
+                        s.addCampus(p);
+                    }
+                }
             }
 
             db.Entry(student).State = EntityState.Modified;
