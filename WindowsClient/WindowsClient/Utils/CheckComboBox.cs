@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-<<<<<<< HEAD
 using System.Collections;
-=======
 using WindowsClient.Models;
->>>>>>> 24a642881485a683ac40f47d3d9d77e27bbb4656
+
 
 namespace WindowsClient.Utils
 {
