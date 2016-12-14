@@ -18,6 +18,7 @@ using Windows.System.Profile;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
+using Windows.Foundation.Metadata;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -43,6 +44,17 @@ namespace WindowsClient
                 case "Windows.Desktop":
                     mainfr.Navigate(typeof(NewsfeedFilter));
                     break;
+            }
+
+            //Mobile customization
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    statusBar.HideAsync();
+                }
             }
         }
 

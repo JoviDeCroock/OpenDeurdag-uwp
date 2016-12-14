@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsClient.Models
 {
-    class Training
+    public class Training
     {
         public Training() { }
         string name;

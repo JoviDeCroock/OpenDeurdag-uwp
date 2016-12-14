@@ -23,7 +23,6 @@
                        Text="Opleidingen" />
         </Border>
         <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
-        
         <!-- items -->
         
     </Grid>
