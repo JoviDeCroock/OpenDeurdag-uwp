@@ -39,7 +39,9 @@ namespace WindowsClient.Utils
                         String[] values = chkValue.Split('-');
                         String campusName = values[0].Trim();
                         String trainingName = values[1].Trim();
-                        Training training = new Training() {Campus = new List<String>(), Name = trainingName};
+                        Training training = new Training() {
+                            Campus = new List<String>(),
+                            Name = trainingName};
                         training.Campus.Add(campusName);
 
                         selectedItems.Add(training);

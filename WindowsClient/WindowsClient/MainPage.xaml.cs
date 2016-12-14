@@ -19,6 +19,8 @@ using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.Foundation.Metadata;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -123,6 +125,14 @@ namespace WindowsClient
             var updator = TileUpdateManager.CreateTileUpdaterForApplication();
             var notification = new TileNotification(xml);
             updator.Update(notification);
+        }
+
+        private async void fillData()
+        {
+            HttpClient client = new HttpClient();
+            var json = await client.GetStringAsync(new Uri("http://localhost:5495/api/todolist"));
+            var lists = JsonConvert.DeserializeObject<List<Campus>>(json);
+            
         }
     }
 }

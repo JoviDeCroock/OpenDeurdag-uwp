@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -16,6 +17,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GraphVersionHelper;
 using Facebook;
+using System.Text;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,25 +31,27 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class NewsfeedFilter : Page
     {
+        ObservableCollection<PostObject> posts;
+
         public NewsfeedFilter()
         {
             this.InitializeComponent();
 
-
-            //fill lists of feeds here
-            //veranderNaam1.ItemsSource = ;
-            //veranderNaam2.ItemsSource = ;
-            //veranderNaam3.ItemsSource = ;
-            //veranderNaam4.ItemsSource = ;
-            //veranderNaam5.ItemsSource = ;
-            //veranderNaam6.ItemsSource = ;
             getDataTest();
+            //fill lists of feeds here
+            
+
         }
 
-        //private void onHomeButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Frame.Navigate(typeof(MainPage));
-        //}
+        private void onHomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        private void onFilterChange(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         private void updateFeeds1(object sender, RoutedEventArgs e)
         {
@@ -102,24 +109,59 @@ namespace WindowsClient.Views
                 veranderNaam6.Visibility = Visibility.Collapsed;
         }
 
-        private void onHomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
 
-        private async void getDataTest()
+        private async void /*Task<ObservableCollection<PostObject>>*/ getDataTest()
         {
+            
             HttpClient client = new HttpClient();
 
-            string PackageName = Package.Current.Id.Name;
-            string oauthUrl = string.Format("https://graph.facebook.com/v2.8/HoGentCampusAalst/feed?access_token=EAACEdEose0cBAJg66oZBMKNZCbP8dsZC1iciZAXIgqkonZCpM4E4khbHfTt5BeymU7dblBC8Yy12UZBZCf3YM0ZCE2Lkw5vBKNGMJ5LPZBakYdNLQZCgacYQ0KoewChnUjkekdPQHgiejqnZAfXLjARpzmILn4GBhLnXIVH3uPAHqZCmxwZDZD");
+            string token = "EAACEdEose0cBAIlVtfowVZA89gc3V7zDsHW3ezQuZAvDoOZB3WDHEh0fI8ZCM7YJZBoAmqDR2UMcUHzQYZC05stGVAjc9O1c54ELWZC6ZB1iNMAk8KlDnODm0CqYnRxmQSNyxxnL9rkYjSnZBGlpaV5ZBlZAzBZCQLm1ZA0lmPBZAsRV558QZDZD";
 
-            string temp = await client.GetStringAsync(oauthUrl);
-            string accessToken = temp.Split('=')[1];
+            string[] pages = new string[] {"HoGentCampusAalst" , "hogenttoegepasteinformatica", "874745529279221" };
+            Dictionary<string, string> dicPage = new Dictionary<string, string>();
+            dicPage.Add("Campus Aalst", "HoGentCampusAalst");
 
-            string pageInfo = await client.GetStringAsync(string.Format("https://graph.facebook.com/v2.8/HoGentCampusAalst/feed?access_token={0}", accessToken));
-            string pagePosts = await client.GetStringAsync(string.Format("", accessToken));
+            foreach (KeyValuePair<string, string> entry in dicPage)
+            {
+
+                string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
+                string json = await client.GetStringAsync(oauthUrl);
+                var result = JsonConvert.DeserializeObject<Wrapper>(json);
+
+                posts = new ObservableCollection<PostObject>();
+
+                for (int i = 0; i < 5; ++i)
+                {
+                    PostObject post = new PostObject()
+                    {
+                        id = result.data[i].id,
+                        story = result.data[i].story,
+                        message = result.data[i].message,
+                        created_time = result.data[i].created_time
+                    };
+
+                    posts.Add(post);
+
+                }
+            }
+
+            //return posts;
         }
 
+    }
+
+    class Wrapper
+    {
+        public PostObject[] data;
+
+    }
+
+    class PostObject
+    {
+        public string id { get; set; }
+        public string story { get; set; }
+        public string message { get; set; }
+        public DateTime created_time { get; set; }
+        public string page { get; set; }
     }
 }
