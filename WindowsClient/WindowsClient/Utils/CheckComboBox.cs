@@ -38,11 +38,23 @@ namespace WindowsClient.Utils
                         String[] values = chkValue.Split('-');
                         String campusName = values[0].Trim();
                         String trainingName = values[1].Trim();
-                        Training training = new Training() {Campus = new List<String>(), Name = trainingName};
-                        training.Campus.Add(campusName);
 
-                        selectedItems.Add(training);
+                        bool found = false;
+                        foreach (Training existingTraining in selectedItems)
+                        {
+                            if (existingTraining.Name.Equals(trainingName))
+                            {
+                                existingTraining.Campus.Add(campusName);
+                                found = true;
+                            }
+                        }
 
+                        if (!found)
+                        {
+                            Training training = new Training() { Campus = new List<string>() , Name = trainingName};
+                            training.Campus.Add(campusName);
+                            selectedItems.Add(training);
+                        }
                     }
                 }
             }
