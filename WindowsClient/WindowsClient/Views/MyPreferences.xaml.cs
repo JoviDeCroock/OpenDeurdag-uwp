@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsClient.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +27,8 @@ namespace WindowsClient.Views
         public MyPreferences()
         {
             this.InitializeComponent();
+
+
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
@@ -35,7 +38,7 @@ namespace WindowsClient.Views
 
         private void verzendGegevens_Click(object sender, RoutedEventArgs e)
         {
-            var iets = this.checkComboBox.SelectedItems;
+            List<Models.Training> trainings = this.checkComboBox.SelectedItems;
         }
     }
 

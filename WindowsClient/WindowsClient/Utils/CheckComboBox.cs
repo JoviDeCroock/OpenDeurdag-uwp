@@ -44,8 +44,22 @@ namespace WindowsClient.Utils
                             Name = trainingName};
                         training.Campus.Add(campusName);
 
-                        selectedItems.Add(training);
+                        bool found = false;
+                        foreach (Training existingTraining in selectedItems)
+                        {
+                            if (existingTraining.Name.Equals(trainingName))
+                            {
+                                existingTraining.Campus.Add(campusName);
+                                found = true;
+                            }
+                        }
 
+                        if (!found)
+                        {
+                            training = new Training() { Campus = new List<string>() , Name = trainingName};
+                            training.Campus.Add(campusName);
+                            selectedItems.Add(training);
+                        }
                     }
                 }
             }

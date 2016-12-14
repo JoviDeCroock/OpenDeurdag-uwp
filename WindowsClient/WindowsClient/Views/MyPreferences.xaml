@@ -33,7 +33,7 @@
                 <TextBlock Text="Mijn voorkeur:"
                            Margin="0 20 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
-                <my:CheckComboBox Style="{StaticResource HoGent_CheckComboBox}" PlaceholderText="Kies voorkeuren" Margin="0 0 0 20" x:Name="checkComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <my:CheckComboBox Style="{StaticResource HoGent_CheckComboBox}" PlaceholderText="Voorkeuren" Margin="0 0 0 20" x:Name="checkComboBox" DisplayMemberPath="Name">
                     <CheckBox Content="Gent - TI"/>
                     <CheckBox Content="Aalst - TI"/>
                     <CheckBox Content="Gent - Nog iets"/>
