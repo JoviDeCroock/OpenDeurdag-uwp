@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using WindowsClient.Models;
 
 namespace WindowsClient.Utils
 {
     public class CheckComboBox : ComboBox
     {
-        ArrayList selectedItems;
+        private List<Training> selectedItems;
 
-        public ArrayList SelectedItems
+        public List<Training> SelectedItems
         {
             get
             {
@@ -25,15 +26,22 @@ namespace WindowsClient.Utils
         internal void SetSelectedItems()
         {
             CheckBox chkTemp = null;
-            selectedItems = new ArrayList();
+            selectedItems = new List<Training>();
             foreach (object objTemp in this.Items)
             {
                 if (objTemp.GetType() == typeof(CheckBox))
                 {
-                    chkTemp = (CheckBox)objTemp;
+                    chkTemp = (CheckBox) objTemp;
                     if (chkTemp.IsChecked == true)
                     {
-                        selectedItems.Add(chkTemp);
+                        String chkValue = chkTemp.Content.ToString();
+                        String[] values = chkValue.Split('-');
+                        String campusName = values[0].Trim();
+                        String trainingName = values[1].Trim();
+                        Training training = new Training() {Campus = new List<String>(), Name = trainingName};
+                        training.Campus.Add(campusName);
+
+                        selectedItems.Add(training);
 
                     }
                 }

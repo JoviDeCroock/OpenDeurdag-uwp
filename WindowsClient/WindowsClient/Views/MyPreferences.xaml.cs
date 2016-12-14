@@ -35,7 +35,7 @@ namespace WindowsClient.Views
 
         private void verzendGegevens_Click(object sender, RoutedEventArgs e)
         {
-
+            var iets = this.checkComboBox.SelectedItems;
         }
     }
 

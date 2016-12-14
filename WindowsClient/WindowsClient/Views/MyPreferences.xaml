@@ -26,22 +26,18 @@
         <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
 
         <!-- items -->
-        <ScrollContentPresenter  Grid.Row="1" 
-                                 Margin="20 20 0 0" 
-                                 HorizontalAlignment="Left" 
-                                 VerticalAlignment="Top" 
-                                 Height="Auto" 
-                                 Width="Auto"
-                                 ScrollViewer.VerticalScrollMode="Enabled">
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Hidden">
             <StackPanel Width="300">
                 <TextBlock Text="Mijn voorkeur:"
-                           Margin="0 0 0 20"
+                           Margin="0 20 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
                 <my:CheckComboBox Style="{StaticResource HoGent_CheckComboBox}" PlaceholderText="Kies voorkeuren" Margin="0 0 0 20" x:Name="checkComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <CheckBox Content="One"/>
-                    <CheckBox Content="Two"/>
-                    <CheckBox Content="Three"/>
-                    <CheckBox Content="Four"/>
+                    <CheckBox Content="Gent - TI"/>
+                    <CheckBox Content="Aalst - TI"/>
+                    <CheckBox Content="Gent - Nog iets"/>
+                    <CheckBox Content="Aalst - Nog meer"/>
                 </my:CheckComboBox>
                 <TextBlock Text="Mijn gegevens:"
                            Margin="0 0 0 20"
@@ -86,13 +82,11 @@
                          Margin="0 0 0 20"
                          Style="{StaticResource HoGent_TextBox}"/>
                 <Button Content="Verzend"
-                        Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"/>
-                
+                        Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
+                        Margin="0 0 0 20"/>
+
 
             </StackPanel>
-
-
-
-        </ScrollContentPresenter>
+        </ScrollViewer>
     </Grid>
 </Page>
