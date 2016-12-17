@@ -30,7 +30,6 @@ namespace RondleidingAPI.Models
 
         public void addCampus(StudentCampus c)
         {
-            c.Campus.addToStudents(c);
             PrefCampus.Add(c);
         }
         public void removeCampus(int id)
@@ -43,7 +42,6 @@ namespace RondleidingAPI.Models
 
         public void addTraining(StudentTraining t)
         {
-            t.Training.addToStudents(t);
             PrefTraining.Add(t);
         }
         public void removeTraining(int id)

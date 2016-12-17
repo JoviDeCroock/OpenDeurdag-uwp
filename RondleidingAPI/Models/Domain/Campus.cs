@@ -31,12 +31,10 @@ namespace RondleidingAPI.Models
         }
         public void addToTraining(TrainingCampus t)
         {
-            t.Training.addToCampus(t);
             Trainingen.Add(t);
         }
         public void addToStudents(StudentCampus t)
         {
-            t.Student.addCampus(t);
             Studenten.Add(t);
         }
     }

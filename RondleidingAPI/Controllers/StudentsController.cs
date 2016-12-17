@@ -51,7 +51,7 @@ namespace RondleidingAPI.Controllers
             }
 
             /*TRYOUT*/
-            Student s = db.Student.Where(t => t.StudentId == student.StudentId).FirstOrDefault();
+            Student s = db.Student.Where(t => t.StudentId == student.StudentId).FirstOrDefault();          
             if(student.PrefTraining != s.PrefTraining)
             {
                 foreach(StudentTraining p in student.PrefTraining)

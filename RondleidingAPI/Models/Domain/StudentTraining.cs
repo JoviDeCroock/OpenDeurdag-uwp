@@ -13,7 +13,6 @@ namespace RondleidingAPI.Models.Domain
         public int StudentId { get; set; }
         [Key, Column(Order = 1)]
         public int TrainingId { get; set; }
-        public virtual Student Student { get; set; }
-        public virtual Training Training { get; set; }
+        public StudentTraining() { }
     }
 }
