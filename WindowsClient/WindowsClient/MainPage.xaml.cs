@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using WindowsClient.Views;
+using WindowsClient.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -131,8 +132,20 @@ namespace WindowsClient
         {
             HttpClient client = new HttpClient();
             var json = await client.GetStringAsync(new Uri("http://localhost:5495/api/todolist"));
-            var lists = JsonConvert.DeserializeObject<List<Campus>>(json);
-            
+            //var lists = JsonConvert.DeserializeObject<List<Campus>>(json);            
+        }
+
+        private void goToRoutes(object sender, RoutedEventArgs e)
+        {
+            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+            {
+                case "Windows.Mobile":
+                    Frame.Navigate(typeof(Routes));
+                    break;
+                case "Windows.Desktop":
+                    mainfr.Navigate(typeof(Routes));
+                    break;
+            }
         }
     }
 }
