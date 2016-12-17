@@ -21,7 +21,7 @@
                     <Button Background="Transparent" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock VerticalAlignment="Center" Text="Opleidingen" FontSize="20"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Tapped="goToRoutes">
                     <Button Background="Transparent" Content="&#xE707;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock VerticalAlignment="Center" Text="Routeplanner" FontSize="20"/>
                 </StackPanel>
