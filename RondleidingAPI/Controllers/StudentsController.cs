@@ -52,22 +52,24 @@ namespace RondleidingAPI.Controllers
 
             /*TRYOUT*/
             Student s = db.Student.Where(t => t.StudentId == student.StudentId).FirstOrDefault();          
-            if(student.PrefTraining != s.PrefTraining)
+            if(student.PrefTraining.Count != s.PrefTraining.Count)
             {
                 foreach(StudentTraining p in student.PrefTraining)
                 {
                     if(!s.PrefTraining.Contains(p))
                     {
+                        db.STraining.Add(p);
                         s.addTraining(p);
                     }
                 }
             }
-            if (student.PrefCampus != s.PrefCampus)
+            if (student.PrefCampus.Count != s.PrefCampus.Count)
             {
                 foreach (StudentCampus p in student.PrefCampus)
                 {
                     if (!s.PrefCampus.Contains(p))
                     {
+                        db.SCampus.Add(p);
                         s.addCampus(p);
                     }
                 }
