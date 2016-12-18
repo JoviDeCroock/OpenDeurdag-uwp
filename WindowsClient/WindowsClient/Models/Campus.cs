@@ -15,6 +15,7 @@ namespace OpendeurdagAPI.Models.Domain
         public string Street { get; set; }
         public string Telephone { get; set; }
         public string Feed { get; set; }
+        [JsonIgnore]
         public virtual IList<Training> Trainingen { get; set; }
         public IList<int> TrainingIds { get; set; }
         [JsonIgnore]

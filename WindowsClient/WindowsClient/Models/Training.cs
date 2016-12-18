@@ -1,28 +1,45 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace WindowsClient.Models
+namespace OpendeurdagAPI.Models.Domain
 {
     public class Training
     {
-        public Training() { }
-        string name;
-        IList<string> campus;
-        /*TODO: add more attributes (e.g. descriptions, ...) */
+        public int TrainingId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        [JsonIgnore]
+        public virtual IList<Campus> Campussen { get; set; }
+        public IList<int> CampusId { get; set; }
+        public string Feed { get; set; }
+        [JsonIgnore]
+        public virtual IList<Student> Studenten { get; set; }
+        public IList<int> StudentId { get; set; }
+        public Training() { Campussen = new List<Campus>(); Studenten = new List<Student>(); CampusId = new List<int>();StudentId = new List<int>();}
 
-        public string Name
+        public Training(string name, string description, string feed)
         {
-            get { return name; }
-            set { name = value; }
+            Name = name;
+            Description = description;
+            Feed = feed;
+            Campussen = new List<Campus>();
+            Studenten = new List<Student>();
+            CampusId = new List<int>();
+            StudentId = new List<int>();
         }
 
-        public IList<string> Campus
+        public void addToCampus(Campus t)
         {
-            get { return campus; }
-            set { campus = value; }
+            CampusId.Add(t.CampusId);
+            Campussen.Add(t);
+        }
+        public void addToStudents(Student t)
+        {
+            StudentId.Add(t.StudentId);
+            Studenten.Add(t);
         }
     }
 }

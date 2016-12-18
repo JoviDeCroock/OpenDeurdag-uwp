@@ -12,9 +12,9 @@ namespace WindowsClient.Utils
 {
     public class CheckComboBox : ComboBox
     {
-        private List<Training> selectedItems;
+        private List<Training2> selectedItems;
 
-        public List<Training> SelectedItems
+        public List<Training2> SelectedItems
         {
             get
             {
@@ -27,7 +27,7 @@ namespace WindowsClient.Utils
         internal void SetSelectedItems()
         {
             CheckBox chkTemp = null;
-            selectedItems = new List<Training>();
+            selectedItems = new List<Training2>();
             foreach (object objTemp in this.Items)
             {
                 if (objTemp.GetType() == typeof(CheckBox))
@@ -39,13 +39,13 @@ namespace WindowsClient.Utils
                         String[] values = chkValue.Split('-');
                         String campusName = values[0].Trim();
                         String trainingName = values[1].Trim();
-                        Training training = new Training() {
+                        Training2 training = new Training2() {
                             Campus = new List<String>(),
                             Name = trainingName};
                         training.Campus.Add(campusName);
 
                         bool found = false;
-                        foreach (Training existingTraining in selectedItems)
+                        foreach (Training2 existingTraining in selectedItems)
                         {
                             if (existingTraining.Name.Equals(trainingName))
                             {
@@ -56,7 +56,7 @@ namespace WindowsClient.Utils
 
                         if (!found)
                         {
-                            training = new Training() { Campus = new List<string>() , Name = trainingName};
+                            training = new Training2() { Campus = new List<string>() , Name = trainingName};
                             training.Campus.Add(campusName);
                             selectedItems.Add(training);
                         }

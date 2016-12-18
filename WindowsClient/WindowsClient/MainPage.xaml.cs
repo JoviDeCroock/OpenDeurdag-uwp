@@ -105,6 +105,19 @@ namespace WindowsClient
             }
         }
 
+        private void goToRoutes(object sender, RoutedEventArgs e)
+        {
+            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+            {
+                case "Windows.Mobile":
+                    Frame.Navigate(typeof(Routes));
+                    break;
+                case "Windows.Desktop":
+                    mainfr.Navigate(typeof(Routes));
+                    break;
+            }
+        }
+
         private void updateTile()
         {
             /* TileWide310x150SmallImageAndText04 */

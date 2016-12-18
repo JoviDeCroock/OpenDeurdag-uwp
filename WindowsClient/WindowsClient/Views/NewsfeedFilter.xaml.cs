@@ -55,6 +55,7 @@ namespace WindowsClient.Views
         private void onFilterChange(object sender, RoutedEventArgs e)
         {
             List<PostObject> tempPosts = new List<PostObject>();
+            feedLijst.Visibility = Visibility.Collapsed;
 
             //overlopen alle checkboxes
             foreach (CheckBox cb in checkboxFeeds)
@@ -62,6 +63,8 @@ namespace WindowsClient.Views
                 //kijk of checkbox aangevinkt is
                 if (cb.IsChecked == true)
                 {
+                    feedLijst.Visibility = Visibility.Visible;
+
                     //alle posts ophalen die geassocieerd worden met de checkbox en toevoegen aan tempPosts        
                     var temp = posts.Where(p => p.page.ToLower().Equals(cb.Content.ToString().ToLower()));
                     foreach (PostObject p in temp)
@@ -72,7 +75,6 @@ namespace WindowsClient.Views
             }
 
             feedLijst.ItemsSource = tempPosts;
-            feedLijst.Visibility = Visibility.Visible;
 
         }
 
@@ -89,6 +91,9 @@ namespace WindowsClient.Views
             dicPage.Add("Bedrijfsmanagement", "hogentbedrijfsmanagement");
             dicPage.Add("Retail management", "hogentretailmanagement");
             dicPage.Add("Office management", "hogentofficemanagement");
+
+            string campusJson = await client.GetStringAsync("http://localhost:50103/api/Campus");
+
 
             try
             {

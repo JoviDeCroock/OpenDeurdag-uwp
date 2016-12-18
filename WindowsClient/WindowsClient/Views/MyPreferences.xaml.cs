@@ -38,7 +38,7 @@ namespace WindowsClient.Views
 
         private void verzendGegevens_Click(object sender, RoutedEventArgs e)
         {
-            List<Models.Training> trainings = this.checkComboBox.SelectedItems;
+            List<Models.Training2> trainings = this.checkComboBox.SelectedItems;
         }
     }
 

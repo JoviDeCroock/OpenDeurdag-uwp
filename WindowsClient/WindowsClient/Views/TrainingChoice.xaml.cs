@@ -25,17 +25,17 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        ObservableCollection<WindowsClient.Models.Training> trainingsGent;
+        ObservableCollection<WindowsClient.Models.Training2> trainingsGent;
 
         public TrainingChoice()
         {
             this.InitializeComponent();
 
-            trainingsGent = new ObservableCollection<WindowsClient.Models.Training>() {
-                new WindowsClient.Models.Training() { Name="Bedrijfsmanagement"},
-                new WindowsClient.Models.Training() { Name="Office management"},
-                new WindowsClient.Models.Training() { Name="Retailmanagement"},
-                new WindowsClient.Models.Training() { Name="Toegepaste informatica"}
+            trainingsGent = new ObservableCollection<WindowsClient.Models.Training2>() {
+                new WindowsClient.Models.Training2() { Name="Bedrijfsmanagement"},
+                new WindowsClient.Models.Training2() { Name="Office management"},
+                new WindowsClient.Models.Training2() { Name="Retailmanagement"},
+                new WindowsClient.Models.Training2() { Name="Toegepaste informatica"}
                 };
 
             listViewTrainingsGent.ItemsSource = trainingsGent;
@@ -48,7 +48,7 @@ namespace WindowsClient.Views
 
         private async void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
         {
-            Training selectedTraining = (Training)e.ClickedItem;
+            Training2 selectedTraining = (Training2)e.ClickedItem;
             var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name);
 
             await dialog.ShowAsync();

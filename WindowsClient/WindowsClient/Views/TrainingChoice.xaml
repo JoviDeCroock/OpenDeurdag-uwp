@@ -40,10 +40,9 @@
                     <StackPanel HorizontalAlignment="Center" Width="250">
                         <TextBlock HorizontalAlignment="Center"
                                        TextWrapping="Wrap"
-                                       Text="{Binding Name}"
-                                    Foreground="White"
+                                       Text="{Binding Name}"                                    
                                        Style="{StaticResource Hogent_TextBlockNormal}"/>
-                        <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="White" X1="0" Y1="5" X2="200" Y2="5"/>
+                        <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="Black" X1="0" Y1="5" X2="200" Y2="5"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
