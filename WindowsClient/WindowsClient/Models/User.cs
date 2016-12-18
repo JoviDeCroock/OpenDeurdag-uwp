@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpendeurdagAPI.Models.Domain
+namespace Windowsclient.Models
 {
     public class User
     {
