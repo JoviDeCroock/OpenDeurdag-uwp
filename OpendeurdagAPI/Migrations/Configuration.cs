@@ -24,10 +24,6 @@ namespace OpendeurdagAPI.Migrations
 
         protected override void Seed(OpendeurdagAPI.Models.OpendeurdagAPIContext context)
         {
-            /*if (System.Diagnostics.Debugger.IsAttached == false)
-            {
-                System.Diagnostics.Debugger.Launch();
-            }*/
             var campussenObj = new[]
             {
                 new Campus() { CampusId = 1, Name = "HoGent Schoonmeersen", City = "Gent", Street = "Valentin Vaerwyckweg", HouseNumber = "1", Telephone = "09 243 35 60", Feed = "Hogeschool-Gent-Campus-Schoonmeersen" },
@@ -41,13 +37,20 @@ namespace OpendeurdagAPI.Migrations
                 new Training() { TrainingId = 4, Name="Office management", Description="Management boiz", Feed = "hogentofficemanagement"}
             };
 
-            campussenObj[0].addToTraining(trainingenObj[0]);
-            campussenObj[0].addToTraining(trainingenObj[1]);
-            campussenObj[0].addToTraining(trainingenObj[2]);
-            campussenObj[0].addToTraining(trainingenObj[3]);
-            campussenObj[1].addToTraining(trainingenObj[0]);
-            campussenObj[1].addToTraining(trainingenObj[1]);
-            campussenObj[1].addToTraining(trainingenObj[3]);
+            campussenObj[0].Trainingen.Add(trainingenObj[0]);
+            campussenObj[0].TrainingIds.Add(trainingenObj[0].TrainingId);
+            campussenObj[0].Trainingen.Add(trainingenObj[1]);
+            campussenObj[0].TrainingIds.Add(trainingenObj[1].TrainingId);
+            campussenObj[0].Trainingen.Add(trainingenObj[2]);
+            campussenObj[0].TrainingIds.Add(trainingenObj[2].TrainingId);
+            campussenObj[0].Trainingen.Add(trainingenObj[3]);
+            campussenObj[0].TrainingIds.Add(trainingenObj[3].TrainingId);
+            campussenObj[1].Trainingen.Add(trainingenObj[0]);
+            campussenObj[1].TrainingIds.Add(trainingenObj[0].TrainingId);
+            campussenObj[1].Trainingen.Add(trainingenObj[1]);
+            campussenObj[1].TrainingIds.Add(trainingenObj[1].TrainingId);
+            campussenObj[1].Trainingen.Add(trainingenObj[3]);
+            campussenObj[1].TrainingIds.Add(trainingenObj[3].TrainingId);
 
             foreach (Campus c in campussenObj)
             {
@@ -61,7 +64,10 @@ namespace OpendeurdagAPI.Migrations
             context.Posts.AddOrUpdate(x => x.PostId,
                 new Post() { PostId = 1, Title = "WELKOM!", Text = "Welkom bij de coolste hogeschool evar!" }
              );
-
+            if (System.Diagnostics.Debugger.IsAttached == false)
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
             context.SaveChanges();
         }
     }

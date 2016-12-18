@@ -13,10 +13,8 @@ namespace OpendeurdagAPI.Models.Domain
         public string HouseNumber { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
-        [JsonIgnore]
         public virtual IList<Campus> PrefCampus { get; set; }
         public IList<int> CampusIds { get; set; }
-        [JsonIgnore]
         public virtual IList<Training> PrefTraining { get; set; }
         public IList<int> TrainingIds { get; set; }
         public Student() { PrefCampus = new List<Campus>(); PrefTraining = new List<Training>(); TrainingIds = new List<int>(); CampusIds = new List<int>();}

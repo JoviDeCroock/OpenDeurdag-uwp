@@ -153,6 +153,14 @@
     <Compile Include="Migrations\201612181124194_initial.Designer.cs">
       <DependentUpon>201612181124194_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612181141290_initial1.cs" />
+    <Compile Include="Migrations\201612181141290_initial1.Designer.cs">
+      <DependentUpon>201612181141290_initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612181205275_initial2.cs" />
+    <Compile Include="Migrations\201612181205275_initial2.Designer.cs">
+      <DependentUpon>201612181205275_initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domain\Admin.cs" />
     <Compile Include="Models\Domain\Campus.cs" />
@@ -175,6 +183,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612181124194_initial.resx">
       <DependentUpon>201612181124194_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181141290_initial1.resx">
+      <DependentUpon>201612181141290_initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181205275_initial2.resx">
+      <DependentUpon>201612181205275_initial2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
