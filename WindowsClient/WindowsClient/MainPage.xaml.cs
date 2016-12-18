@@ -21,6 +21,7 @@ using Windows.UI.Popups;
 using Windows.Foundation.Metadata;
 using System.Net.Http;
 using Newtonsoft.Json;
+//using RondleidingAPI.Models.Domain;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -129,10 +130,11 @@ namespace WindowsClient
 
         private async void fillData()
         {
+            /*
             HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://localhost:5495/api/todolist"));
+            var json = await client.GetStringAsync(new Uri("http://localhost:5495/api/Campus"));
             var lists = JsonConvert.DeserializeObject<List<Campus>>(json);
-            
+            */
         }
     }
 }

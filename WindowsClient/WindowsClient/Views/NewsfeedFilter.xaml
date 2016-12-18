@@ -49,91 +49,62 @@
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="0"
-                      Content="blabla1" 
-                      Checked="updateFeeds1"
-                      Unchecked="updateFeeds1"/>
+                      x:Name="checkboxAalst"
+                      Content="HoGent Aalst"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="1"
-                      Content="blabla2"
-                      Checked="updateFeeds2"
-                      Unchecked="updateFeeds2"/>
+                      x:Name="checkboxSchoonmeersen"
+                      Content="HoGent Schoonmeersen"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="2"
-                      Content="blabla3"
-                      Checked="updateFeeds3"
-                      Unchecked="updateFeeds3"/>
+                      x:Name="checkboxTI"
+                      Content="Toegepaste Informatica"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="3"
-                      Content="blabla4"
-                      Checked="updateFeeds4"
-                      Unchecked="updateFeeds4"/>
+                      x:Name="checkboxBM"
+                      Content="Bedrijfsmanagement"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="4"
-                      Content="blabla5"
-                      Checked="updateFeeds5"
-                      Unchecked="updateFeeds5"/>
+                      x:Name="checkboxRM"
+                      Content="Retail Management"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="5"
-                      Content="blabla6"
-                      Checked="updateFeeds6"
-                      Unchecked="updateFeeds6"/>
+                      x:Name="checkboxOM"
+                      Content="Office Management"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
         </Grid>
 
         <RelativePanel Grid.Row="3">
-            <ListView x:Name="veranderNaam1"
+            <ListView x:Name="feedLijst"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <!-- set data -->
+                        <Border BorderBrush="#006fb8;">
+                            <StackPanel>
+                                <TextBlock Text="{Binding page}"/>
+                                <TextBlock Text="{Binding created_time}"/>
+                                <TextBlock Text="{Binding message}"/>
+                            </StackPanel>                            
+                        </Border>                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="veranderNaam2"
-                      RelativePanel.Below="veranderNaam1">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- set data -->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="veranderNaam3"
-                      RelativePanel.Below="veranderNaam2">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- set data -->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="veranderNaam4"
-                      RelativePanel.Below="veranderNaam3">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- set data -->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView> 
-            <ListView x:Name="veranderNaam5"
-                      RelativePanel.Below="veranderNaam4">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- set data -->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="veranderNaam6"
-                      RelativePanel.Below="veranderNaam5">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!-- set data -->
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
         </RelativePanel>
     </Grid>
 </Page>

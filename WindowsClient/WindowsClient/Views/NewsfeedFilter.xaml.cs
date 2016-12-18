@@ -21,6 +21,8 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using Windows.ApplicationModel.DataTransfer;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,15 +34,17 @@ namespace WindowsClient.Views
     public sealed partial class NewsfeedFilter : Page
     {
         ObservableCollection<PostObject> posts;
+        List<CheckBox> checkboxFeeds;
 
         public NewsfeedFilter()
         {
             this.InitializeComponent();
 
-            getDataTest();
-            //fill lists of feeds here
-            
+            posts = new ObservableCollection<PostObject>();
+            checkboxFeeds = new List<CheckBox>();
 
+            fillPosts();
+            fillCheckboxes();
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
@@ -50,102 +54,96 @@ namespace WindowsClient.Views
 
         private void onFilterChange(object sender, RoutedEventArgs e)
         {
-            
-        }
+            List<PostObject> tempPosts = new List<PostObject>();
 
-        private void updateFeeds1(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible splitView.IsPaneOpen = !splitView.IsPaneOpen;
-            //link voor booleantovisibilityconverter (miss beter?) : http://stackoverflow.com/questions/39832208/how-to-use-booleantovisibilityconverter-in-uwp
-            if (veranderNaam1.Visibility == Visibility.Collapsed)
-                veranderNaam1.Visibility = Visibility.Visible;
-            else
-                veranderNaam1.Visibility = Visibility.Collapsed;
-            
-        }
-
-        private void updateFeeds2(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible
-            if (veranderNaam2.Visibility == Visibility.Collapsed)
-                veranderNaam2.Visibility = Visibility.Visible;
-            else            
-                veranderNaam2.Visibility = Visibility.Collapsed;
-        }
-
-        private void updateFeeds3(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible
-            if (veranderNaam3.Visibility == Visibility.Collapsed)
-                veranderNaam3.Visibility = Visibility.Visible;
-            else            
-                veranderNaam3.Visibility = Visibility.Collapsed;
-        }
-
-        private void updateFeeds4(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible
-            if (veranderNaam4.Visibility == Visibility.Collapsed)
-                veranderNaam4.Visibility = Visibility.Visible;
-            else            
-                veranderNaam4.Visibility = Visibility.Collapsed;
-        }
-
-        private void updateFeeds5(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible
-            if (veranderNaam5.Visibility == Visibility.Collapsed)
-                veranderNaam5.Visibility = Visibility.Visible;
-            else            
-                veranderNaam5.Visibility = Visibility.Collapsed;
-        }
-
-        private void updateFeeds6(object sender, RoutedEventArgs e)
-        {
-            //set list of feeds visible or invisible
-            if (veranderNaam6.Visibility == Visibility.Collapsed)
-                veranderNaam6.Visibility = Visibility.Visible;
-            else            
-                veranderNaam6.Visibility = Visibility.Collapsed;
-        }
-
-
-        private async void /*Task<ObservableCollection<PostObject>>*/ getDataTest()
-        {
-            
-            HttpClient client = new HttpClient();
-
-            string token = "EAACEdEose0cBAIlVtfowVZA89gc3V7zDsHW3ezQuZAvDoOZB3WDHEh0fI8ZCM7YJZBoAmqDR2UMcUHzQYZC05stGVAjc9O1c54ELWZC6ZB1iNMAk8KlDnODm0CqYnRxmQSNyxxnL9rkYjSnZBGlpaV5ZBlZAzBZCQLm1ZA0lmPBZAsRV558QZDZD";
-
-            string[] pages = new string[] {"HoGentCampusAalst" , "hogenttoegepasteinformatica", "874745529279221" };
-            Dictionary<string, string> dicPage = new Dictionary<string, string>();
-            dicPage.Add("Campus Aalst", "HoGentCampusAalst");
-
-            foreach (KeyValuePair<string, string> entry in dicPage)
+            //overlopen alle checkboxes
+            foreach (CheckBox cb in checkboxFeeds)
             {
-
-                string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
-                string json = await client.GetStringAsync(oauthUrl);
-                var result = JsonConvert.DeserializeObject<Wrapper>(json);
-
-                posts = new ObservableCollection<PostObject>();
-
-                for (int i = 0; i < 5; ++i)
+                //kijk of checkbox aangevinkt is
+                if (cb.IsChecked == true)
                 {
-                    PostObject post = new PostObject()
+                    //alle posts ophalen die geassocieerd worden met de checkbox en toevoegen aan tempPosts        
+                    var temp = posts.Where(p => p.page.ToLower().Equals(cb.Content.ToString().ToLower()));
+                    foreach (PostObject p in temp)
                     {
-                        id = result.data[i].id,
-                        story = result.data[i].story,
-                        message = result.data[i].message,
-                        created_time = result.data[i].created_time
-                    };
-
-                    posts.Add(post);
-
+                        tempPosts.Add(p);
+                    }
                 }
             }
 
+            feedLijst.ItemsSource = tempPosts;
+            feedLijst.Visibility = Visibility.Visible;
+
+        }
+
+        private async void /*Task<ObservableCollection<PostObject>>*/ fillPosts()
+        {
+
+            HttpClient client = new HttpClient();
+            string token = "EAACEdEose0cBADktuPcZB4sfnFKkKdgu7gjmEW7rOLXaDVY7gZAjtZCaU94EZAfCdEqmQfZAMLwZBZCBI1ZAQ3h2lNZB8rQQhwPs1xZCQtEFZAQZCgH6YsongbAsKZAyNAQF9cqO5dwLFnw7uR6hEfOd3XiOgfLInrZCdguyCmgwqW4wrZAMgZDZD";
+
+            Dictionary<string, string> dicPage = new Dictionary<string, string>();
+            dicPage.Add("HoGent Aalst", "HoGentCampusAalst");
+            //dicPage.Add("HoGent Schoonmeersen", "Hogeschool-Gent-Campus-Schoonmeersen");
+            dicPage.Add("Toegepaste Informatica", "hogenttoegepasteinformatica");
+            dicPage.Add("Bedrijfsmanagement", "hogentbedrijfsmanagement");
+            dicPage.Add("Retail management", "hogentretailmanagement");
+            dicPage.Add("Office management", "hogentofficemanagement");
+
+            try
+            {
+                foreach (KeyValuePair<string, string> entry in dicPage)
+                {
+                    string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
+                    string json = await client.GetStringAsync(oauthUrl);
+                    Debug.Write(json);
+                    var result = JsonConvert.DeserializeObject<Wrapper>(json);
+
+                    for (int i = 0; i < 5; ++i)
+                    {
+                        PostObject post = new PostObject()
+                        {
+                            id = result.data[i].id,
+                            story = result.data[i].story,
+                            message = result.data[i].message,
+                            created_time = result.data[i].created_time,
+                            page = entry.Key
+                        };
+
+                        posts.Add(post);
+
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog("Er ging iets mis.");
+                if (e.Message.Contains("400"))
+                {
+                    dialog = new Windows.UI.Popups.MessageDialog("Error 400 : Bad request. Refresh facebook token.\nhttps://developers.facebook.com/tools/explorer/");
+                    await dialog.ShowAsync();
+                }
+                
+                await dialog.ShowAsync();
+            }
+            catch (Exception e)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog("Er ging iets mis.");
+                await dialog.ShowAsync();
+            }
+
             //return posts;
+        }
+
+        private void fillCheckboxes()
+        {
+            //alle checkboxfilters toevoegen aan een lijst
+            checkboxFeeds.Add(checkboxAalst);
+            //checkboxFeeds.Add(checkboxSchoonmeersen);
+            checkboxFeeds.Add(checkboxTI);
+            checkboxFeeds.Add(checkboxBM);
+            checkboxFeeds.Add(checkboxRM);
+            checkboxFeeds.Add(checkboxOM);
         }
 
     }
