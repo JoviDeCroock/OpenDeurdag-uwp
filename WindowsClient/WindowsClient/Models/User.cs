@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Windowsclient.Models
+namespace WindowsClient.Models
 {
     public class User
     {

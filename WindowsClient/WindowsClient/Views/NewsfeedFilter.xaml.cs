@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.ApplicationModel.DataTransfer;
-using Windowsclient.Models;
+using WindowsClient.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -41,8 +41,9 @@ namespace WindowsClient.Views
         {
             this.InitializeComponent();
 
-            posts = new ObservableCollection<PostObject>();
+            
             checkboxFeeds = new List<CheckBox>();
+            posts = new ObservableCollection<PostObject>();
 
             fillPosts();
             fillCheckboxes();
@@ -83,47 +84,53 @@ namespace WindowsClient.Views
         {
             //create http client + set token
             HttpClient client = new HttpClient();
-            string token = "EAACEdEose0cBADktuPcZB4sfnFKkKdgu7gjmEW7rOLXaDVY7gZAjtZCaU94EZAfCdEqmQfZAMLwZBZCBI1ZAQ3h2lNZB8rQQhwPs1xZCQtEFZAQZCgH6YsongbAsKZAyNAQF9cqO5dwLFnw7uR6hEfOd3XiOgfLInrZCdguyCmgwqW4wrZAMgZDZD";
-
+            
             //get all the links to the feeds 
             string campusJson = await client.GetStringAsync("http://localhost:50103/api/Campus");
-            var Campusses = JsonConvert.DeserializeObject<RootObject>(campusJson);
-
+            var Campusses = JsonConvert.DeserializeObject<List<RootObject>>(campusJson);
             Dictionary<string, string> dicPage = new Dictionary<string, string>();
-            dicPage.Add("HoGent Aalst", "HoGentCampusAalst");
-            //dicPage.Add("HoGent Schoonmeersen", "Hogeschool-Gent-Campus-Schoonmeersen");
-            dicPage.Add("Toegepaste Informatica", "hogenttoegepasteinformatica");
-            dicPage.Add("Bedrijfsmanagement", "hogentbedrijfsmanagement");
-            dicPage.Add("Retail management", "hogentretailmanagement");
-            dicPage.Add("Office management", "hogentofficemanagement");            
 
+            foreach(RootObject c in Campusses)
+            {
+                dicPage.Add(c.Name, c.Feed);
+                foreach(WindowsClient.Models.Training t in c.Trainingen)
+                {
+                    if(!dicPage.ContainsKey(t.Name))                        
+                        dicPage.Add(t.Name, t.Feed);
+                }
+            }
 
+            //facebook token
+            string token = "EAACEdEose0cBAMWI0oUxvTgCRrfblr6aZCW9HTVQlKe7KaLsXBOZBKg1LWIz5G4V5ZC0yAoF1pcDDW8ErZBGTpfZBd4ae6nMJIe6h0x9HP8WZC6VRKQwS4ZBTqu3enBJ9dnLGqlg1fBHgacVcytEQJjtu4t7r6CqTLGN2vQPZAoVlevCUpyUMh5H";
+
+            //get all the facebooks posts
             try
             {
                 foreach (KeyValuePair<string, string> entry in dicPage)
                 {
                     //This crap page doesn't wanne share its feeds >=(
-                    if (entry.Key.Equals("HoGent Schoonmeersen"))
-                        break;
-
-                    //set the appropriate url and get json
-                    string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
-                    string json = await client.GetStringAsync(oauthUrl);
-                    Debug.Write(json);
-                    var result = JsonConvert.DeserializeObject<Wrapper>(json);
-
-                    //convert the json to PostObjects
-                    for (int i = 0; i < 5; ++i)
+                    if (!entry.Key.Equals("HoGent Schoonmeersen"))
                     {
-                        PostObject post = new PostObject()
+                        //set the appropriate url and get json
+                        string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
+                        string json = await client.GetStringAsync(oauthUrl);
+                        Debug.Write(json);
+                        var result = JsonConvert.DeserializeObject<Wrapper>(json);
+
+                        //convert the json to PostObjects
+                        for (int i = 0; i < 5; ++i)
                         {
-                            id = result.data[i].id,
-                            story = result.data[i].story,
-                            message = result.data[i].message,
-                            created_time = result.data[i].created_time,
-                            page = entry.Key
-                        };
-                        posts.Add(post);
+                            PostObject post = new PostObject()
+                            {
+                                id = result.data[i].id,
+                                story = result.data[i].story,
+                                message = result.data[i].message,
+                                created_time = result.data[i].created_time,
+                                page = entry.Key
+                            };
+                            //add retrieved post to posts
+                            posts.Add(post);
+                        }
                     }
                 }
             }
@@ -171,17 +178,9 @@ namespace WindowsClient.Views
         public string page { get; set; }
     }
 
-    public class Trainingen
-    {
-        public int TrainingId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Feed { get; set; }
-    }
-
     public class RootObject
     {
-        public List<Trainingen> Trainingen { get; set; }
+        public List<WindowsClient.Models.Training> Trainingen { get; set; }
         public int CampusId { get; set; }
         public string Name { get; set; }
         public string City { get; set; }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Windowsclient.Models
+namespace WindowsClient.Models
 {
     public class Student : User
     {

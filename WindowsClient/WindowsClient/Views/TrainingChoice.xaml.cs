@@ -14,7 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Collections.ObjectModel; 
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,20 +27,13 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        ObservableCollection<WindowsClient.Models.Training2> trainingsGent;
+        ObservableCollection<WindowsClient.Models.Training> trainingsGent;
 
         public TrainingChoice()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();           
 
-            trainingsGent = new ObservableCollection<WindowsClient.Models.Training2>() {
-                new WindowsClient.Models.Training2() { Name="Bedrijfsmanagement"},
-                new WindowsClient.Models.Training2() { Name="Office management"},
-                new WindowsClient.Models.Training2() { Name="Retailmanagement"},
-                new WindowsClient.Models.Training2() { Name="Toegepaste informatica"}
-                };
-
-            listViewTrainingsGent.ItemsSource = trainingsGent;
+            fillTrainings();            
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
@@ -46,9 +41,35 @@ namespace WindowsClient.Views
             Frame.Navigate(typeof(MainPage));
         }
 
+        private async void fillTrainings()
+        {
+            HttpClient client = new HttpClient();
+            string json = await client.GetStringAsync("http://localhost:50103/api/Campus");
+            var result = JsonConvert.DeserializeObject<List<RootObject>>(json);
+
+            trainingsGent = new ObservableCollection<Models.Training>();
+            int index = 0;
+
+            foreach (RootObject root in result)
+            {
+
+                //trainingsGent.Add(t);
+                foreach(Models.Training t in root.Trainingen)
+                {
+                 
+                    t.Campussen.Add(root.Name);
+
+                }
+
+                
+            }
+            
+            listViewTrainingsGent.ItemsSource = trainingsGent;
+        }
+
         private async void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
         {
-            Training2 selectedTraining = (Training2)e.ClickedItem;
+            Models.Training selectedTraining = (Models.Training)e.ClickedItem;
             var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name);
 
             await dialog.ShowAsync();
