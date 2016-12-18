@@ -13,12 +13,10 @@ namespace OpendeurdagAPI.Models.Domain
         public string Description { get; set; }
         [JsonIgnore]
         public virtual IList<Campus> Campussen { get; set; }
-        public IList<int> CampusId { get; set; }
         public string Feed { get; set; }
         [JsonIgnore]
         public virtual IList<Student> Studenten { get; set; }
-        public IList<int> StudentId { get; set; }
-        public Training() { Campussen = new List<Campus>(); Studenten = new List<Student>(); CampusId = new List<int>();StudentId = new List<int>();}
+        public Training() { Campussen = new List<Campus>(); Studenten = new List<Student>();}
 
         public Training(string name, string description, string feed)
         {
@@ -27,18 +25,14 @@ namespace OpendeurdagAPI.Models.Domain
             Feed = feed;
             Campussen = new List<Campus>();
             Studenten = new List<Student>();
-            CampusId = new List<int>();
-            StudentId = new List<int>();
         }
 
         public void addToCampus(Campus t)
         {
-            CampusId.Add(t.CampusId);
             Campussen.Add(t);
         }
         public void addToStudents(Student t)
         {
-            StudentId.Add(t.StudentId);
             Studenten.Add(t);
         }
     }
