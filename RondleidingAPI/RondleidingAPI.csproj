@@ -116,6 +116,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612140727437_initial.cs" />
+    <Compile Include="Migrations\201612140727437_initial.Designer.cs">
+      <DependentUpon>201612140727437_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612171522379_initial1.cs" />
+    <Compile Include="Migrations\201612171522379_initial1.Designer.cs">
+      <DependentUpon>201612171522379_initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612171531162_initial2.cs" />
+    <Compile Include="Migrations\201612171531162_initial2.Designer.cs">
+      <DependentUpon>201612171531162_initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domain\Admin.cs" />
     <Compile Include="Models\Domain\Campus.cs" />
@@ -137,6 +149,17 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612140727437_initial.resx">
+      <DependentUpon>201612140727437_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171522379_initial1.resx">
+      <DependentUpon>201612171522379_initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171531162_initial2.resx">
+      <DependentUpon>201612171531162_initial2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

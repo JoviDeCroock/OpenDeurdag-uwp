@@ -43,28 +43,21 @@ namespace RondleidingAPI.Migrations
             var trainingen = new[]
             {
                 /*Richtingen in beide campussen*/
-                new TrainingCampus() {Training = trainingenObj[0], Campus= campussenObj[0]},
-                new TrainingCampus() {Training = trainingenObj[0], Campus= campussenObj[1]},
-                new TrainingCampus() {Training = trainingenObj[1], Campus= campussenObj[0]},        
-                new TrainingCampus() {Training = trainingenObj[1], Campus= campussenObj[1]},
-                new TrainingCampus() {Training = trainingenObj[3], Campus= campussenObj[0]},
-                new TrainingCampus() {Training = trainingenObj[3], Campus= campussenObj[1]},
+                new TrainingCampus() {TrainingsId = 1, CampusId= 1},
+                new TrainingCampus() {TrainingsId = 1, CampusId= 2},
+                new TrainingCampus() {TrainingsId = 2, CampusId= 1},        
+                new TrainingCampus() {TrainingsId = 2, CampusId= 2},
+                new TrainingCampus() {TrainingsId = 4, CampusId= 1},
+                new TrainingCampus() {TrainingsId = 4, CampusId= 2},
                 /*Richting alleen in Aalst*/
-                new TrainingCampus() {Training = trainingenObj[2], Campus= campussenObj[0]}
+                new TrainingCampus() {TrainingsId = 3, CampusId= 1}
             };
 
-            foreach(TrainingCampus t in trainingen)
+            foreach (TrainingCampus t in trainingen)
             {
                 context.TCampus.AddOrUpdate(t);
             }
-            if (campussenObj[0].Trainingen == null)
-            {
-                campussenObj[0].Trainingen = new List<TrainingCampus>();
-            }
-            if (campussenObj[1].Trainingen == null)
-            {
-                campussenObj[1].Trainingen = new List<TrainingCampus>();
-            }
+
             campussenObj[0].addToTraining(trainingen[0]);
             campussenObj[0].addToTraining(trainingen[2]);
             campussenObj[0].addToTraining(trainingen[4]);
@@ -72,30 +65,22 @@ namespace RondleidingAPI.Migrations
             campussenObj[1].addToTraining(trainingen[1]);
             campussenObj[1].addToTraining(trainingen[3]);
             campussenObj[1].addToTraining(trainingen[5]);
-            if (trainingenObj[0].Campussen == null)
-            {
-                trainingenObj[0].Campussen = new List<TrainingCampus>();
-            }
-            if (trainingenObj[1].Campussen == null)
-            {
-                trainingenObj[1].Campussen = new List<TrainingCampus>();
-            }
-            trainingenObj[0].addToCampus(trainingen[0]);
+            /*trainingenObj[0].addToCampus(trainingen[0]);
             trainingenObj[0].addToCampus(trainingen[1]);
             trainingenObj[1].addToCampus(trainingen[2]);
             trainingenObj[1].addToCampus(trainingen[3]);
             trainingenObj[3].addToCampus(trainingen[4]);
             trainingenObj[3].addToCampus(trainingen[5]);
-            trainingenObj[2].addToCampus(trainingen[6]);
+            trainingenObj[2].addToCampus(trainingen[6]);*/
 
             foreach (Campus c in campussenObj)
             {
                 context.Campus.AddOrUpdate(c);
             }
-            foreach (Training t in trainingenObj)
+           /* foreach (Training t in trainingenObj)
             {
                 context.Training.AddOrUpdate(t);
-            }
+            }*/
 
             context.Admin.AddOrUpdate(x => x.AdminId,
                 new Admin() { AdminId = 1, Email = "admin@gmail.com", Name = "Admin", Password = encode("Password") }

@@ -36,7 +36,7 @@
                 Content="Opleidingen" Click="goToTrainings"/>
         <Button Grid.Row="3" 
                 Style="{StaticResource HoGent_ButtonStyle}" 
-                Content="Routeplanner"/>
+                Content="Routeplanner" Click="goToRoutes"/>
         <Button Grid.Row="4" 
                 Style="{StaticResource HoGent_ButtonStyle}" 
                 Content="Mijn interesses" Click="goToMyPreferences"/>
