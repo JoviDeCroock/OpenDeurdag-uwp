@@ -47,41 +47,6 @@ namespace OpendeurdagAPI.Controllers
             return Ok(admin);
         }
 
-        // PUT: api/Admins/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutAdmin(int id, Admin admin)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != admin.AdminId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(admin).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/Admins
         [ResponseType(typeof(Admin))]
         public async Task<IHttpActionResult> PostAdmin(Admin admin)
@@ -105,21 +70,6 @@ namespace OpendeurdagAPI.Controllers
         }
 
         // DELETE: api/Admins/5
-        [ResponseType(typeof(Admin))]
-        public async Task<IHttpActionResult> DeleteAdmin(int id)
-        {
-            Admin admin = await db.Admins.FindAsync(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
-
-            db.Admins.Remove(admin);
-            await db.SaveChangesAsync();
-
-            return Ok(admin);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -37,41 +37,6 @@ namespace OpendeurdagAPI.Controllers
             return Ok(post);
         }
 
-        // PUT: api/Posts/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutPost(int id, Post post)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != post.PostId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(post).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/Posts
         [ResponseType(typeof(Post))]
         public async Task<IHttpActionResult> PostPost(Post post)
@@ -80,7 +45,10 @@ namespace OpendeurdagAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            if (post.Title == null || post.Text == null)
+            {
+                return Ok("Vul alle velden in aub");
+            }
             db.Posts.Add(post);
             await db.SaveChangesAsync();
 

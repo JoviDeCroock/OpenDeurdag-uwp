@@ -41,8 +41,35 @@ namespace OpendeurdagAPI.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutStudent(int id, Student student)
         {
-           Student s = db.Student.FirstOrDefault(ad => ad.StudentId == student.StudentId);
+            student.StudentId = id + 1;
+            Student s = db.Student.FirstOrDefault(ad => ad.StudentId == student.StudentId);
+            if (s == null)
+            {
+                return Ok("Ongeldige student");
+            }
+            s.PrefCampus = student.PrefCampus;
+            s.PrefTraining = student.PrefTraining;
+            db.Entry(s).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StudentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(s);
         }
+
 
         // POST: api/Students
         [ResponseType(typeof(Student))]
@@ -52,27 +79,14 @@ namespace OpendeurdagAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            if (student.Street == null || student.HouseNumber == null || student.Province == null || student.City == null || student.Name == null || student.Email == null)
+            {
+                return Ok("Vul alle velden in");
+            }
             db.Student.Add(student);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = student.StudentId }, student);
-        }
-
-        // DELETE: api/Students/5
-        [ResponseType(typeof(Student))]
-        public async Task<IHttpActionResult> DeleteStudent(int id)
-        {
-            Student student = await db.Student.FindAsync(id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            db.Student.Remove(student);
-            await db.SaveChangesAsync();
-
-            return Ok(student);
         }
 
         protected override void Dispose(bool disposing)
