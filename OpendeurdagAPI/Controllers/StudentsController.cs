@@ -41,35 +41,7 @@ namespace OpendeurdagAPI.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutStudent(int id, Student student)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != student.StudentId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(student).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+           Student s = db.Student.FirstOrDefault(ad => ad.StudentId == student.StudentId);
         }
 
         // POST: api/Students

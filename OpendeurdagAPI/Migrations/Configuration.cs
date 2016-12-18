@@ -38,19 +38,12 @@ namespace OpendeurdagAPI.Migrations
             };
 
             campussenObj[0].Trainingen.Add(trainingenObj[0]);
-            campussenObj[0].TrainingIds.Add(trainingenObj[0].TrainingId);
             campussenObj[0].Trainingen.Add(trainingenObj[1]);
-            campussenObj[0].TrainingIds.Add(trainingenObj[1].TrainingId);
             campussenObj[0].Trainingen.Add(trainingenObj[2]);
-            campussenObj[0].TrainingIds.Add(trainingenObj[2].TrainingId);
             campussenObj[0].Trainingen.Add(trainingenObj[3]);
-            campussenObj[0].TrainingIds.Add(trainingenObj[3].TrainingId);
             campussenObj[1].Trainingen.Add(trainingenObj[0]);
-            campussenObj[1].TrainingIds.Add(trainingenObj[0].TrainingId);
             campussenObj[1].Trainingen.Add(trainingenObj[1]);
-            campussenObj[1].TrainingIds.Add(trainingenObj[1].TrainingId);
             campussenObj[1].Trainingen.Add(trainingenObj[3]);
-            campussenObj[1].TrainingIds.Add(trainingenObj[3].TrainingId);
 
             foreach (Campus c in campussenObj)
             {

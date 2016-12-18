@@ -86,17 +86,22 @@ namespace OpendeurdagAPI.Controllers
         [ResponseType(typeof(Admin))]
         public async Task<IHttpActionResult> PostAdmin(Admin admin)
         {
-            if (!ModelState.IsValid)
+            if(admin.Email!= null || admin.Password!=null)
             {
-                return BadRequest(ModelState);
+                return Ok("Vul alle velden in");
+            }
+            Admin a = db.Admins.FirstOrDefault(ad => ad.Email == admin.Email);
+            if (a == null)
+            {
+                return NotFound();
             }
 
-            admin.Password = encode(admin.Password);
-
-            db.Admins.Add(admin);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = admin.AdminId }, admin);
+            string x = encode(admin.Password);
+            if (a.Password == x)
+            {
+                return Ok(a);
+            }
+            return Ok("Foutief wachtwoord.");
         }
 
         // DELETE: api/Admins/5
