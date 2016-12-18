@@ -36,73 +36,7 @@ namespace OpendeurdagAPI.Controllers
 
             return Ok(campus);
         }
-
-        // PUT: api/Campus/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCampus(int id, Campus campus)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != campus.CampusId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(campus).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CampusExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Campus
-        [ResponseType(typeof(Campus))]
-        public async Task<IHttpActionResult> PostCampus(Campus campus)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Campus.Add(campus);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = campus.CampusId }, campus);
-        }
-
-        // DELETE: api/Campus/5
-        [ResponseType(typeof(Campus))]
-        public async Task<IHttpActionResult> DeleteCampus(int id)
-        {
-            Campus campus = await db.Campus.FindAsync(id);
-            if (campus == null)
-            {
-                return NotFound();
-            }
-
-            db.Campus.Remove(campus);
-            await db.SaveChangesAsync();
-
-            return Ok(campus);
-        }
-
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
