@@ -92,13 +92,10 @@ namespace WindowsClient.Views
             {
                 case GeolocationAccessStatus.Allowed:
 
-                    // If DesiredAccuracy or DesiredAccuracyInMeters are not set (or value is                       0), DesiredAccuracy.Default is used.
                     Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = 100 };
 
-                    // Carry out the operation
                     Geoposition startPosition = await geolocator.GetGeopositionAsync().AsTask();
 
-                    // End at the city of Seattle, Washington.,
 
                     BasicGeoposition endLocation = new BasicGeoposition() { Latitude = latitude, Longitude = longitude };
 
