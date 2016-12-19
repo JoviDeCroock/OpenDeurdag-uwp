@@ -35,7 +35,6 @@ namespace WindowsClient
         public MainPage()
         {
             this.InitializeComponent();
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -116,6 +115,11 @@ namespace WindowsClient
                     mainfr.Navigate(typeof(Routes));
                     break;
             }
+        }
+
+        private void AdminLoginClick(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void updateTile()

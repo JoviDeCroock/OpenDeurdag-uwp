@@ -57,10 +57,12 @@ namespace OpendeurdagAPI.Migrations
             context.Posts.AddOrUpdate(x => x.PostId,
                 new Post() { PostId = 1, Title = "WELKOM!", Text = "Welkom bij de coolste hogeschool evar!" }
              );
+            /*
             if (System.Diagnostics.Debugger.IsAttached == false)
             {
                 System.Diagnostics.Debugger.Launch();
             }
+            */
             context.SaveChanges();
         }
     }

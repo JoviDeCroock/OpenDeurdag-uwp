@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace OpendeurdagAPI.Models.Domain
+
+namespace WindowsClient.Models
 {
     public class Post
     {

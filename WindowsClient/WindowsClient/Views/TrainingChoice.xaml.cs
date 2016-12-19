@@ -14,7 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Collections.ObjectModel; 
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,20 +27,13 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        ObservableCollection<WindowsClient.Models.Training2> trainingsGent;
+        ObservableCollection<WindowsClient.Models.Training> trainings;
 
         public TrainingChoice()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();           
 
-            trainingsGent = new ObservableCollection<WindowsClient.Models.Training2>() {
-                new WindowsClient.Models.Training2() { Name="Bedrijfsmanagement"},
-                new WindowsClient.Models.Training2() { Name="Office management"},
-                new WindowsClient.Models.Training2() { Name="Retailmanagement"},
-                new WindowsClient.Models.Training2() { Name="Toegepaste informatica"}
-                };
-
-            listViewTrainingsGent.ItemsSource = trainingsGent;
+            fillTrainings();            
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
@@ -46,12 +41,49 @@ namespace WindowsClient.Views
             Frame.Navigate(typeof(MainPage));
         }
 
-        private async void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
+        private async void fillTrainings()
         {
-            Training2 selectedTraining = (Training2)e.ClickedItem;
-            var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name);
+            HttpClient client = new HttpClient();
+            string json = await client.GetStringAsync("http://localhost:50103/api/Campus");
+            var result = JsonConvert.DeserializeObject<List<RootObject>>(json);
 
-            await dialog.ShowAsync();
+            trainings = new ObservableCollection<Models.Training>();
+
+            foreach (RootObject root in result)
+            {
+                foreach(Models.Training t in root.Trainingen)
+                {
+                    if(trainings.Any(training => training.Name.Equals(t.Name)))
+                    {
+                        //t.Campussen.Add(root);
+                        var temp = trainings.Where(training => training.Name.Equals(t.Name));
+                        foreach(Models.Training tr in temp)
+                        {
+                            tr.Campussen.Add(root.Name);
+                        }
+                    }
+                    else
+                    {
+                        t.Campussen.Add(root.Name);
+                        trainings.Add(t);
+                    }
+                }                
+            }
+            
+            listViewTrainingsGent.ItemsSource = trainings;
+        }
+
+        private void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
+        {
+            Models.Training selectedTraining = (Models.Training)e.ClickedItem;
+
+            chosenTraining.Text = selectedTraining.Name;
+            descriptionOfTraining.Text = selectedTraining.Description;
+            CampussesOfTraining.Text = String.Join(", ", selectedTraining.Campussen);
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+
+            //var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name + "\nDeze richting kan u volgen in: " + String.Join(", ", selectedTraining.Campussen));
+            //await dialog.ShowAsync();
         }
     }
 }

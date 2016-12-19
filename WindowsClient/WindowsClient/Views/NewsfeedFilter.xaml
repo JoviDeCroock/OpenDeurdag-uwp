@@ -3,20 +3,26 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowsClient.Views"
+    xmlns:utils="using:WindowsClient.Utils"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <utils:DateConverter x:Name="DateConverter"/>
+    </Page.Resources>
 
     <Grid Style="{StaticResource HoGent_Grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="75"/>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="250"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
 
         <!-- header -->
         <Border Grid.Row="0" Background="#006fb8;">
@@ -30,81 +36,120 @@
                    VerticalAlignment="Center"
                    Margin="20 0 0 0"
                    FontSize="24"/>
-        <Button Grid.Row="0" Style="{StaticResource HoGent_ButtonHome}" Click="onHomeButton_Click" Visibility="Collapsed"/>
 
 
         <Grid Grid.Row="2">
             <!-- definitions -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="260"/>
             </Grid.ColumnDefinitions>
+            <TextBlock Text="Opleidingen"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                       Foreground="#006fb8;"
+                   VerticalAlignment="Center"
+                   Margin="20 0 0 0"
+                   FontSize="24"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
                       Grid.Column="0"
-                      x:Name="checkboxAalst"
-                      Content="HoGent Aalst"
-                      Checked="onFilterChange"
-                      Unchecked="onFilterChange"/>
-
-            <CheckBox Style="{StaticResource HoGent_Checkbox}"
-                      Grid.Column="1"
-                      x:Name="checkboxSchoonmeersen"
-                      Content="HoGent Schoonmeersen"
-                      Checked="onFilterChange"
-                      Unchecked="onFilterChange"/>
-
-            <CheckBox Style="{StaticResource HoGent_Checkbox}"
-                      Grid.Column="2"
-                      x:Name="checkboxTI"
-                      Content="Toegepaste Informatica"
-                      Checked="onFilterChange"
-                      Unchecked="onFilterChange"/>
-
-            <CheckBox Style="{StaticResource HoGent_Checkbox}"
-                      Grid.Column="3"
+                      Grid.Row="1"
                       x:Name="checkboxBM"
                       Content="Bedrijfsmanagement"
                       Checked="onFilterChange"
                       Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
-                      Grid.Column="4"
+                      Grid.Column="0"
+                      Grid.Row="2"
+                      x:Name="checkboxOM"
+                      Content="Office Management"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
+
+            <CheckBox Style="{StaticResource HoGent_Checkbox}"
+                      Grid.Column="0"
+                      Grid.Row="3"
                       x:Name="checkboxRM"
                       Content="Retail Management"
                       Checked="onFilterChange"
                       Unchecked="onFilterChange"/>
 
             <CheckBox Style="{StaticResource HoGent_Checkbox}"
-                      Grid.Column="5"
-                      x:Name="checkboxOM"
-                      Content="Office Management"
+                      Grid.Row="4"
+                      Grid.Column="0"
+                      x:Name="checkboxTI"
+                      Content="Toegepaste Informatica"
                       Checked="onFilterChange"
                       Unchecked="onFilterChange"/>
+
+            <TextBlock Text="Campussen"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                       Foreground="#006fb8;"
+                   VerticalAlignment="Center"
+                   Margin="20 0 0 0"
+                   FontSize="24"/>
+
+            <CheckBox Style="{StaticResource HoGent_Checkbox}"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      x:Name="checkboxAalst"
+                      Content="HoGent Aalst"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
+
+
+
+            <CheckBox Style="{StaticResource HoGent_Checkbox}"
+                      Grid.Column="1"
+                      Grid.Row="2"
+                      x:Name="checkboxSchoonmeersen"
+                      Content="HoGent Schoonmeersen"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
+
+
+
+
+
+
+
         </Grid>
 
-        <RelativePanel Grid.Row="3">
-            <ListView x:Name="feedLijst"
-                      >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="#006fb8;">
-                            <StackPanel>
-                                <TextBlock Text="{Binding page}"/>
-                                <TextBlock Text="{Binding created_time}"/>
-                                <TextBlock Text="{Binding message}"/>
-                            </StackPanel>                            
-                        </Border>                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </RelativePanel>
+        <ScrollViewer Grid.Row="3" x:Name="rij3">
+            <StackPanel HorizontalAlignment="Stretch">
+                <ListView x:Name="feedLijst" HorizontalAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="10" HorizontalAlignment="Stretch">
+                                <TextBlock HorizontalAlignment="Stretch"
+                                    x:Name="pagename"
+                                    Text="{Binding page}"
+                                    Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                                <TextBlock HorizontalAlignment="Stretch"
+                                    Style="{StaticResource Hogent_TextBlockFeedDate}"
+                                    x:Name="time"                                    
+                                    Text="{Binding created_time, Converter={StaticResource DateConverter}}"/>
+                                <TextBlock HorizontalAlignment="Stretch"
+                                    TextWrapping="Wrap"
+                                    x:Name="message"
+                                    Width="Auto"
+                                    Text="{Binding message}"/>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

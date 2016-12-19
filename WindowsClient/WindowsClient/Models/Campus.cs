@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace OpendeurdagAPI.Models.Domain
+namespace WindowsClient.Models
 {
     public class Campus
     {
@@ -15,10 +14,8 @@ namespace OpendeurdagAPI.Models.Domain
         public string Street { get; set; }
         public string Telephone { get; set; }
         public string Feed { get; set; }
-        [JsonIgnore]
         public virtual IList<Training> Trainingen { get; set; }
         public IList<int> TrainingIds { get; set; }
-        [JsonIgnore]
         public virtual IList<Student> Studenten { get; set; }
         public IList<int> StudentIds { get; set; }
         public Campus() { Trainingen = new List<Training>(); Studenten = new List<Student>(); TrainingIds = new List<int>();StudentIds = new List<int>();}
