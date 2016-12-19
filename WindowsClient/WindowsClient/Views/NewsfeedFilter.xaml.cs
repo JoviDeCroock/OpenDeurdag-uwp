@@ -101,7 +101,7 @@ namespace WindowsClient.Views
             }
 
             //facebook token
-            string token = "EAACEdEose0cBAH5ZC2hB1FtQkvmfjGpDtpA15BlEZC6pMxsJWj4CFpHVJIEdOQMXBNgTVUNJQN0U0iiEfLSX2GliwONKLz6S50SBvTMw6YM1s6ZChcSkZCVkicRviI3bAV4Jpz34ZAngeALjFWZBF0ft5RYuG1Xufa91ZCKfYoJzAZDZD";
+            string token = "EAACEdEose0cBAA0KS7mYBRVNU6skRUkDRoZCjMNGeg9vD17l8c23bTaWCZAsNP4oGKfzGjAchWZCeomQlx9TJTkzh6w4vNcXJy9uuZCi13aFZBrDcAL93jI79DwW8HxZCtnL6Ao6OygJ1QdmP1MwJhZAtT0q2WE8eXFCMG2IxRBDgZDZD";
 
             //get all the facebooks posts
             try

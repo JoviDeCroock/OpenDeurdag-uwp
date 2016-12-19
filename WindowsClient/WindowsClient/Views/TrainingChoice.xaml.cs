@@ -27,7 +27,7 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        ObservableCollection<WindowsClient.Models.Training> trainingsGent;
+        ObservableCollection<WindowsClient.Models.Training> trainings;
 
         public TrainingChoice()
         {
@@ -47,32 +47,43 @@ namespace WindowsClient.Views
             string json = await client.GetStringAsync("http://localhost:50103/api/Campus");
             var result = JsonConvert.DeserializeObject<List<RootObject>>(json);
 
-            trainingsGent = new ObservableCollection<Models.Training>();
-            int index = 0;
+            trainings = new ObservableCollection<Models.Training>();
 
             foreach (RootObject root in result)
             {
-
-                //trainingsGent.Add(t);
                 foreach(Models.Training t in root.Trainingen)
                 {
-                 
-                    t.Campussen.Add(root.Name);
-
-                }
-
-                
+                    if(trainings.Any(training => training.Name.Equals(t.Name)))
+                    {
+                        //t.Campussen.Add(root);
+                        var temp = trainings.Where(training => training.Name.Equals(t.Name));
+                        foreach(Models.Training tr in temp)
+                        {
+                            tr.Campussen.Add(root.Name);
+                        }
+                    }
+                    else
+                    {
+                        t.Campussen.Add(root.Name);
+                        trainings.Add(t);
+                    }
+                }                
             }
             
-            listViewTrainingsGent.ItemsSource = trainingsGent;
+            listViewTrainingsGent.ItemsSource = trainings;
         }
 
-        private async void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
+        private void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
         {
             Models.Training selectedTraining = (Models.Training)e.ClickedItem;
-            var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name);
 
-            await dialog.ShowAsync();
+            chosenTraining.Text = selectedTraining.Name;
+            descriptionOfTraining.Text = selectedTraining.Description;
+            CampussesOfTraining.Text = String.Join(", ", selectedTraining.Campussen);
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+
+            //var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name + "\nDeze richting kan u volgen in: " + String.Join(", ", selectedTraining.Campussen));
+            //await dialog.ShowAsync();
         }
     }
 }

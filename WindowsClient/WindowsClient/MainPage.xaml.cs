@@ -117,6 +117,11 @@ namespace WindowsClient
             }
         }
 
+        private void AdminLoginClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void updateTile()
         {
             /* TileWide310x150SmallImageAndText04 */
