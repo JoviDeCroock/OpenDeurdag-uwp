@@ -35,6 +35,16 @@
                 IsItemClickEnabled="True"
                 ItemClick="listViewHoGentItem_Click"
                 ItemsSource="{Binding trainingsGent}" >
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <StackPanel>
+                        <TextBlock x:Name="chosenTraining"/>
+                        <TextBlock x:Name="descriptionOfTraining"/>
+                        <TextBlock Text="U kan deze richting volgen in:"/>
+                        <TextBlock x:Name="CampussesOfTraining"/>
+                    </StackPanel>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center" Width="250">

@@ -9,8 +9,9 @@ namespace WindowsClient.Models
     {
         public int TrainingId { get; set; }
         public string Name { get; set; }
+        public string stringCB { get; set; }
         public string Description { get; set; }
-        public IList<string> Campussen { get; set; }
+        public List<string> Campussen { get; set; }
         public IList<int> CampusId { get; set; }
         public string Feed { get; set; }
         public virtual IList<Student> Studenten { get; set; }
