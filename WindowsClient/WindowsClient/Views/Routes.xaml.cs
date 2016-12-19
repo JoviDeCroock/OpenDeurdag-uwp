@@ -126,8 +126,7 @@ namespace WindowsClient.Views
                     MapIcon mapIcon2 = new MapIcon();
                     mapIcon2.Location = gp2;
                     mapIcon2.NormalizedAnchorPoint = new Point(0.5, 1.0);
-                    //mapIcon2.Title = ((Campus) Campusses.SelectedItem).Name;
-                    mapIcon2.Title = "Campus";
+                    mapIcon2.Title = ((Campus) Campusses.SelectedItem).Name;
                     mapIcon1.ZIndex = 0;
                     MyMap.MapElements.Add(mapIcon2);
 
