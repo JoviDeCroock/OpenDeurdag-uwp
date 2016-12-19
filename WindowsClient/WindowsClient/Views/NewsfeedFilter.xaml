@@ -90,17 +90,25 @@
                       Unchecked="onFilterChange"/>
         </Grid>
 
-        <RelativePanel Grid.Row="3">
+        <RelativePanel Grid.Row="3" Width="Auto">
             <ListView x:Name="feedLijst"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="#006fb8;">
-                            <StackPanel>
-                                <TextBlock Text="{Binding page}"/>
-                                <TextBlock Text="{Binding created_time}"/>
-                                <TextBlock Text="{Binding message}"/>
-                            </StackPanel>                            
+                        <Border BorderBrush="#006fb8;" BorderThickness="2" Margin="0 15 0 0">
+                            <RelativePanel Margin="10">
+                                <TextBlock 
+                                    x:Name="pagename"
+                                    Text="{Binding page}"/>
+                                <TextBlock
+                                    x:Name="time"
+                                    RelativePanel.Below="pagename"
+                                    Text="{Binding created_time}"/>
+                                <TextBlock 
+                                    x:Name="message"
+                                    RelativePanel.Below="time"
+                                    Text="{Binding message}"/>
+                            </RelativePanel>                            
                         </Border>                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
