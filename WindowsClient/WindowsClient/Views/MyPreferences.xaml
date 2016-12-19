@@ -16,91 +16,77 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- header -->
-        <Border Grid.Row="0" Background="#006fb8;">
+        <Border Grid.ColumnSpan="2" Grid.Row="0" Background="#006fb8;">
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Interesses" />
         </Border>
         <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
 
-        <!-- items -->
-        <ScrollViewer Grid.Row="1"
-                      HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Hidden">
-            <StackPanel Width="300">
-                <TextBlock Text="Mijn voorkeur:"
+
+        <ListBox x:Name="listbox" Grid.Column="0" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Content}" Checked="CheckBox_Checked"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Width="300" Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Mijn voorkeur:"
                            Margin="0 20 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
-                <my:CheckComboBox Style="{StaticResource HoGent_CheckComboBox}" PlaceholderText="Voorkeuren" Margin="0 0 0 20" x:Name="checkComboBox">
-                    
-                    <my:CheckComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Content}" IsEnabled="True" Click="test" />
-                        </DataTemplate>
-                    </my:CheckComboBox.ItemTemplate>
-                    <!--
-                    <CheckBox Content="Gent - TI"/>
-                    <CheckBox Content="Aalst - TI"/>
-                    <CheckBox Content="Gent - Nog iets"/>
-                    <CheckBox Content="Aalst - Nog meer"/>-->
-                </my:CheckComboBox>
-                <ListBox x:Name="listbox">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Content}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <TextBlock Text="Mijn gegevens:"
+            <TextBlock Text="Mijn gegevens:"
                            Margin="0 0 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
-                <TextBox PlaceholderText="Voornaam"
+            <TextBox PlaceholderText="Voornaam"
                          x:Name="firstname"
                          Margin="0 0 0 20"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <TextBox PlaceholderText="Naam"
+            <TextBox PlaceholderText="Naam"
                          x:Name="lastname"
                          Margin="0 0 0 20"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <TextBox PlaceholderText="E-mailadres"
+            <TextBox PlaceholderText="E-mailadres"
                          x:Name="email"
                          Margin="0 0 0 10"
                          InputScope="EmailSmtpAddress"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <TextBlock Text="Adres"
+            <TextBlock Text="Adres"
                            Margin="20 0 0 10"
                            FontSize="14"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBox PlaceholderText="Straat"
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBox PlaceholderText="Straat"
                              x:Name="street"
                          Width="200"
                          HorizontalAlignment="Left"
                          Style="{StaticResource HoGent_TextBox}"/>
-                    <TextBox PlaceholderText="Nr."
+                <TextBox PlaceholderText="Nr."
                              x:Name="houseNumber"
                              Width="75"
                              HorizontalAlignment="Right"
                              Margin="25 0 0 0"
                              InputScope="Digits"
                              Style="{StaticResource HoGent_TextBox}"/>
-                </StackPanel>
-                <TextBox PlaceholderText="Stad"
+            </StackPanel>
+            <TextBox PlaceholderText="Stad"
                          x:Name="city"
                          Margin="0 0 0 10"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <TextBox PlaceholderText="Provincie"
+            <TextBox PlaceholderText="Provincie"
                          x:Name="county"
                          Margin="0 0 0 20"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <Button Content="Verzend"
+            <Button Content="Verzend"
                         Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
                         Margin="0 0 0 20"/>
 
 
-            </StackPanel>
-        </ScrollViewer>
+        </StackPanel>
+
     </Grid>
 </Page>
