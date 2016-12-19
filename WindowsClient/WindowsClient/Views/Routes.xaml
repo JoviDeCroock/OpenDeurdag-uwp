@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowsClient.Views"
     xmlns:utils="using:WindowsClient.Utils"
+        xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:images="using:WindowsClient.Images"
+    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -13,8 +15,8 @@
         <!-- definitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,11 +26,32 @@
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Routeplanner" />
         </Border>
-        <!-- items -->
-        <ScrollViewer Grid.Row="1">
-            <!--<RelativePanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock 
+                   VerticalAlignment="Center"
+                   Margin="20 0 20 0"
+                   FontSize="24"
+                   Text="Route naar "/>
+            <ComboBox Width="200px" x:Name="Campusses" SelectionChanged="SelectionChanged"
+Style="{StaticResource HoGent_ComboBox}"
+                      Margin="0 10 0 10">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <Maps:MapControl x:Name="MyMap" MapServiceToken="QJnnkMOv4orFAt7p4GK1~ikA6-gj9lszj5iNbmmhGUA~AihogMlA2PlLcNuwEBlmsXhaMUVihNwVB_ja3eWdfaNts9aEQTutaGi9q66wMGFW" Grid.Row="2"/>
+        <!--<ScrollViewer >
+            
+            -->
+        <!--<RelativePanel>
                 <Image x:Name="route" Source="../Images/route.png"/>-->
-                <FlipView Name="ImageFlipView" RelativePanel.Below="route">
+        <!--<FlipView Name="ImageFlipView" RelativePanel.Below="route">
                     <FlipView.ItemTemplate>
                         <DataTemplate x:DataType="utils:RouteImage">
                             <ScrollViewer MinZoomFactor="1" DoubleTapped="scrollViewer_DoubleTapped" ZoomMode="Enabled">
@@ -36,8 +59,9 @@
                             </ScrollViewer>
                         </DataTemplate>
                     </FlipView.ItemTemplate>
-                </FlipView>
-            <!--</RelativePanel>-->
-        </ScrollViewer>
+                </FlipView>-->
+        <!--</RelativePanel>-->
+        <!--
+        </ScrollViewer>-->
     </Grid>
 </Page>

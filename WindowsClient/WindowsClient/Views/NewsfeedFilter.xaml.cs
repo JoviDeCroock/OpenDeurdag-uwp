@@ -76,7 +76,7 @@ namespace WindowsClient.Views
                 }
             }
 
-            feedLijst.ItemsSource = tempPosts;
+            feedLijst.ItemsSource = tempPosts.OrderByDescending(p => p.created_time).ToList();
 
         }
 
@@ -101,7 +101,7 @@ namespace WindowsClient.Views
             }
 
             //facebook token
-            string token = "EAACEdEose0cBAH5ZC2hB1FtQkvmfjGpDtpA15BlEZC6pMxsJWj4CFpHVJIEdOQMXBNgTVUNJQN0U0iiEfLSX2GliwONKLz6S50SBvTMw6YM1s6ZChcSkZCVkicRviI3bAV4Jpz34ZAngeALjFWZBF0ft5RYuG1Xufa91ZCKfYoJzAZDZD";
+            string token = "EAACEdEose0cBALFx1q7bUJBZAO6tFbHBVOm6qadWeZAifkI3xDlQ82MIwZA3YXjvOiwchQMj8Bkwaoq3SvvZAQATpxbHnIBHs61VYZBROxurjZCd8693Gxfn52MOteszCSIRqiWgXyDlZCYSX0BGal670TS0Uf9Ry5FIQJqGfrRFAZDZD";
 
             //get all the facebooks posts
             try
@@ -132,7 +132,9 @@ namespace WindowsClient.Views
                             posts.Add(post);
                         }
                     }
+                    
                 }
+
             }
             catch (HttpRequestException e)
             {
