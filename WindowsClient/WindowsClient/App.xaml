@@ -1027,6 +1027,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Name="HoGent_ListBox" TargetType="ListBox">
+            <Setter Property="Background" Value="White"/>
+        </Style>
 
 
 

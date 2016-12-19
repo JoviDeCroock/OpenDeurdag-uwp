@@ -35,7 +35,6 @@ namespace WindowsClient.Views
         public MyPreferences()
         {
             this.InitializeComponent();
-
             fillCheckboxes();   
         }
 
@@ -105,7 +104,7 @@ namespace WindowsClient.Views
             }
             Student nieuw = new Student();
             nieuw.Province = county.Text;
-            nieuw.Name = "" + firstname.Text + lastname.Text;
+            nieuw.Name = "" + firstname.Text + " " + lastname.Text;
             nieuw.City = city.Text;
             nieuw.Street = street.Text;
             nieuw.HouseNumber = houseNumber.Text;
@@ -114,7 +113,10 @@ namespace WindowsClient.Views
             nieuw.Email = email.Text;
             string body = JsonConvert.SerializeObject(nieuw);
             var result2 = await client.PostAsync("http://localhost:50103/api/Students", new StringContent(body, Encoding.UTF8, "application/json"));
-              
+
+            var dialog = new Windows.UI.Popups.MessageDialog("Je gegevens werden doorgestuurd.");
+            await dialog.ShowAsync();
+
         }
 
         private async void fillCheckboxes()
