@@ -50,13 +50,7 @@ Style="{StaticResource HoGent_ComboBox}"
 
 
             <Maps:MapControl x:Name="MyMap" MapServiceToken="QJnnkMOv4orFAt7p4GK1~ikA6-gj9lszj5iNbmmhGUA~AihogMlA2PlLcNuwEBlmsXhaMUVihNwVB_ja3eWdfaNts9aEQTutaGi9q66wMGFW" Grid.Row="2"/>
-            <!--<TextBlock 
-                    Grid.Row="3"
-                   VerticalAlignment="Center"
-                   Margin="20 0 20 0"
-                   FontSize="24"
-                   Text="Campus Schoonmeersen"/>
-            <Image Grid.Row="4" x:Name="route" Source="../Images/route.png" HorizontalAlignment="Left"/>-->
+
             <StackPanel Grid.Row="3" Orientation="Horizontal" x:Name="LevelStack" Visibility="Visible">
                 <TextBlock 
                    VerticalAlignment="Center"
@@ -79,24 +73,6 @@ Style="{StaticResource HoGent_ComboBox}"
             <ScrollViewer Grid.Row="4" x:Name="ScrollImage"  DoubleTapped="ImageDoubleTapped" ZoomMode="Enabled">
                 <Image x:Name="LevelImage"  Visibility="Visible"/>
             </ScrollViewer>
-
-            <!--<ScrollViewer >
-            
-            -->
-            <!--<RelativePanel>
-                -->
-            <!--<FlipView Name="ImageFlipView" RelativePanel.Below="route">
-                    <FlipView.ItemTemplate>
-                        <DataTemplate x:DataType="utils:RouteImage">
-                            <ScrollViewer MinZoomFactor="1" DoubleTapped="scrollViewer_DoubleTapped" ZoomMode="Enabled">
-                                <Image Source="{Binding Path}"/>
-                            </ScrollViewer>
-                        </DataTemplate>
-                    </FlipView.ItemTemplate>
-                </FlipView>-->
-            <!--</RelativePanel>-->
-            <!--
-        </ScrollViewer>-->
         </Grid>
     </ScrollViewer>
 </Page>
