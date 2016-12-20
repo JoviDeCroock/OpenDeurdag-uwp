@@ -84,6 +84,7 @@
                           Margin="10 10 10 10"
                          Style="{StaticResource HoGent_TextBox}"/>
             <ComboBox x:Name="Province"
+                       PlaceholderText="Provincie"
                      Margin="10"
                      Style="{StaticResource HoGent_ComboBox}">
                 <ComboBoxItem Content="Antwerpen"/>
