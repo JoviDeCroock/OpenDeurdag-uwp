@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,7 +28,8 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        ObservableCollection<WindowsClient.Models.Training> trainings;
+        //ObservableCollection<WindowsClient.Models.Training> trainings;
+        ObservableCollection<TrainingWithImage> trainings;
 
         public TrainingChoice()
         {
@@ -47,7 +49,7 @@ namespace WindowsClient.Views
             string json = await client.GetStringAsync("http://localhost:50103/api/Campus");
             var result = JsonConvert.DeserializeObject<List<RootObject>>(json);
 
-            trainings = new ObservableCollection<Models.Training>();
+            trainings = new ObservableCollection<TrainingWithImage>();
 
             foreach (RootObject root in result)
             {
@@ -57,7 +59,7 @@ namespace WindowsClient.Views
                     {
                         //t.Campussen.Add(root);
                         var temp = trainings.Where(training => training.Name.Equals(t.Name));
-                        foreach(Models.Training tr in temp)
+                        foreach(TrainingWithImage tr in temp)
                         {
                             tr.Campussen.Add(root.Name);
                         }
@@ -65,7 +67,7 @@ namespace WindowsClient.Views
                     else
                     {
                         t.Campussen.Add(root.Name);
-                        trainings.Add(t);
+                        trainings.Add(new TrainingWithImage(t));
                     }
                 }                
             }
@@ -75,15 +77,43 @@ namespace WindowsClient.Views
 
         private void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
         {
-            Models.Training selectedTraining = (Models.Training)e.ClickedItem;
+            TrainingWithImage selectedTraining = (TrainingWithImage) e.ClickedItem;
 
             chosenTraining.Text = selectedTraining.Name;
             descriptionOfTraining.Text = selectedTraining.Description;
             CampussesOfTraining.Text = String.Join(", ", selectedTraining.Campussen);
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
 
             //var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name + "\nDeze richting kan u volgen in: " + String.Join(", ", selectedTraining.Campussen));
             //await dialog.ShowAsync();
+        }
+
+        public class TrainingWithImage
+        {
+            public int TrainingId { get; set; }
+            public string Name { get; set; }
+            public string stringCB { get; set; }
+            public string Description { get; set; }
+            public List<string> Campussen { get; set; }
+            public IList<int> CampusId { get; set; }
+            public string Feed { get; set; }
+            public virtual IList<Student> Studenten { get; set; }
+            public IList<int> StudentId { get; set; }
+            public String Image { get; set; }
+
+            public TrainingWithImage(Training training)
+            {
+                Name = training.Name;
+                Description = training.Description;
+                Feed = training.Feed;
+                Campussen = new List<string>();
+                Studenten = new List<Student>();
+                CampusId = new List<int>();
+                StudentId = new List<int>();
+
+                Regex initials = new Regex(@"(\b[a-zA-Z])[a-zA-Z]* ?");
+                string init = initials.Replace(training.Name, "$1").ToUpper();
+                Image = "ms-appx:///Images/" + init + ".jpg";
+            }
         }
     }
 }

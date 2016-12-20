@@ -31,10 +31,10 @@ namespace OpendeurdagAPI.Migrations
             };
             var trainingenObj = new[]
             {
-                new Training() { TrainingId = 1, Name="Toegepaste Informatica", Description="Toekomstrichting boiz", Feed = "hogenttoegepasteinformatica"},
-                new Training() { TrainingId = 2, Name="Bedrijfsmanagement", Description="Bedrijfsrichting boiz", Feed = "hogentbedrijfsmanagement"},
-                new Training() { TrainingId = 3, Name="Retail management", Description="Retailrichthing boiz", Feed = "hogentretailmanagement"},
-                new Training() { TrainingId = 4, Name="Office management", Description="Management boiz", Feed = "hogentofficemanagement"}
+                new Training() { TrainingId = 1, Name="Toegepaste Informatica", Description="Computerrichting, hier start de leerling volledig vanaf de basis. Daarna heeft de leerling keuze om netwerken/programmeren te doen.", Feed = "hogenttoegepasteinformatica"},
+                new Training() { TrainingId = 2, Name="Bedrijfsmanagement", Description="Praktijk georienteerde richting over het managen van een bedrijf.", Feed = "hogentbedrijfsmanagement"},
+                new Training() { TrainingId = 3, Name="Retail management", Description="Voorbereiding op de job van strategisch manager in de detailhandel.", Feed = "hogentretailmanagement"},
+                new Training() { TrainingId = 4, Name="Office management", Description="Voorbereidende richting op het organiserende en coordinerende aspect in bedrijven.", Feed = "hogentofficemanagement"}
             };
 
             campussenObj[0].Trainingen.Add(trainingenObj[0]);

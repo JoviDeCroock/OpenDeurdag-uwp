@@ -126,9 +126,6 @@
     <Compile Include="Views\Routes.xaml.cs">
       <DependentUpon>Routes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Training.xaml.cs">
-      <DependentUpon>Training.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TrainingChoice.xaml.cs">
       <DependentUpon>TrainingChoice.xaml</DependentUpon>
     </Compile>
@@ -183,12 +180,16 @@
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Images\B.jpg" />
     <Content Include="Images\GSCHB1.png" />
     <Content Include="Images\GSCHB3.png" />
     <Content Include="Images\GSCHB0.png" />
     <Content Include="Images\GSCHB2.png" />
     <Content Include="Images\GSCHB4.png" />
+    <Content Include="Images\OM.jpg" />
+    <Content Include="Images\RM.jpg" />
     <Content Include="Images\route.png" />
+    <Content Include="Images\TI.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -239,7 +240,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Training.xaml">
+    <Page Include="Views\TrainingChoice.DeviceFamily-Mobile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

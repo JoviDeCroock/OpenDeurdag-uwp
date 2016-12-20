@@ -10,7 +10,7 @@
     <Grid Style="{StaticResource HoGent_Grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="250"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,21 +22,70 @@
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Opleidingen" />
         </Border>
-        <Button  Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
 
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="1">
+            <ListView x:Name="listViewTrainingsGent" HorizontalAlignment="Stretch" Width="Auto"
+                      IsItemClickEnabled="True"
+                      ItemClick="listViewHoGentItem_Click">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" MaxWidth="200">
+                            <Image Source="{Binding Image}"/>
+                            <TextBlock HorizontalAlignment="Center"
+                                    x:Name="Training"
+                                    Text="{Binding Name}"
+                                    Style="{StaticResource Hogent_TextBlockNormal}"
+                                       Margin="10" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="10">
+            <TextBlock Style="{StaticResource Hogent_TextBlockFeedTitle}" x:Name="chosenTraining"/>
+            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" x:Name="descriptionOfTraining"/>
+            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" Text="U kan deze richting volgen in:"/>
+            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" x:Name="CampussesOfTraining"/>
+        </StackPanel>
+
+        <!--<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Source="../Images/BM.jpg" MaxWidth="250" Margin="10"/>
+            <Image Source="../Images/OM.jpg" MaxWidth="250" Margin="10"/>
+            <Image Source="../Images/RM.jpg" MaxWidth="250" Margin="10"/>
+            <Image Source="../Images/TI.jpg" MaxWidth="250" Margin="10"/>
+        </StackPanel>
+        -->
         <!-- items -->
+        <!--
         <ListView
-                Grid.Row="1"
+                Grid.Row="3"
                 x:Name="listViewTrainingsGent" 
                 Visibility="Visible"
                 Height="Auto"  
-                Width="250"
-                VerticalAlignment="Top"
+                Width="Auto"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+            ScrollViewer.HorizontalScrollMode="Enabled"   
                 IsItemClickEnabled="True"
                 ItemClick="listViewHoGentItem_Click"
                 ItemsSource="{Binding trainingsGent}" >
-            <FlyoutBase.AttachedFlyout>
+            <FlyoutBase.AttachedFlyout >
                 <Flyout>
+                    <Flyout.FlyoutPresenterStyle>
+                        <Style TargetType="FlyoutPresenter">
+                            <Setter Property="ScrollViewer.HorizontalScrollMode" 
+                                Value="Disabled"/>
+                            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                            <Setter Property="IsTabStop" Value="True"/>
+                            <Setter Property="TabNavigation" Value="Cycle"/>
+                        </Style>
+                    </Flyout.FlyoutPresenterStyle>
                     <StackPanel>
                         <TextBlock x:Name="chosenTraining"/>
                         <TextBlock x:Name="descriptionOfTraining"/>
@@ -45,17 +94,25 @@
                     </StackPanel>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>
-            <ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="Transparent" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>                
                 <DataTemplate>
-                    <StackPanel HorizontalAlignment="Center" Width="250">
+                    <StackPanel HorizontalAlignment="Center" MaxWidth="250">                        
                         <TextBlock HorizontalAlignment="Center"
+                                   
                                        TextWrapping="Wrap"
                                        Text="{Binding Name}"                                    
                                        Style="{StaticResource Hogent_TextBlockNormal}"/>
-                        <Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="Black" X1="0" Y1="5" X2="200" Y2="5"/>
+                        -->
+        <!--<Line HorizontalAlignment="Center" Margin="0 0 0 10" Stroke="Black" X1="0" Y1="5" X2="700" Y2="5"/>-->
+        <!--
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
     </Grid>
 </Page>
