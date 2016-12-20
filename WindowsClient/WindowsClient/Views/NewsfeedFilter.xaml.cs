@@ -76,7 +76,7 @@ namespace WindowsClient.Views
                 }
             }
 
-            feedLijst.ItemsSource = tempPosts;
+            feedLijst.ItemsSource = tempPosts.OrderByDescending(p => p.created_time).ToList();
 
         }
 

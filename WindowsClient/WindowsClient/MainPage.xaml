@@ -7,32 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <SplitView CompactPaneLength="35" OpenPaneLength="175" x:Name="splitView" DisplayMode="CompactOverlay" IsPaneOpen="False" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <SplitView CompactPaneLength="40" OpenPaneLength="200" x:Name="splitView" DisplayMode="CompactOverlay" IsPaneOpen="False" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView.Pane>
 
             <StackPanel Background="#006fb8">
 
-                <Button  Content="&#xE700;" FontFamily="Segoe MDL2 Assets" AutomationProperties.Name="Favorite" Click="on_Click" />
+                <Button  Content="&#xE700;" FontFamily="Segoe MDL2 Assets" AutomationProperties.Name="Favorite" Click="on_Click" Padding="10"/>
                 <StackPanel Orientation="Horizontal" Tapped="goToNewsFeed">
-                    <Button  Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets" />
-                    <TextBlock VerticalAlignment="Center" Text="Newsfeed" FontSize="20"/>
+                    <Button  Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets" Padding="10"/>
+                    <TextBlock VerticalAlignment="Center" Text="Newsfeed" FontSize="20" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Tapped="goToTrainings">
-                    <Button Background="Transparent" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
-                    <TextBlock VerticalAlignment="Center" Text="Opleidingen" FontSize="20"/>
+                    <Button Background="Transparent" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" Padding="10"/>
+                    <TextBlock VerticalAlignment="Center" Text="Opleidingen" FontSize="20" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Tapped="goToRoutes">
-                    <Button Background="Transparent" Content="&#xE707;" FontFamily="Segoe MDL2 Assets"/>
-                    <TextBlock VerticalAlignment="Center" Text="Routeplanner" FontSize="20"/>
+                    <Button Background="Transparent" Content="&#xE707;" FontFamily="Segoe MDL2 Assets" Padding="10"/>
+                    <TextBlock VerticalAlignment="Center" Text="Routeplanner" FontSize="20" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Tapped="goToMyPreferences">
-                    <Button Background="Transparent" Content="&#xE735;" FontFamily="Segoe MDL2 Assets"/>
-                    <TextBlock VerticalAlignment="Center" Text="Interesses" FontSize="20"/>
+                    <Button Background="Transparent" Content="&#xE735;" FontFamily="Segoe MDL2 Assets" Padding="10"/>
+                    <TextBlock VerticalAlignment="Center" Text="Interesses" FontSize="20" Padding="10"/>
                 </StackPanel>
-                <Button x:Name="btnAdminLogin" Visibility="Collapsed" Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Click="AdminLoginClick"/>
+                <Button x:Name="btnAdminLogin" Visibility="Collapsed" Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Click="AdminLoginClick" Padding="10"/>
             </StackPanel>
 
-            
+
         </SplitView.Pane>
         <SplitView.Content>
             <!---->
