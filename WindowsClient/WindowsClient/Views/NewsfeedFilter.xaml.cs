@@ -48,12 +48,6 @@ namespace WindowsClient.Views
             fillPosts();
             fillCheckboxes();
         }
-
-        private void onHomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
-
         private void onFilterChange(object sender, RoutedEventArgs e)
         {
             List<PostObject> tempPosts = new List<PostObject>();

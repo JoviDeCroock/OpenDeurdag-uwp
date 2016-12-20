@@ -26,8 +26,7 @@
             <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
                        Text="Interesses" />
         </Border>
-        <Button Grid.Row="0" Click="onHomeButton_Click" Style="{StaticResource HoGent_ButtonHome}" Visibility="Collapsed"/>
-
+       
         <TextBlock Text="Mijn voorkeuren:" Grid.Row="1" Grid.Column="0"
                            Margin="20 20 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>

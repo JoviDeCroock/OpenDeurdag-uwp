@@ -80,7 +80,7 @@
 
             <ScrollViewer Grid.Row="2">
                 <StackPanel>
-                    <TextBlock  Text="Studenten verdeling" Style="{StaticResource Hogent_TextBlockFeedTitle}" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Studenten verdeling" FontSize="42" Style="{StaticResource Hogent_TextBlockFeedTitle}" HorizontalAlignment="Left"/>
                     <RelativePanel>
                         <StackPanel x:Name="GentVerdeling">
                             <TextBlock Text="Gent" HorizontalAlignment="Right" FontSize="24" Style="{StaticResource Hogent_TextBlockFeedTitle}"/>

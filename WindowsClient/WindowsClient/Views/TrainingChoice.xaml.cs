@@ -37,12 +37,6 @@ namespace WindowsClient.Views
 
             fillTrainings();            
         }
-
-        private void onHomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
-
         private async void fillTrainings()
         {
             HttpClient client = new HttpClient();
