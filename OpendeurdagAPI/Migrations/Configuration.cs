@@ -53,9 +53,9 @@ namespace OpendeurdagAPI.Migrations
             context.Admins.AddOrUpdate(x => x.AdminId,
                 new Admin() { AdminId = 1, Email = "admin@gmail.com", Name = "Admin", Password = encode("Password") }
             );
-
+            DateTime date = DateTime.Now;
             context.Posts.AddOrUpdate(x => x.PostId,
-                new Post() { PostId = 1, Title = "WELKOM!", Text = "Welkom bij de coolste hogeschool evar!" }
+                new Post() { PostId = 1, Title = "WELKOM!", Text = "Welkom bij de coolste hogeschool evar!", Date = date }
              );
             /*
             if (System.Diagnostics.Debugger.IsAttached == false)

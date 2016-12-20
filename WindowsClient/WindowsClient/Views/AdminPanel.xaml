@@ -3,48 +3,102 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowsClient.Views"
+    xmlns:utils="using:WindowsClient.Utils"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Style="{StaticResource HoGent_Grid}">
-        <!-- definitions -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />            
-        </Grid.ColumnDefinitions>
-        <!-- header -->
-        <Border Grid.Row="0" Background="#006fb8;">
-            <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
-                       Text="Admin Paneel" />
-        </Border>
-        
-        <!-- items -->
-        <Grid>
+    <Page.Resources>
+        <utils:DateConverter x:Name="DateConverter"/>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid Style="{StaticResource HoGent_Grid}">
+            <!-- definitions -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!-- header -->
+            <Border Grid.Row="0" Background="#006fb8;">
+                <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
+                       Text="Admin Paneel" />
+            </Border>
 
-            <ListView x:Name="listView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" 
+            <!-- items -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Maak een post" FontSize="42" Margin="10" Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="50 0">
+                    <TextBlock Text="Titel"
+                           Style="{StaticResource Hogent_TextBlockNormal}"/>
+                    <TextBox Style="{StaticResource HoGent_TextBox}" 
+                         x:Name="Title"
+                         Margin="0 0 0 10"/>
+                    <TextBlock Text="Boodschap"
+                           Style="{StaticResource Hogent_TextBlockNormal}"/>
+                    <TextBox Height="300"
+                         AcceptsReturn="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         TextWrapping="Wrap"
+                         Style="{StaticResource HoGent_TextBox}"
+                         x:Name="Message"
+                         Margin="0 0 10 0"/>
+                    <Button Content="Verzend" HorizontalAlignment="Right" Margin="0 20 " Style="{StaticResource HoGent_ButtonStyle}" Click="SendPost"/>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" Text="Uw posts" Margin="10" FontSize="42" Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                <Button Content="refresh" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource HoGent_ButtonStyle}" Click="refreshPosts"/>
+                <ListView Margin="15 0 0 0" Grid.Row="1" x:Name="listViewPosts" Grid.Column="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" 
                                        Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
-                            <TextBlock Text="{Binding Text}"
+                                <TextBlock Text="{Binding Date, Converter={StaticResource DateConverter}}"
+                                       Style="{StaticResource Hogent_TextBlockFeedDate}"/>
+                                <TextBlock Text="{Binding Text}"
                                        Style="{StaticResource Hogent_TextBlockNormal}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
+                                <Button Content="Delete" DataContext="{Binding PostId}" Style="{StaticResource HoGent_ButtonStyle}" Click="OnClickDelete"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <ScrollViewer Grid.Row="2">
+                <StackPanel >
+                    <TextBlock  Text="Studenten verdeling" Style="{StaticResource Hogent_TextBlockFeedTitle}" HorizontalAlignment="Center"/>
+                    <ListView x:Name="list1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <ListView x:Name="list2">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                
+                            </DataTemplate>                            
+                        </ListView.ItemTemplate>                        
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
-    </Grid>
+        
+    </ScrollViewer>
 </Page>

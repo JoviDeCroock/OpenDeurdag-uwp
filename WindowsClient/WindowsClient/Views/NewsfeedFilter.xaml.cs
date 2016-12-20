@@ -149,6 +149,20 @@ namespace WindowsClient.Views
                 var dialog = new Windows.UI.Popups.MessageDialog("Er ging iets mis.");
                 await dialog.ShowAsync();
             }
+
+            string adminPosts = await client.GetStringAsync("http://localhost:50103/api/Posts");
+            var result2 = JsonConvert.DeserializeObject<List<Post>>(adminPosts);
+            foreach(Post p in result2)
+            {
+                PostObject PO = new PostObject();
+                PO.page = "Admin";
+                PO.message = p.Title + "\n\n" + p.Text;
+                PO.created_time = p.Date;
+
+                posts.Add(PO);
+            }
+
+
         }
 
         private void fillCheckboxes()
@@ -160,6 +174,7 @@ namespace WindowsClient.Views
             checkboxFeeds.Add(checkboxBM);
             checkboxFeeds.Add(checkboxRM);
             checkboxFeeds.Add(checkboxOM);
+            checkboxFeeds.Add(checkboxAdmin);
         }
 
     }

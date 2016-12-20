@@ -28,7 +28,7 @@
            <TextBlock HorizontalAlignment="Left" Text="Username" Style="{StaticResource Hogent_TextBlockNormal}" Padding="0 25 0 0"/>
             <TextBox x:Name="username" InputScope="EmailSmtpAddress" Style="{StaticResource HoGent_TextBox}" Padding="0 5"/>
             <TextBlock HorizontalAlignment="Left" Text="Password" Style="{StaticResource Hogent_TextBlockNormal}" Padding="0 5"/>
-            <TextBox x:Name="password" InputScope="Password" Style="{StaticResource HoGent_TextBox}" Padding="0 5"/>
+            <PasswordBox x:Name="password" Padding="0 5"/>
             <Button Content="Aanmelden" Margin="0 20" Style="{StaticResource HoGent_ButtonStyle}" Click="Aanmelden"/>
         </StackPanel>
     </Grid>

@@ -31,6 +31,8 @@ namespace WindowsClient.Views
         public AdminLogin()
         {
             this.InitializeComponent();
+            username.Text = "admin@gmail.com";
+            password.Password = "password";
         }
 
         private async void Aanmelden(object sender, RoutedEventArgs e)
@@ -41,7 +43,7 @@ namespace WindowsClient.Views
 
             Admin admin = new Admin();
             admin.Email = username.Text;
-            admin.Password = password.Text;
+            admin.Password = password.Password;
 
             string body = JsonConvert.SerializeObject(admin);
             var result = await client.PostAsync("http://localhost:50103/api/Admins", new StringContent(body, Encoding.UTF8, "application/json"));

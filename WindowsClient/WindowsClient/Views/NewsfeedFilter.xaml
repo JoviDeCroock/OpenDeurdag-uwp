@@ -117,6 +117,22 @@
                       Checked="onFilterChange"
                       Unchecked="onFilterChange"/>
 
+            <TextBlock Text="Admin"
+                   Grid.Row="3"
+                   Grid.Column="1"
+                       Foreground="#006fb8;"
+                   VerticalAlignment="Center"
+                   Margin="20 0 0 0"
+                   FontSize="24"/>
+
+            <CheckBox Style="{StaticResource HoGent_Checkbox}"
+                      Grid.Column="1"
+                      Grid.Row="4"
+                      x:Name="checkboxAdmin"
+                      Content="Admin"
+                      Checked="onFilterChange"
+                      Unchecked="onFilterChange"/>
+
         </Grid>
 
         <ScrollViewer Grid.Row="3" x:Name="rij3">

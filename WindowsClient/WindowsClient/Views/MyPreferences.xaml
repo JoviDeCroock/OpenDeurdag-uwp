@@ -94,6 +94,7 @@
                 <ComboBoxItem Content="Luxemburg"/>
                 <ComboBoxItem Content="Namen"/>
                 <ComboBoxItem Content="Oost-Vlaanderen"/>
+                <ComboBoxItem Content="Vlaams-Brabant"/>
                 <ComboBoxItem Content="West-Vlaanderen"/>
                 <ComboBoxItem Content="Waals-Brabant"/>                
             </ComboBox>
