@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using Windows.System.Profile;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,14 +29,19 @@ namespace WindowsClient.Views
     /// </summary>
     public sealed partial class TrainingChoice : Page
     {
-        //ObservableCollection<WindowsClient.Models.Training> trainings;
         ObservableCollection<TrainingWithImage> trainings;
 
         public TrainingChoice()
         {
-            this.InitializeComponent();           
-
-            fillTrainings();            
+            this.InitializeComponent();
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            {
+                fillTrainings();
+            }
+            else
+            {
+                fillTrainingsMobile();
+            }
         }
         private async void fillTrainings()
         {
@@ -47,12 +53,12 @@ namespace WindowsClient.Views
 
             foreach (RootObject root in result)
             {
-                foreach(Models.Training t in root.Trainingen)
+                foreach (Models.Training t in root.Trainingen)
                 {
-                    if(trainings.Any(training => training.Name.Equals(t.Name)))
+                    if (trainings.Any(training => training.Name.Equals(t.Name)))
                     {
                         var temp = trainings.Where(training => training.Name.Equals(t.Name));
-                        foreach(TrainingWithImage tr in temp)
+                        foreach (TrainingWithImage tr in temp)
                         {
                             tr.Campussen.Add(root.Name);
                         }
@@ -63,15 +69,45 @@ namespace WindowsClient.Views
                         twi.Campussen.Add(root.Name);
                         trainings.Add(twi);
                     }
-                }                
+                }
             }
-            
+
+            listViewTrainingsGent.ItemsSource = trainings;
+        }
+
+        private void fillTrainingsMobile()
+        {
+            Campus schoonmeersen = new Campus() { CampusId = 1, Name = "HoGent Schoonmeersen", City = "Gent", Street = "Valentin Vaerwyckweg", HouseNumber = "1", Telephone = "09 243 35 60", Feed = "Hogeschool-Gent-Campus-Schoonmeersen" };
+            Campus aalst = new Campus() { CampusId = 2, Name = "HoGent Aalst", City = "Aalst", Street = "Arbeidstraat", HouseNumber = "14", Telephone = "09 243 38 00", Feed = "HoGentCampusAalst" };
+
+            trainings = new ObservableCollection<TrainingWithImage>();
+
+            TrainingWithImage twi = new TrainingWithImage(new Training() { TrainingId = 1, Name = "Toegepaste Informatica", Description = "Computerrichting, hier start de leerling volledig vanaf de basis. Daarna heeft de leerling keuze om netwerken/programmeren te doen.", Feed = "hogenttoegepasteinformatica" });
+            twi.Campussen.Add(schoonmeersen.Name);
+            twi.Campussen.Add(aalst.Name);
+
+            TrainingWithImage twi2 = new TrainingWithImage(new Training() { TrainingId = 2, Name = "Bedrijfsmanagement", Description = "Praktijk georienteerde richting over het managen van een bedrijf.", Feed = "hogentbedrijfsmanagement" });
+            twi2.Campussen.Add(schoonmeersen.Name);
+            twi2.Campussen.Add(aalst.Name);
+
+            TrainingWithImage twi3 = new TrainingWithImage(new Training() { TrainingId = 3, Name = "Retail management", Description = "Voorbereiding op de job van strategisch manager in de detailhandel.", Feed = "hogentretailmanagement" });
+            twi3.Campussen.Add(schoonmeersen.Name);
+
+            TrainingWithImage twi4 = new TrainingWithImage(new Training() { TrainingId = 4, Name = "Office management", Description = "Voorbereidende richting op het organiserende en coordinerende aspect in bedrijven.", Feed = "hogentofficemanagement" });
+            twi4.Campussen.Add(schoonmeersen.Name);
+            twi4.Campussen.Add(aalst.Name);
+
+            trainings.Add(twi);
+            trainings.Add(twi2);
+            trainings.Add(twi3);
+            trainings.Add(twi4);
+
             listViewTrainingsGent.ItemsSource = trainings;
         }
 
         private void listViewHoGentItem_Click(object sender, ItemClickEventArgs e)
         {
-            TrainingWithImage selectedTraining = (TrainingWithImage) e.ClickedItem;
+            TrainingWithImage selectedTraining = (TrainingWithImage)e.ClickedItem;
 
             chosenTraining.Text = selectedTraining.Name;
             campussesSentence.Visibility = Visibility.Visible;
