@@ -2,43 +2,43 @@
 
 ## Leden:
 
-Callens Elien.
+Callens Elien
 
-De Croock Jovi.
+De Croock Jovi
 
-Schuddinck Kevin.
+Schuddinck Kevin
 
 
 ## Inhoudstafel:
 
-| Hoofdstuk                                                                                |
-|:----------------------------------------------------------------------------------------:|
-|[Objects](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Objecten)   |
-|[Methodes](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Methodes)  |
-|[Client](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Client)      |
+| Hoofdstuk                                                            |
+|:--------------------------------------------------------------------:|
+|[Objects](https://github.com/NastyDipster/OpenDeurdag-uwp#objecten)   |
+|[Methodes](https://github.com/NastyDipster/OpenDeurdag-uwp#Methodes)  |
+|[Client](https://github.com/NastyDipster/OpenDeurdag-uwp#Client)      |
 
 
 ## API
 
 ### Notities
 
-Probleem: veel op veel relatie Student Campus Trainingen.
+Probleem: veel op veel relatie Student Campus Trainingen
 
-Onze oplossing: .
+Onze oplossing: 
 
-1. Uitwerking in database.
+1. Uitwerking in database
 
-2. Methods initieel testen.
+2. Methods initieel testen
 
-3. JsonIgnore van: .
+3. JsonIgnore van: 
 
-	Trainingen -> Studenten.
+	Trainingen -> Studenten
 
-	Trainingen -> Campussen.
+	Trainingen -> Campussen
 
-	Campussen -> Studenten.
+	Campussen -> Studenten
 
-	Reden: Oneindige GET methodes --> Crash.
+	Reden: Oneindige GET methodes --> Crash
 
 
 
@@ -46,7 +46,7 @@ Onze oplossing: .
 
 #### User
 
-| Varnaam       | Type         | 
+| Varnaam       | Type          | 
 |:-------------:|:-------------:| 
 | Name          | string        | 
 | Email         | string        | 
@@ -149,9 +149,23 @@ Onze oplossing: .
 
 | Method           | Type          | Return            |
 |:----------------:|:-------------:|:-----------------:| 
-| api/Studnets     | Get           |  all Students     |
+| api/Students     | Get           |  all Students     |
 | api/Students/id  | Get           | specific Student  |
 | api/Students     | Post          | CreateStudent     |
 
 
 ## Client
+
+### Doel
+
+Wij doelen op support voor de Windows Phone en voor Windows Desktops
+
+
+### Functionaliteiten
+
+1. Facebook Feeds bekijken van de Campussen en Trainingen (Keuze welke ook), alsook de Posts van Admins
+2. Routebegeleiding naar de gekozen Campus
+3. Een voorkeur qua Training en Campus doorgeven aan de HoGent
+4. Admin:
+··*  CRUD van Posts
+··*  Bekijken voorkeur Trainings en Campussen studenten
