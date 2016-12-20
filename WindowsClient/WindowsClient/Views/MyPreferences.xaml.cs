@@ -49,8 +49,6 @@ namespace WindowsClient.Views
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Student));
             List<string> trainings = new List<string>();
             List<string> campussen = new List<string>();
             List<Models.Training> trainingsPost = new List<Models.Training>();
@@ -105,7 +103,7 @@ namespace WindowsClient.Views
             }
             Student nieuw = new Student();
             nieuw.Province = county.Text;
-            nieuw.Name = "" + firstname.Text + lastname.Text;
+            nieuw.Name = firstname.Text + lastname.Text;
             nieuw.City = city.Text;
             nieuw.Street = street.Text;
             nieuw.HouseNumber = houseNumber.Text;

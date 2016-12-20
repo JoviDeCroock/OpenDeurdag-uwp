@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="WindowsClient.Views.AdminLogin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Style="{StaticResource HoGent_Grid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            
+        </Grid.ColumnDefinitions>
+
+        <!-- header -->
+        <Border Grid.Row="0" Background="#006fb8;">
+            <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
+                       Text="Admin login" />
+        </Border>
+
+        <!-- items -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+           <TextBlock Grid.Row="1" Text="Username" Style="{StaticResource Hogent_TextBlockNormal}"/>
+         
+        </StackPanel>
+    </Grid>
+</Page>

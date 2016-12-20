@@ -14,7 +14,7 @@
 
                 <Button  Content="&#xE700;" FontFamily="Segoe MDL2 Assets" AutomationProperties.Name="Favorite" Click="on_Click" />
                 <StackPanel Orientation="Horizontal" Tapped="goToNewsFeed">
-                    <Button Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets"/>
+                    <Button  Background="Transparent" Content="&#xE8A1;" FontFamily="Segoe MDL2 Assets" />
                     <TextBlock VerticalAlignment="Center" Text="Newsfeed" FontSize="20"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Tapped="goToTrainings">
@@ -29,7 +29,7 @@
                     <Button Background="Transparent" Content="&#xE735;" FontFamily="Segoe MDL2 Assets"/>
                     <TextBlock VerticalAlignment="Center" Text="Interesses" FontSize="20"/>
                 </StackPanel>
-                <Button  Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Click="AdminLoginClick"/>
+                <Button x:Name="btnAdminLogin" Visibility="Collapsed" Content="&#xE713;" FontFamily="Segoe MDL2 Assets" Click="AdminLoginClick"/>
             </StackPanel>
 
             
