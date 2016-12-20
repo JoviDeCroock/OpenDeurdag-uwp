@@ -37,39 +37,6 @@ namespace OpendeurdagAPI.Controllers
             return Ok(student);
         }
 
-        // PUT: api/Students/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutStudent(int id, Student student)
-        {
-            student.StudentId = id + 1;
-            Student s = db.Student.FirstOrDefault(ad => ad.StudentId == student.StudentId);
-            if (s == null)
-            {
-                return Ok("Ongeldige student");
-            }
-            s.PrefCampus = student.PrefCampus;
-            s.PrefTraining = student.PrefTraining;
-            db.Entry(s).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Ok(s);
-        }
-
 
         // POST: api/Students
         [ResponseType(typeof(Student))]
