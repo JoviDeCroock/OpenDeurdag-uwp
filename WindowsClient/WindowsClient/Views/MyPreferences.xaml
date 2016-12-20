@@ -83,23 +83,23 @@
                          x:Name="city"
                           Margin="10 10 10 10"
                          Style="{StaticResource HoGent_TextBox}"/>
-            <ComboBox x:Name="County"
+            <ComboBox x:Name="Province"
                      Margin="10"
                      Style="{StaticResource HoGent_ComboBox}">
-                <TextBlock Text="Antwerpen"/>
-                <TextBlock Text="Brussel"/>
-                <TextBlock Text="Henegouwen"/>
-                <TextBlock Text="Limburg"/>
-                <TextBlock Text="Luik"/>
-                <TextBlock Text="Luxemburg"/>
-                <TextBlock Text="Namen"/>
-                <TextBlock Text="Oost-Vlaanderen"/>
-                <TextBlock Text="West-Vlaanderen"/>         
-                <TextBlock Text="Waals-Brabant"/>                
+                <ComboBoxItem Content="Antwerpen"/>
+                <ComboBoxItem Content="Brussel"/>
+                <ComboBoxItem Content="Henegouwen"/>
+                <ComboBoxItem Content="Limburg"/>
+                <ComboBoxItem Content="Luik"/>
+                <ComboBoxItem Content="Luxemburg"/>
+                <ComboBoxItem Content="Namen"/>
+                <ComboBoxItem Content="Oost-Vlaanderen"/>
+                <ComboBoxItem Content="West-Vlaanderen"/>
+                <ComboBoxItem Content="Waals-Brabant"/>                
             </ComboBox>
             <Button Content="Verzend"                    
                     Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
-                    Margin="10 10 10 10" HorizontalAlignment="Right"/>
+                    Margin="10" HorizontalAlignment="Right"/>
 
 
 

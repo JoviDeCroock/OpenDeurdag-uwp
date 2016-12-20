@@ -7,7 +7,44 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="test0"/>
+    <Grid Style="{StaticResource HoGent_Grid}">
+        <!-- definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />            
+        </Grid.ColumnDefinitions>
+        <!-- header -->
+        <Border Grid.Row="0" Background="#006fb8;">
+            <TextBlock Style="{StaticResource HoGent_TextBlockHeader}"
+                       Text="Admin Paneel" />
+        </Border>
+        
+        <!-- items -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView x:Name="listView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" 
+                                       Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                            <TextBlock Text="{Binding Text}"
+                                       Style="{StaticResource Hogent_TextBlockNormal}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </Grid>
     </Grid>
 </Page>
