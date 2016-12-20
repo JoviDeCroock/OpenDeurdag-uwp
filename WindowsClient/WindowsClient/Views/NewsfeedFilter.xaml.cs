@@ -101,7 +101,7 @@ namespace WindowsClient.Views
             }
 
             //facebook token
-            string token = "EAACEdEose0cBALFx1q7bUJBZAO6tFbHBVOm6qadWeZAifkI3xDlQ82MIwZA3YXjvOiwchQMj8Bkwaoq3SvvZAQATpxbHnIBHs61VYZBROxurjZCd8693Gxfn52MOteszCSIRqiWgXyDlZCYSX0BGal670TS0Uf9Ry5FIQJqGfrRFAZDZD";
+            string token = "EAACEdEose0cBACPM7JbndrKZBKoUNCDXWO12kkBLXNO1bEsUUwmnbKQVtX8yYeKldqlZCbSt29uai1nCqRe8WanIqNxaoIeP1ZCcdpbWhvfve09n7pVotJXZCURZA1tKX9CAiiQqLgtriDcPVRNixVbJOBexGAmKPXEzvg6ZB9hwZDZD";
 
             //get all the facebooks posts
             try
@@ -114,7 +114,7 @@ namespace WindowsClient.Views
                         //set the appropriate url and get json
                         string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
                         string json = await client.GetStringAsync(oauthUrl);
-                        Debug.Write(json);
+                        //Debug.Write(json);
                         var result = JsonConvert.DeserializeObject<Wrapper>(json);
 
                         //convert the json to PostObjects
@@ -132,9 +132,7 @@ namespace WindowsClient.Views
                             posts.Add(post);
                         }
                     }
-                    
                 }
-
             }
             catch (HttpRequestException e)
             {

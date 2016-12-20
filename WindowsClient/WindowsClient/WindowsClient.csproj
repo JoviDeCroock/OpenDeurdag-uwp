@@ -110,6 +110,12 @@
     <Compile Include="Utils\CheckComboBox.cs" />
     <Compile Include="Utils\DateConverter.cs" />
     <Compile Include="Utils\RouteImage.cs" />
+    <Compile Include="Views\AdminLogin.xaml.cs">
+      <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdminPanel.xaml.cs">
+      <DependentUpon>AdminPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MyPreferences.xaml.cs">
       <DependentUpon>MyPreferences.xaml</DependentUpon>
     </Compile>
@@ -199,6 +205,18 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdminLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminPanel.DeviceFamily-Mobile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AdminPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MyPreferences.DeviceFamily-Mobile.xaml">
       <SubType>Designer</SubType>

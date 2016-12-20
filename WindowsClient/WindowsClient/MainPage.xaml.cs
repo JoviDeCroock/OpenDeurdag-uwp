@@ -21,6 +21,9 @@ using Windows.UI.Popups;
 using Windows.Foundation.Metadata;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using WindowsClient.Models;
+using System.Net.Http.Headers;
 //using RondleidingAPI.Models.Domain;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -32,6 +35,7 @@ namespace WindowsClient
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int i = 0;
         public MainPage()
         {
             this.InitializeComponent();
@@ -62,11 +66,14 @@ namespace WindowsClient
 
         private void on_Click(object sender, RoutedEventArgs e)
         {
+            resetAdminLogin();
             splitView.IsPaneOpen = !splitView.IsPaneOpen;
         }
 
         private void goToNewsFeed(object sender, RoutedEventArgs e)
         {
+
+            resetAdminLogin();
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
@@ -80,6 +87,12 @@ namespace WindowsClient
 
         private void goToTrainings(object sender, RoutedEventArgs e)
         {
+            ++i;
+            if (i == 5)
+            {
+                btnAdminLogin.Visibility = Visibility.Visible;
+            }
+
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
@@ -93,6 +106,7 @@ namespace WindowsClient
 
         private void goToMyPreferences(object sender, RoutedEventArgs e)
         {
+            resetAdminLogin();
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
@@ -106,6 +120,7 @@ namespace WindowsClient
 
         private void goToRoutes(object sender, RoutedEventArgs e)
         {
+            resetAdminLogin();
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
@@ -119,7 +134,15 @@ namespace WindowsClient
 
         private void AdminLoginClick(object sender, RoutedEventArgs e)
         {
-
+            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+            {
+                case "Windows.Mobile":
+                    Frame.Navigate(typeof(AdminLogin));
+                    break;
+                case "Windows.Desktop":
+                    mainfr.Navigate(typeof(AdminLogin));
+                    break;
+            }
         }
 
         private void updateTile()
@@ -152,6 +175,12 @@ namespace WindowsClient
             var json = await client.GetStringAsync(new Uri("http://localhost:5495/api/Campus"));
             var lists = JsonConvert.DeserializeObject<List<Campus>>(json);
             */
+        }
+
+        private void resetAdminLogin()
+        {
+            i = 0;
+            btnAdminLogin.Visibility = Visibility.Collapsed;
         }
     }
 }
