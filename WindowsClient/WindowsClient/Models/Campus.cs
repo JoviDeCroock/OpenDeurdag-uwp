@@ -14,7 +14,7 @@ namespace WindowsClient.Models
         public string Street { get; set; }
         public string Telephone { get; set; }
         public string Feed { get; set; }
-        public virtual List<Training> Trainingen { get; set; }
+        public List<Training> Trainingen { get; set; }
         public IList<int> TrainingIds { get; set; }
         public virtual IList<Student> Studenten { get; set; }
         public IList<int> StudentIds { get; set; }

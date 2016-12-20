@@ -65,7 +65,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Title}" 
+                                <TextBlock Text="{Binding Title}"
                                        Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
                                 <TextBlock Text="{Binding Date, Converter={StaticResource DateConverter}}"
                                        Style="{StaticResource Hogent_TextBlockFeedDate}"/>
@@ -79,26 +79,40 @@
             </Grid>
 
             <ScrollViewer Grid.Row="2">
-                <StackPanel >
-                    <TextBlock  Text="Studenten verdeling" Style="{StaticResource Hogent_TextBlockFeedTitle}" HorizontalAlignment="Center"/>
-                    <ListView x:Name="list1">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-
-                                <ListView x:Name="list2">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                                
-                            </DataTemplate>                            
-                        </ListView.ItemTemplate>                        
-                    </ListView>
+                <StackPanel>
+                    <TextBlock  Text="Studenten verdeling" Style="{StaticResource Hogent_TextBlockFeedTitle}" HorizontalAlignment="Left"/>
+                    <RelativePanel>
+                        <StackPanel x:Name="GentVerdeling">
+                            <TextBlock Text="Gent" HorizontalAlignment="Right" FontSize="24" Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                            <ListView x:Name="ListGent">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Width="200" Text="{Binding Richting}"/>
+                                            <TextBlock Text="{Binding Aantal}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel x:Name="AalstVerderling"
+                                    RelativePanel.RightOf="GentVerdeling"
+                                    Margin="50 0 0 0">
+                            <TextBlock Text="Aalst" FontSize="24" Style="{StaticResource Hogent_TextBlockFeedTitle}"/>
+                            <ListView x:Name="ListAalst">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Width="100" Text="{Binding Aantal}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </RelativePanel>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        
+
     </ScrollViewer>
 </Page>
