@@ -2,32 +2,32 @@
 
 ## Leden:
 
-Callens Elien
-De Croock Jovi
-Schuddinck Kevin
+Callens Elien.
+De Croock Jovi.
+Schuddinck Kevin.
 
 ## Inhoudstafel:
 
-| Hoofdstuk            |
-|:----------------:|
-|Objects(https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Objecten)   |
-|Methodes(https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Methodes)   |
-|Client(https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Client)  |
+| Hoofdstuk                                                                                |
+|:----------------------------------------------------------------------------------------:|
+|[Objects](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Objecten)   |
+|[Methodes](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Methodes)  |
+|[Client](https://github.com/HoGentTIN/projecten-3-g_st_di_1100/tree/WebDevS3#Client)      |
 
 
 ## API
 
 ### Notities
 
-Probleem: veel op veel relatie Student Campus Trainingen
-Onze oplossing: 
-1. Uitwerking in database
-2. Methods initieel testen
-3. JsonIgnore van: 
-	Trainingen -> Studenten
-	Trainingen -> Campussen
-	Campussen -> Studenten
-	Reden: Oneindige GET methodes --> Crash
+Probleem: veel op veel relatie Student Campus Trainingen.
+Onze oplossing: .
+1. Uitwerking in database.
+2. Methods initieel testen.
+3. JsonIgnore van: .
+	Trainingen -> Studenten.
+	Trainingen -> Campussen.
+	Campussen -> Studenten.
+	Reden: Oneindige GET methodes --> Crash.
 
 
 ### Objecten
