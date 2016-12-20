@@ -88,7 +88,7 @@ namespace WindowsClient
         private void goToTrainings(object sender, RoutedEventArgs e)
         {
             ++i;
-            if (i == 5)
+            if (i == 5 && AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
             {
                 btnAdminLogin.Visibility = Visibility.Visible;
             }

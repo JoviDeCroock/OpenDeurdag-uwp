@@ -101,6 +101,7 @@
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\CampusGegevens.cs" />
+    <Compile Include="Models\GegevensHelper.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Preference.cs" />
     <Compile Include="Models\Student.cs" />
@@ -137,14 +138,17 @@
     <None Include="WindowsClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Hogent_Logo.png" />
     <Content Include="Assets\NewStoreLogo.scale-100.png" />
     <Content Include="Assets\NewStoreLogo.scale-125.png" />
     <Content Include="Assets\NewStoreLogo.scale-150.png" />
     <Content Include="Assets\NewStoreLogo.scale-200.png" />
     <Content Include="Assets\NewStoreLogo.scale-400.png" />
-    <Content Include="Assets\pikachuSplash.png" />
-    <Content Include="Assets\pikachuTile.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
@@ -192,7 +196,6 @@
     <Content Include="Images\TI.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\StoreLogo.png" />
   </ItemGroup>
   <ItemGroup>

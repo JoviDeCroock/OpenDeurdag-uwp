@@ -37,6 +37,7 @@ namespace WindowsClient.Views
         public AdminPanel()
         {
             this.InitializeComponent();
+            //provincieDick.Add("", )
             provincieDick.Add("Oost-Vlaanderen", new List<Student>());
             provincieDick.Add("West-Vlaanderen", new List<Student>());
             provincieDick.Add("Brussel", new List<Student>());
@@ -47,46 +48,98 @@ namespace WindowsClient.Views
             provincieDick.Add("Luxemburg", new List<Student>());
             provincieDick.Add("Namen", new List<Student>());
             provincieDick.Add("Vlaams-Brabant", new List<Student>());
-            provincieDick.Add( "Waals-Brabant", new List<Student>());
+            provincieDick.Add("Waals-Brabant", new List<Student>());
             GetStudents();
             GetPosts();
         }
 
         public async void GetStudents()
         {
-            
+
             studenten = new List<Student>();
             HttpClient client = new HttpClient();
             string jsonStudents = await client.GetStringAsync("http://localhost:50103/api/Students");
-            
+
             var result = JsonConvert.DeserializeObject<List<Student>>(jsonStudents);
             foreach (Student p in result)
             {
+                //DA MOE NOG PER TRAINING GETELD WORDEN FAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
                 provincieDick.Where(prov => prov.Key.Equals(p.Province)).FirstOrDefault().Value.Add(p);
                 studenten.Add(p);
             }
 
             string jsonCampusses = await client.GetStringAsync("http://localhost:50103/api/Campus");
-            var result2 = JsonConvert.DeserializeObject<List<Campus>>(jsonStudents);
-            foreach(Campus c in result2)
-            {
-                CampusGegevens temp = new CampusGegevens();
-                temp.name = c.Name;
+            Dictionary<string, int> aantalPerTrainingGent = new Dictionary<string, int>();
+            Dictionary<string, int> aantalPerTrainingAalst = new Dictionary<string, int>();
+            aantalPerTrainingGent.Add("Toegepaste Informatica", 0);
+            aantalPerTrainingGent.Add("Retail management", 0);
+            aantalPerTrainingGent.Add("Office management", 0);
+            aantalPerTrainingGent.Add("Bedrijfsmanagement", 0);
+
+            aantalPerTrainingAalst.Add("Toegepaste Informatica", 0);
+            aantalPerTrainingAalst.Add("Retail management", 0);
+            aantalPerTrainingAalst.Add("Office management", 0);
+            aantalPerTrainingAalst.Add("Bedrijfsmanagement", 0);
+            //ER STOND DESERIALIZE JSONSTUDENTS KEIRL
+            var result2 = JsonConvert.DeserializeObject<List<Campus>>(jsonCampusses);
+            List<string> testPerTraining = new List<string>();
+            CampusGegevens temp = new CampusGegevens();
+            temp.campussen = new List<string>();
+            foreach (Campus c in result2)
+            {                
+                temp.campussen.Add(c.Name);
                 temp.provincies = provincieDick.Keys.ToList();
-                temp.trainings = c.Trainingen;
                 temp.aantalStuds = new List<string>();
-                foreach(string p in temp.provincies)
+                temp.trainings = c.Trainingen;
+                /*temp.aantalStuds.Add( );*/
+                foreach (string p in temp.provincies)
                 {
+                    //DA MOE NOG PER TRAINING GETELD WORDEN FAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
                     temp.aantalStuds.Add(provincieDick.Where(prov => prov.Key.Equals(p)).FirstOrDefault().Value.Count().ToString());
                 }
-                campusses.Add(temp);
+                foreach (Training t in temp.trainings)
+                {
+                    foreach (Student st in studenten)
+                    {
+                        if (st.PrefCampus.Where(ca => ca.Name == c.Name).FirstOrDefault() != null)
+                        {
+                            foreach (Training xd in st.PrefTraining)
+                            {
+                                if (xd.Name == t.Name)
+                                {
+                                    if (c.Name == "HoGent Schoonmeersen")
+                                    {
+                                        aantalPerTrainingGent[t.Name]++;
+                                    }
+                                    else
+                                    {
+                                        aantalPerTrainingAalst[t.Name]++;
+                                        /*CHECK SKYPE SCREENSHOT HEUWMEUW*/
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                string x = "";
+            }
+            List<GegevensHelper> GegevensGent = new List<GegevensHelper>();
+            List<GegevensHelper> GegevensAalst = new List<GegevensHelper>();
+            foreach (string training in aantalPerTrainingGent.Keys)
+            {
+                GegevensGent.Add(new GegevensHelper() { Aantal = aantalPerTrainingGent[training], Richting = training +"\t" });
+            }
+            foreach (string training in aantalPerTrainingAalst.Keys)
+            {
+                GegevensAalst.Add(new GegevensHelper() { Aantal = aantalPerTrainingAalst[training], Richting = training + "\t" });
             }
 
-
+            ListGent.ItemsSource = GegevensGent;
+            ListAalst.ItemsSource = GegevensAalst;
         }
 
         public async void GetPosts()
-        {            
+        {
             /*Miss bij Posts een date adden pff.... Meer Migrations euj*/
             posts = new List<Post>();
             HttpClient client = new HttpClient();
@@ -94,8 +147,8 @@ namespace WindowsClient.Views
             string json = await client.GetStringAsync("http://localhost:50103/api/Posts");
             var result = JsonConvert.DeserializeObject<List<Post>>(json);
             foreach (Post p in result)
-            { 
-                posts.Add(p);                
+            {
+                posts.Add(p);
             }
             listViewPosts.ItemsSource = posts;
         }
@@ -109,7 +162,7 @@ namespace WindowsClient.Views
                 var result = await client.GetStringAsync("http://localhost:50103/api/Posts/" + id);
                 await client.DeleteAsync("http://localhost:50103/api/Posts/" + id);
             }
-            catch(HttpRequestException e)
+            catch (HttpRequestException e)
             {
                 GetPosts();
                 ContentDialog deleteFileDialog = new ContentDialog()
@@ -125,7 +178,7 @@ namespace WindowsClient.Views
 
         public async void PostPosts(Post p)
         {
-            
+
             string body = JsonConvert.SerializeObject(p);
             var result = await client.PostAsync("http://localhost:50103/api/Posts", new StringContent(body, Encoding.UTF8, "application/json"));
             if (result.IsSuccessStatusCode == true)
@@ -173,7 +226,17 @@ namespace WindowsClient.Views
         {
             GetPosts();
         }
+        public class RootObject
+        {
+            public List<WindowsClient.Models.Training> Trainingen { get; set; }
+            public int CampusId { get; set; }
+            public string Name { get; set; }
+            public string City { get; set; }
+            public string HouseNumber { get; set; }
+            public string Street { get; set; }
+            public string Telephone { get; set; }
+            public string Feed { get; set; }
+        }
 
-        
     }
 }
