@@ -12,6 +12,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
+using Windows.System.Profile;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -54,18 +55,30 @@ namespace WindowsClient.Views
 
         private async void fillCampusses()
         {
-            //create http client + set token
-            HttpClient client = new HttpClient();
-
-            //get all the links to the feeds 
-            string campusJson = await client.GetStringAsync("http://localhost:50103/api/Campus");
-            var Camps = JsonConvert.DeserializeObject<List<RootObject>>(campusJson);
-            //Dictionary<string, RootObject> dicPage = new Dictionary<string, RootObject>();
             var items = new ObservableCollection<Campus>();
-            foreach (RootObject c in Camps)
+
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
             {
-                //dicPage.Add(c.Name, c);
-                items.Add(new Campus() { CampusId = c.CampusId, City = c.City, Feed = c.Feed, HouseNumber = c.HouseNumber, Name = c.Name, Street = c.Street, Telephone = c.Telephone });
+                //create http client + set token
+                HttpClient client = new HttpClient();
+
+                //get all the links to the feeds 
+                string campusJson = await client.GetStringAsync("http://localhost:50103/api/Campus");
+                var Camps = JsonConvert.DeserializeObject<List<RootObject>>(campusJson);
+                //Dictionary<string, RootObject> dicPage = new Dictionary<string, RootObject>();
+                
+                foreach (RootObject c in Camps)
+                {
+                    //dicPage.Add(c.Name, c);
+                    items.Add(new Campus() { CampusId = c.CampusId, City = c.City, Feed = c.Feed, HouseNumber = c.HouseNumber, Name = c.Name, Street = c.Street, Telephone = c.Telephone });
+                }
+            } else
+            {
+                //Hardcoded voor Mobile
+                Campus c1 = new Campus() { CampusId = 1, Name = "HoGent Schoonmeersen", City = "Gent", Street = "Valentin Vaerwyckweg", HouseNumber = "1", Telephone = "09 243 35 60", Feed = "Hogeschool-Gent-Campus-Schoonmeersen" };
+                Campus c2 = new Campus() { CampusId = 2, Name = "HoGent Aalst", City = "Aalst", Street = "Arbeidstraat", HouseNumber = "14", Telephone = "09 243 38 00", Feed = "HoGentCampusAalst" };
+                items.Add(c1);
+                items.Add(c2);
             }
             Campusses.ItemsSource = items;
             Campusses.SelectedItem = items[0];

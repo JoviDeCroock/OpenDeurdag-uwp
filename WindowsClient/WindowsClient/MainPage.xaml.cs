@@ -66,20 +66,24 @@ namespace WindowsClient
 
         private void on_Click(object sender, RoutedEventArgs e)
         {
-            resetAdminLogin();
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            {
+                resetAdminLogin();
+            }
             splitView.IsPaneOpen = !splitView.IsPaneOpen;
         }
 
         private void goToNewsFeed(object sender, RoutedEventArgs e)
         {
 
-            resetAdminLogin();
+            
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
                     Frame.Navigate(typeof(NewsfeedFilter));
                     break;
                 case "Windows.Desktop":
+                    resetAdminLogin();
                     mainfr.Navigate(typeof(NewsfeedFilter));
                     break;
             }
@@ -87,11 +91,7 @@ namespace WindowsClient
 
         private void goToTrainings(object sender, RoutedEventArgs e)
         {
-            ++i;
-            if (i == 5)
-            {
-                btnAdminLogin.Visibility = Visibility.Visible;
-            }
+
 
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
@@ -99,6 +99,11 @@ namespace WindowsClient
                     Frame.Navigate(typeof(TrainingChoice));
                     break;
                 case "Windows.Desktop":
+                    ++i;
+                    if (i == 5)
+                    {
+                        btnAdminLogin.Visibility = Visibility.Visible;
+                    }
                     mainfr.Navigate(typeof(TrainingChoice));
                     break;
             }
@@ -106,13 +111,14 @@ namespace WindowsClient
 
         private void goToMyPreferences(object sender, RoutedEventArgs e)
         {
-            resetAdminLogin();
+
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
                     Frame.Navigate(typeof(MyPreferences));
                     break;
                 case "Windows.Desktop":
+                    resetAdminLogin();
                     mainfr.Navigate(typeof(MyPreferences));
                     break;
             }
@@ -120,13 +126,14 @@ namespace WindowsClient
 
         private void goToRoutes(object sender, RoutedEventArgs e)
         {
-            resetAdminLogin();
+
             switch (AnalyticsInfo.VersionInfo.DeviceFamily)
             {
                 case "Windows.Mobile":
                     Frame.Navigate(typeof(Routes));
                     break;
                 case "Windows.Desktop":
+                    resetAdminLogin();
                     mainfr.Navigate(typeof(Routes));
                     break;
             }

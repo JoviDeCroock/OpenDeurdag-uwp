@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,13 +36,60 @@ namespace WindowsClient.Views
         public MyPreferences()
         {
             this.InitializeComponent();
-
-            fillCheckboxes();   
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+                fillCheckboxes();
         }
 
         private void onHomeButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
+        }
+
+        //With dummydata to show on mobile
+        private async void verzendGegevens_Click_Mobile(object sender, RoutedEventArgs e)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            List<Models.Training> trainingsPost = new List<Models.Training>();
+            List<Campus> campussenPost = new List<Campus>();
+            List<string> campussen = new List<string>();
+            trainingsPost = this.checkComboBox.SelectedItems;
+            foreach (Training t in trainingsPost)
+            {
+                foreach(String c in t.Campussen)
+                {
+                    if(!campussen.Contains(c))
+                    {
+                        campussen.Add(c);
+                    }
+                }
+            }
+            foreach(String c in campussen)
+            {
+                campussenPost.Add(new Campus
+                {
+                    City = "City",
+                    Feed = "feed",
+                    HouseNumber = "nr",
+                    Name = c,
+                    Street = "street",
+                    Telephone = "phone",
+                    Trainingen = trainingsPost
+                });
+            }
+            Student nieuw = new Student();
+            nieuw.Province = (string)Province.SelectionBoxItem;
+            nieuw.Name = firstname.Text + lastname.Text;
+            nieuw.City = city.Text;
+            nieuw.Street = street.Text;
+            nieuw.HouseNumber = houseNumber.Text;
+            nieuw.PrefTraining = trainingsPost;
+            nieuw.PrefCampus = campussenPost;
+            nieuw.Email = email.Text;
+            var dialog = new Windows.UI.Popups.MessageDialog("Student geregistreerd.");
+            await dialog.ShowAsync();
+
         }
 
         private async void verzendGegevens_Click(object sender, RoutedEventArgs e)
@@ -75,7 +123,7 @@ namespace WindowsClient.Views
             }
             foreach (RootObject r in result)
             {
-                if(campussen.Contains(r.Name.Trim()))
+                if (campussen.Contains(r.Name.Trim()))
                 {
                     /*OMZETTEN NAAR CAMPUS*/
                     Campus c = new Models.Campus();
@@ -102,7 +150,7 @@ namespace WindowsClient.Views
                 }
             }
             Student nieuw = new Student();
-            nieuw.Province = (string) Province.SelectionBoxItem;
+            nieuw.Province = (string)Province.SelectionBoxItem;
             nieuw.Name = firstname.Text + lastname.Text;
             nieuw.City = city.Text;
             nieuw.Street = street.Text;
@@ -112,7 +160,6 @@ namespace WindowsClient.Views
             nieuw.Email = email.Text;
             string body = JsonConvert.SerializeObject(nieuw);
             var result2 = await client.PostAsync("http://localhost:50103/api/Students", new StringContent(body, Encoding.UTF8, "application/json"));
-              
         }
 
         private async void fillCheckboxes()
@@ -121,18 +168,18 @@ namespace WindowsClient.Views
             string json = await client.GetStringAsync("http://localhost:50103/api/Campus");
             result = JsonConvert.DeserializeObject<List<RootObject>>(json);
 
-            foreach(RootObject root in result)
+            foreach (RootObject root in result)
             {
-                foreach(Models.Training t in root.Trainingen)
+                foreach (Models.Training t in root.Trainingen)
                 {
                     CheckBox cb = new CheckBox();
                     cb.Content = root.Name + " - " + t.Name;
                     checkboxList.Add(cb);
-                }         
+                }
             }
-            if(checkComboBox != null)
+            if (checkComboBox != null)
                 checkComboBox.ItemsSource = checkboxList;
-            if(listbox != null)
+            if (listbox != null)
                 listbox.ItemsSource = checkboxList;
         }
 
