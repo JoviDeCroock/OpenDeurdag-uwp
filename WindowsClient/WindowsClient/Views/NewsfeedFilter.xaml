@@ -117,12 +117,6 @@
                       Checked="onFilterChange"
                       Unchecked="onFilterChange"/>
 
-
-
-
-
-
-
         </Grid>
 
         <ScrollViewer Grid.Row="3" x:Name="rij3">

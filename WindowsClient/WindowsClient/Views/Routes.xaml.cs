@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WindowsClient.Models;
 using WindowsClient.Utils;
@@ -68,10 +69,29 @@ namespace WindowsClient.Views
             }
             Campusses.ItemsSource = items;
             Campusses.SelectedItem = items[0];
+
             if (Campusses.SelectedItem != null)
             {
                 ShowRouteOnMap();
             }
+
+            var itemsLevels = new ObservableCollection<Level>();
+            for(int i = 0; i <= 4; i++)
+            {
+                itemsLevels.Add(new Level() { LevelName = i==0?"Benedenverdieping":i + "e verdieping", LevelNr = i });
+            }
+            Levels.ItemsSource = itemsLevels;
+            Levels.SelectedItem = itemsLevels[0];
+
+            if(Levels.SelectedItem != null)
+            {
+                ShowLevel();
+            }
+        }
+
+        private void ShowLevel()
+        {
+            LevelImage.Source = new BitmapImage(new Uri("ms-appx:///Images/GSCHB" + ((Level) Levels.SelectedItem).LevelNr + ".png"));
         }
 
         private async void ShowRouteOnMap()
@@ -162,6 +182,33 @@ namespace WindowsClient.Views
             }
         }
 
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(((Campus) Campusses.SelectedItem).City == "Gent")
+            {
+                LevelStack.Visibility = Visibility.Visible;
+                LevelImage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LevelStack.Visibility = Visibility.Collapsed;
+                LevelImage.Visibility = Visibility.Collapsed;
+            }
+            ShowRouteOnMap();
+        }
+
+        private void SelectionLevelChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowLevel();
+        }
+
+        public class Level
+        {
+            public string LevelName { get; set; }
+            public int LevelNr { get; set; }
+        }
+
+
         //private async void scrollViewer_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         //{
         //    var scrollViewer = sender as ScrollViewer;
@@ -246,9 +293,32 @@ namespace WindowsClient.Views
             public string traceId { get; set; }
         }
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ImageDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            ShowRouteOnMap();
+            var sv = sender as ScrollViewer;
+
+            if (sv == null) return;
+            Point p = e.GetPosition(sv);
+
+            TimeSpan period = TimeSpan.FromMilliseconds(10);
+
+            Windows.System.Threading.ThreadPoolTimer.CreateTimer(async (source) =>
+            {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    if (sv.ZoomFactor <= 1)
+                    {
+                        //var k = sv.ChangeView(p.X + sv.HorizontalOffset * 2, p.Y + sv.VerticalOffset * 2, 2);
+                        var k = sv.ChangeView(50, 50, 2);
+                    }
+                    else
+                    {
+                        sv.ChangeView(sv.HorizontalOffset / 2 - p.X, sv.VerticalOffset / 2 - p.Y, 1);
+                    }
+                });
+            }
+            , period);
+
         }
     }
 
