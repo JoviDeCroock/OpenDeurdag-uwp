@@ -102,7 +102,7 @@ namespace WindowsClient.Views
                 }
             }
             Student nieuw = new Student();
-            nieuw.Province = county.Text;
+            nieuw.Province = county.SelectedText;
             nieuw.Name = firstname.Text + lastname.Text;
             nieuw.City = city.Text;
             nieuw.Street = street.Text;

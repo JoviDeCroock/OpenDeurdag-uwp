@@ -114,7 +114,7 @@ namespace WindowsClient.Views
                         //set the appropriate url and get json
                         string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
                         string json = await client.GetStringAsync(oauthUrl);
-                        Debug.Write(json);
+                        //Debug.Write(json);
                         var result = JsonConvert.DeserializeObject<Wrapper>(json);
 
                         //convert the json to PostObjects

@@ -134,7 +134,15 @@ namespace WindowsClient
 
         private void AdminLoginClick(object sender, RoutedEventArgs e)
         {
-            
+            switch (AnalyticsInfo.VersionInfo.DeviceFamily)
+            {
+                case "Windows.Mobile":
+                    Frame.Navigate(typeof(AdminLogin));
+                    break;
+                case "Windows.Desktop":
+                    mainfr.Navigate(typeof(AdminLogin));
+                    break;
+            }
         }
 
         private void updateTile()
@@ -172,6 +180,7 @@ namespace WindowsClient
         private void resetAdminLogin()
         {
             i = 0;
+            btnAdminLogin.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -83,14 +83,23 @@
                          x:Name="city"
                           Margin="10 10 10 10"
                          Style="{StaticResource HoGent_TextBox}"/>
-            <TextBox PlaceholderText="Provincie"
-                         x:Name="county"
-                          Margin="10 10 10 10"
-                         Style="{StaticResource HoGent_TextBox}"/>
-            <Button Content="Verzend"
-                    
-                        Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
-                        Margin="10 10 10 10" HorizontalAlignment="Right"/>
+            <ComboBox x:Name="County"
+                     Margin="10"
+                     Style="{StaticResource HoGent_ComboBox}">
+                <TextBlock Text="Antwerpen"/>
+                <TextBlock Text="Brussel"/>
+                <TextBlock Text="Henegouwen"/>
+                <TextBlock Text="Limburg"/>
+                <TextBlock Text="Luik"/>
+                <TextBlock Text="Luxemburg"/>
+                <TextBlock Text="Namen"/>
+                <TextBlock Text="Oost-Vlaanderen"/>
+                <TextBlock Text="West-Vlaanderen"/>         
+                <TextBlock Text="Waals-Brabant"/>                
+            </ComboBox>
+            <Button Content="Verzend"                    
+                    Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
+                    Margin="10 10 10 10" HorizontalAlignment="Right"/>
 
 
 

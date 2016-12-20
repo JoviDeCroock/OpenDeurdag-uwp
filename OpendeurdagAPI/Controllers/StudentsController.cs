@@ -50,6 +50,11 @@ namespace OpendeurdagAPI.Controllers
             {
                 return Ok("Vul alle velden in");
             }
+            foreach (Campus d in student.PrefCampus)
+            {
+                db.Campus.Where(c => c.CampusId == d.CampusId);
+            }
+
             db.Student.Add(student);
             await db.SaveChangesAsync();
 
