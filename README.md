@@ -3,8 +3,11 @@
 ## Leden:
 
 Callens Elien.
+
 De Croock Jovi.
+
 Schuddinck Kevin.
+
 
 ## Inhoudstafel:
 
@@ -20,14 +23,23 @@ Schuddinck Kevin.
 ### Notities
 
 Probleem: veel op veel relatie Student Campus Trainingen.
+
 Onze oplossing: .
+
 1. Uitwerking in database.
+
 2. Methods initieel testen.
+
 3. JsonIgnore van: .
+
 	Trainingen -> Studenten.
+
 	Trainingen -> Campussen.
+
 	Campussen -> Studenten.
+
 	Reden: Oneindige GET methodes --> Crash.
+
 
 
 ### Objecten
