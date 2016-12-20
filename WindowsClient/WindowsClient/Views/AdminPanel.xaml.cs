@@ -161,15 +161,28 @@ namespace WindowsClient.Views
 
         private async void SendPost(object sender, RoutedEventArgs e)
         {
-            Post newPost = new Post();
-            newPost.Title = Title.Text;
-            newPost.Text = Message.Text;
-            newPost.Date = DateTime.Now;
-            string body = JsonConvert.SerializeObject(newPost);
-            var result = await client.PostAsync("http://localhost:50103/api/Posts", new StringContent(body, Encoding.UTF8, "application/json"));
-            if (result.IsSuccessStatusCode == true)
+            if (Title.Text != "" && Message.Text != "")
             {
-                //Succes!
+                Post newPost = new Post();
+                newPost.Title = Title.Text;
+                newPost.Text = Message.Text;
+                newPost.Date = DateTime.Now;
+                string body = JsonConvert.SerializeObject(newPost);
+                var result = await client.PostAsync("http://localhost:50103/api/Posts", new StringContent(body, Encoding.UTF8, "application/json"));
+                if (result.IsSuccessStatusCode == true)
+                {
+                    //Succes!
+                }
+            }
+            else
+            {
+                ContentDialog deleteFileDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = "Gelieve alle velden in te vullen.",
+                    PrimaryButtonText = "OK",
+                };
+                ContentDialogResult result = await deleteFileDialog.ShowAsync();
             }
         }
 

@@ -175,7 +175,7 @@ namespace WindowsClient.Views
                 ContentDialog alleVeldenInvullen = new ContentDialog()
                 {
                     Title = "Error",
-                    Content = "U moet al de velden invullen.",
+                    Content = "Gelieve alle velden in te vullen.",
                     PrimaryButtonText = "OK",
                 };
                 ContentDialogResult result = await alleVeldenInvullen.ShowAsync();
