@@ -39,21 +39,15 @@
                             <CheckBox Content="{Binding Content}"/>
                         </DataTemplate>
                     </my:CheckComboBox.ItemTemplate>
-                    <!--
-                    <CheckBox Content="Gent - TI"/>
-                    <CheckBox Content="Aalst - TI"/>
-                    <CheckBox Content="Gent - Nog iets"/>
-                    <CheckBox Content="Aalst - Nog meer"/>-->
+                    <CheckBox Content="Aalst - Bedrijfsmanagement"/>
+                    <CheckBox Content="Aalst - Office Management"/>
+                    <CheckBox Content="Aalst - Toegepaste Informatica"/>
+                    <CheckBox Content="Gent - Bedrijfsmanagement"/>
+                    <CheckBox Content="Gent - Office Management"/>
+                    <CheckBox Content="Gent - Retail Management"/>
+                    <CheckBox Content="Gent - Toegepaste Informatica"/>
                 </my:CheckComboBox>
-                <!--
-                <ListBox x:Name="listbox">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Content}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                -->
+
                 <TextBlock Text="Mijn gegevens:"
                            Margin="0 0 0 20"
                            Style="{StaticResource Hogent_TextBlockNormal}"/>
@@ -92,15 +86,25 @@
                          x:Name="city"
                          Margin="0 0 0 10"
                          Style="{StaticResource HoGent_TextBox}"/>
-                <TextBox PlaceholderText="Provincie"
-                         x:Name="county"
-                         Margin="0 0 0 20"
-                         Style="{StaticResource HoGent_TextBox}"/>
+                <ComboBox PlaceholderText="Provincie"
+                    x:Name="Province"
+                     Margin="0 0 0 10"
+                     Style="{StaticResource HoGent_ComboBox}">
+                    <ComboBoxItem Content="Antwerpen"/>
+                    <ComboBoxItem Content="Brussel"/>
+                    <ComboBoxItem Content="Henegouwen"/>
+                    <ComboBoxItem Content="Limburg"/>
+                    <ComboBoxItem Content="Luik"/>
+                    <ComboBoxItem Content="Luxemburg"/>
+                    <ComboBoxItem Content="Namen"/>
+                    <ComboBoxItem Content="Oost-Vlaanderen"/>
+                    <ComboBoxItem Content="Vlaams-Brabant"/>
+                    <ComboBoxItem Content="West-Vlaanderen"/>
+                    <ComboBoxItem Content="Waals-Brabant"/>
+                </ComboBox>
                 <Button Content="Verzend"
-                        Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click"
+                        Style="{StaticResource HoGent_ButtonStyle}" Click="verzendGegevens_Click_Mobile"
                         Margin="0 0 0 20"/>
-
-
             </StackPanel>
         </ScrollViewer>
     </Grid>

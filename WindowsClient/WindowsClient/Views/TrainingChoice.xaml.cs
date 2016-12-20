@@ -51,7 +51,6 @@ namespace WindowsClient.Views
                 {
                     if(trainings.Any(training => training.Name.Equals(t.Name)))
                     {
-                        //t.Campussen.Add(root);
                         var temp = trainings.Where(training => training.Name.Equals(t.Name));
                         foreach(TrainingWithImage tr in temp)
                         {
@@ -78,9 +77,6 @@ namespace WindowsClient.Views
             campussesSentence.Visibility = Visibility.Visible;
             descriptionOfTraining.Text = selectedTraining.Description;
             CampussesOfTraining.Text = String.Join(", ", selectedTraining.Campussen);
-
-            //var dialog = new Windows.UI.Popups.MessageDialog("U klikte op " + selectedTraining.Name + "\nDeze richting kan u volgen in: " + String.Join(", ", selectedTraining.Campussen));
-            //await dialog.ShowAsync();
         }
 
         public class TrainingWithImage

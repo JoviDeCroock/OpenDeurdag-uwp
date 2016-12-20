@@ -24,6 +24,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.ApplicationModel.DataTransfer;
 using WindowsClient.Models;
+using Windows.System.Profile;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,8 +45,14 @@ namespace WindowsClient.Views
             
             checkboxFeeds = new List<CheckBox>();
             posts = new ObservableCollection<PostObject>();
-
-            fillPosts();
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            {
+                fillPosts();
+                
+            } else
+            {
+                fillPostsMobile();
+            }
             fillCheckboxes();
         }
         private void onFilterChange(object sender, RoutedEventArgs e)
@@ -159,6 +166,114 @@ namespace WindowsClient.Views
 
         }
 
+        private void onFilterChangeMobile(object sender, RoutedEventArgs e)
+        {
+            List<PostObject> tempPosts = new List<PostObject>();
+            feedLijst.Visibility = Visibility.Collapsed;
+
+            //iterate through all the checkboxes
+            foreach (CheckBox cb in checkboxFeeds)
+            {
+                //check if marked
+                if (cb != null && cb.IsChecked == true)
+                {
+                    feedLijst.Visibility = Visibility.Visible;
+
+                    //get all posts linked to the checkboxes and add them to tempPosts    
+                    var temp = posts.Where(p => p.page.ToLower().Equals(cb.Content.ToString().ToLower()));
+                    foreach (PostObject p in temp)
+                    {
+                        tempPosts.Add(p);
+                    }
+                }
+            }
+
+            feedLijst.ItemsSource = tempPosts.OrderByDescending(p => p.created_time).ToList();
+
+        }
+
+        private async void fillPostsMobile()
+        {
+            //create http client + set token
+            HttpClient client = new HttpClient();
+
+            //get all the links to the feeds 
+            Campus[] campussenObj = new Campus[]
+                        {
+                new Campus() { CampusId = 1, Name = "HoGent Schoonmeersen", City = "Gent", Street = "Valentin Vaerwyckweg", HouseNumber = "1", Telephone = "09 243 35 60", Feed = "Hogeschool-Gent-Campus-Schoonmeersen" },
+                new Campus() { CampusId = 2, Name = "HoGent Aalst", City = "Aalst", Street = "Arbeidstraat", HouseNumber = "14", Telephone = "09 243 38 00", Feed = "HoGentCampusAalst" }
+            };
+            Training[] trainingenObj = new Training[]
+            {
+                new Training() { TrainingId = 1, Name="Toegepaste Informatica", Description="Computerrichting, hier start de leerling volledig vanaf de basis. Daarna heeft de leerling keuze om netwerken/programmeren te doen.", Feed = "hogenttoegepasteinformatica"},
+                new Training() { TrainingId = 2, Name="Bedrijfsmanagement", Description="Praktijk georienteerde richting over het managen van een bedrijf.", Feed = "hogentbedrijfsmanagement"},
+                new Training() { TrainingId = 3, Name="Retail management", Description="Voorbereiding op de job van strategisch manager in de detailhandel.", Feed = "hogentretailmanagement"},
+                new Training() { TrainingId = 4, Name="Office management", Description="Voorbereidende richting op het organiserende en coordinerende aspect in bedrijven.", Feed = "hogentofficemanagement"}
+            };
+
+            Dictionary<string, string> dicPage = new Dictionary<string, string>();
+
+            foreach (Campus c in campussenObj)
+            {
+                dicPage.Add(c.Name, c.Feed);
+            }
+
+            foreach (Training t in trainingenObj)
+            {
+                dicPage.Add(t.Name, t.Feed);
+            }
+
+            //facebook token
+            string token = "EAACEdEose0cBADR1gM0UaWcwyEg8gdZCABEZC6CLsAGG1yCievZAYCZB1AuZBbc6HI7n78ZCAJfvdP34ZAZBELSWnSXNcZC9dAcuDrRRJiu64PZAD0uJRpB3aeT0VEwlxpBEuA0qBqWm5CY2Efw3dWuZC2hyuvJu5Uuv835C8VYDmEFggZDZD";
+
+            //get all the facebooks posts
+            try
+            {
+                foreach (KeyValuePair<string, string> entry in dicPage)
+                {
+                    //This crap page doesn't wanne share its feeds >=(
+                    if (!entry.Key.Equals("HoGent Schoonmeersen"))
+                    {
+                        //set the appropriate url and get json
+                        string oauthUrl = string.Format("https://graph.facebook.com/v2.8/{0}/feed?access_token={1}", entry.Value, token);
+                        string json = await client.GetStringAsync(oauthUrl);
+                        //Debug.Write(json);
+                        var result = JsonConvert.DeserializeObject<Wrapper>(json);
+
+                        //convert the json to PostObjects
+                        for (int i = 0; i < 5; ++i)
+                        {
+                            PostObject post = new PostObject()
+                            {
+                                id = result.data[i].id,
+                                story = result.data[i].story,
+                                message = result.data[i].message,
+                                created_time = result.data[i].created_time,
+                                page = entry.Key
+                            };
+                            //add retrieved post to posts
+                            posts.Add(post);
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog("Er ging iets mis.");
+                if (e.Message.Contains("400"))
+                {
+                    dialog = new Windows.UI.Popups.MessageDialog("Error 400 : Bad request. Refresh facebook token.\nhttps://developers.facebook.com/tools/explorer/");
+                    await dialog.ShowAsync();
+                }
+                await dialog.ShowAsync();
+            }
+            catch (Exception e)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog("Er ging iets mis.");
+                await dialog.ShowAsync();
+            }
+        }
+
         private void fillCheckboxes()
         {
             //add all checkboxfilters to the list
@@ -168,7 +283,10 @@ namespace WindowsClient.Views
             checkboxFeeds.Add(checkboxBM);
             checkboxFeeds.Add(checkboxRM);
             checkboxFeeds.Add(checkboxOM);
-            checkboxFeeds.Add(checkboxAdmin);
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            {
+                checkboxFeeds.Add(checkboxAdmin);
+            }
         }
 
     }

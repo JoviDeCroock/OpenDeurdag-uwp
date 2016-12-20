@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,8 +36,60 @@ namespace WindowsClient.Views
         public MyPreferences()
         {
             this.InitializeComponent();
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+                fillCheckboxes();
+        }
 
-            fillCheckboxes();
+        private void onHomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        //With dummydata to show on mobile
+        private async void verzendGegevens_Click_Mobile(object sender, RoutedEventArgs e)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            List<Models.Training> trainingsPost = new List<Models.Training>();
+            List<Campus> campussenPost = new List<Campus>();
+            List<string> campussen = new List<string>();
+            trainingsPost = this.checkComboBox.SelectedItems;
+            foreach (Training t in trainingsPost)
+            {
+                foreach (String c in t.Campussen)
+                {
+                    if (!campussen.Contains(c))
+                    {
+                        campussen.Add(c);
+                    }
+                }
+            }
+            foreach (String c in campussen)
+            {
+                campussenPost.Add(new Campus
+                {
+                    City = "City",
+                    Feed = "feed",
+                    HouseNumber = "nr",
+                    Name = c,
+                    Street = "street",
+                    Telephone = "phone",
+                    Trainingen = trainingsPost
+                });
+            }
+            Student nieuw = new Student();
+            nieuw.Province = (string)Province.SelectionBoxItem;
+            nieuw.Name = firstname.Text + lastname.Text;
+            nieuw.City = city.Text;
+            nieuw.Street = street.Text;
+            nieuw.HouseNumber = houseNumber.Text;
+            nieuw.PrefTraining = trainingsPost;
+            nieuw.PrefCampus = campussenPost;
+            nieuw.Email = email.Text;
+            var dialog = new Windows.UI.Popups.MessageDialog("Student geregistreerd.");
+            await dialog.ShowAsync();
+
         }
 
         private async void verzendGegevens_Click(object sender, RoutedEventArgs e)
@@ -52,6 +105,7 @@ namespace WindowsClient.Views
                 List<Campus> campussenPost = new List<Campus>();
                 if (listbox != null)
                 {
+
                     foreach (CheckBox c in this.listbox.Items)
                     {
                         if ((bool)c.IsChecked)
@@ -73,6 +127,7 @@ namespace WindowsClient.Views
                 {
                     if (campussen.Contains(r.Name.Trim()))
                     {
+                        /*OMZETTEN NAAR CAMPUS*/
                         Campus c = new Models.Campus();
                         c.CampusId = r.CampusId;
                         c.City = r.City;
@@ -112,19 +167,18 @@ namespace WindowsClient.Views
                 firstname.Text = "";
                 lastname.Text = "";
                 Province.SelectedItem = null;
-
                 string body = JsonConvert.SerializeObject(nieuw);
                 var result2 = await client.PostAsync("http://localhost:50103/api/Students", new StringContent(body, Encoding.UTF8, "application/json"));
             }
             else
             {
-                ContentDialog allesInvullen = new ContentDialog()
+                ContentDialog alleVeldenInvullen = new ContentDialog()
                 {
                     Title = "Error",
-                    Content = "U moet alle velden invullen",
+                    Content = "U moet al de velden invullen.",
                     PrimaryButtonText = "OK",
                 };
-                ContentDialogResult result = await allesInvullen.ShowAsync();
+                ContentDialogResult result = await alleVeldenInvullen.ShowAsync();
             }
         }
 
@@ -148,6 +202,7 @@ namespace WindowsClient.Views
             if (listbox != null)
                 listbox.ItemsSource = checkboxList;
         }
+
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox x = (CheckBox)sender;
