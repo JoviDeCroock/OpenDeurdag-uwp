@@ -50,10 +50,19 @@ namespace OpendeurdagAPI.Controllers
             {
                 return Ok("Vul alle velden in");
             }
+            /*OPVULLEN MET ORIGINELE DB OBJECTEN OF HIJ MAAKT NIEUWE CAMPUSSEN EN TRAININGEN AAN*/
+            List<Campus> dbC = new List<Campus>();
+            List<Training> dbT = new List<Training>();
             foreach (Campus d in student.PrefCampus)
             {
-                db.Campus.Where(c => c.CampusId == d.CampusId);
+                dbC.Add(db.Campus.Where(c => c.CampusId == d.CampusId).FirstOrDefault());
             }
+            foreach (Training d in student.PrefTraining)
+            {
+                dbT.Add(db.Trainings.Where(c => c.TrainingId == d.TrainingId).FirstOrDefault());
+            }
+            student.PrefCampus = dbC;
+            student.PrefTraining = dbT;
 
             db.Student.Add(student);
             await db.SaveChangesAsync();
