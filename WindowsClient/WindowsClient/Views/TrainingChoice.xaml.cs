@@ -66,8 +66,9 @@ namespace WindowsClient.Views
                     }
                     else
                     {
-                        t.Campussen.Add(root.Name);
-                        trainings.Add(new TrainingWithImage(t));
+                        TrainingWithImage twi = new TrainingWithImage(t);
+                        twi.Campussen.Add(root.Name);
+                        trainings.Add(twi);
                     }
                 }                
             }
@@ -80,6 +81,7 @@ namespace WindowsClient.Views
             TrainingWithImage selectedTraining = (TrainingWithImage) e.ClickedItem;
 
             chosenTraining.Text = selectedTraining.Name;
+            campussesSentence.Visibility = Visibility.Visible;
             descriptionOfTraining.Text = selectedTraining.Description;
             CampussesOfTraining.Text = String.Join(", ", selectedTraining.Campussen);
 

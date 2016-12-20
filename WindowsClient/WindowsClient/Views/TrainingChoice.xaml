@@ -10,7 +10,7 @@
     <Grid Style="{StaticResource HoGent_Grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="240"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -34,8 +34,8 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" MaxWidth="200">
-                            <Image Source="{Binding Image}"/>
+                        <StackPanel Orientation="Vertical" Width="250">
+                            <Image Source="{Binding Image}" Margin="0 10 0 10"/>
                             <TextBlock HorizontalAlignment="Center"
                                     x:Name="Training"
                                     Text="{Binding Name}"
@@ -47,10 +47,10 @@
             </ListView>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Margin="10">
+        <StackPanel Grid.Row="2" Margin="10 30 10 10">
             <TextBlock Style="{StaticResource Hogent_TextBlockFeedTitle}" x:Name="chosenTraining"/>
-            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" x:Name="descriptionOfTraining"/>
-            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" Text="U kan deze richting volgen in:"/>
+            <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" TextWrapping="Wrap" x:Name="descriptionOfTraining"/>
+            <TextBlock Style="{StaticResource Hogent_TextBlockFeedDate}" x:Name="campussesSentence" Visibility="Collapsed" Margin="0 10 0 0" Text="U kan deze richting volgen in:"/>
             <TextBlock Style="{StaticResource Hogent_TextBlockNormal}" x:Name="CampussesOfTraining"/>
         </StackPanel>
 
