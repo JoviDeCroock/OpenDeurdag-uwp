@@ -183,6 +183,10 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Images\GSCHB1.png" />
+    <Content Include="Images\GSCHB3.png" />
+    <Content Include="Images\GSCHB0.png" />
+    <Content Include="Images\GSCHB2.png" />
+    <Content Include="Images\GSCHB4.png" />
     <Content Include="Images\route.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
